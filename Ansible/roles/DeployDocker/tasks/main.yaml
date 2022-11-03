@@ -12,16 +12,22 @@
     state: latest
     update_cache: true
 
-- name: Add Docker GPG apt Key
+#- name: Run expect to wait for a successful PXE boot via out-of-band CIMC
+#  become: true
+#  ansible.builtin.shell: |
+#    mkdir -p /etc/apt/keyrings
+#    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+- name: add GPG key
   become: true
   apt_key:
-    url: https://download.docker.com/linux/debian/gpg
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
 - name: Add Docker Repository
   become: true
   apt_repository:
-    repo: "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+    repo: deb [arch=armhf] https://download.docker.com/linux/raspbian {{ ansible_distribution_release }} stable
     state: present
 
 - name: Update apt and install docker-ce
