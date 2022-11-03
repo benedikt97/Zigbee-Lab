@@ -7,19 +7,21 @@
       - curl
       - gnupg
       - lsb-release
+      - raspberrypi-kernel
+      - raspberrypi-kernel-headers
     state: latest
     update_cache: true
 
 - name: Add Docker GPG apt Key
   become: true
   apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+    url: https://download.docker.com/linux/debian/gpg
     state: present
 
 - name: Add Docker Repository
   become: true
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    repo: "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
     state: present
 
 - name: Update apt and install docker-ce

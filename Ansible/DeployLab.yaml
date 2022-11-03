@@ -1,4 +1,4 @@
 - name: Deploy the Lab
   hosts: localhost
   roles:
-    - DockerDeploy
+    - DeployDocker
