@@ -1,0 +1,35 @@
+\chapter{Versuchsdurchführung}
+
+\section{Ursprungszustand vor Versuch}
+
+Der ZigBee Kordinator ist als \grqq Hat \grqq{} auf dem Raspberry installiert. Der Sniffer ist per USB an der 
+Frontseite des Raspberrys angeracht. Eingabegeräte, ein Monitor sowie die Stromversorgung sind weiterhin vom
+Studenten anzuschließen.  
+
+Auf einem RaspberryPi werden die Anwendungen zigbee2mqtt, Mosquitto sowie HomeAssistant der Docker ausgeführt. Die
+Services sind konfiguriert, es sind keine Geräte per Zigbee verbunden. 
+Die jeweligen Webinterfaces sind über eine Webadresse im Browser erreichbar. Der ZigBee Kordinator ist als \grqq Hat \grqq{}
+auf dem Raspberry installiert. Der Sniffer ist per USB an der Frontseite des Raspberrys angeracht.  
+
+\section{Aufgabenstellungen}
+
+\subsection{Aufgabe 1 - Vertraut machen mit der Umgebung}
+
+Der Student soll den Webbrowser starten, und z2m.local aufrufen. Er soll ich Anhand einer kurzen Beschreibung selbst
+mit der WebGui vertraut machen. Der Koordinator soll auf den entsprechenden Kanal eingestellt werden.
+
+Der Student soll sichergehen, dass keine Geräte in zigbee2mqtt registriert sind. Falls dies der Fall ist, soll
+er das Script zum zurücksetzen des Versuches starten.
+
+Der Student soll Wireshark über die Kommandozeile mit den entsprechendem Befehl starten, und überprüfen ob die Anwendung
+ohne Fehlermeldung startet und orgnungsgemäß funktioniert.
+
+\subsection{Aufgabe 2 - Joining der Phillips Hue Lampe und Fernbediernung}
+
+Der Student soll das Beitreten von Komponenten in zigbee2mqtt erlauben. Erst anschließend soll er Wireshark starten.
+Nun lässt er die Phillips Hue Lampe sowie die Fernbedienung dem Netzwerk beitreten. Sobald zigbee2Mqtt ein erfolgreiches
+Interview meldet, wird Wireshark gestoppt, und der Sniffing Vorgange abgespeichert.
+
+
+
+
