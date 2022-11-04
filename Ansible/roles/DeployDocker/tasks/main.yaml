@@ -12,16 +12,10 @@
     state: latest
     update_cache: true
 
-#- name: Run expect to wait for a successful PXE boot via out-of-band CIMC
-#  become: true
-#  ansible.builtin.shell: |
-#    mkdir -p /etc/apt/keyrings
-#    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
 - name: add GPG key
   become: true
   apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+    url: https://download.docker.com/linux/raspbian/gpg
     state: present
 
 - name: Add Docker Repository
@@ -30,19 +24,24 @@
     repo: deb [arch=armhf] https://download.docker.com/linux/raspbian {{ ansible_distribution_release }} stable
     state: present
 
-- name: Update apt and install docker-ce
+- name: Update apt and install docker
   become: true
   apt:
     pkg:
       - docker-ce
       - docker-ce-cli
       - containerd.io
-      - docker-compose-plugin
-      - docker-compose
     state: latest
     update_cache: true
 
-- name: Add benedikt to group docker
+- name: Manually Install docker-compose binary 2.29
+  become: true
+  ansible.builtin.copy:
+    src: docker-compose
+    dest: /usr/libexec/docker/cli-plugins
+    mode: u+x,g-x,o-x
+
+- name: Add ansible to group docker
   become: true
   ansible.builtin.user:
     name: ansible

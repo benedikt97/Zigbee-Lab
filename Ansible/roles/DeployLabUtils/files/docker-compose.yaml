@@ -46,8 +46,6 @@ services:
       # CC2530 / GBAN GB2530S
       #- /dev/ttyUSB_cc2530:/dev/ttyACM0
     restart: always
-    networks:
-      - backbone
     environment:
       - VIRTUAL_HOST=z2m.local
       - VIRTUAL_PORT=8080
