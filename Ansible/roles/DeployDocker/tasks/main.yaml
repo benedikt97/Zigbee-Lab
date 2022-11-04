@@ -45,7 +45,7 @@
 - name: Add benedikt to group docker
   become: true
   ansible.builtin.user:
-    name: benedikt
+    name: ansible
     groups: docker
     append: yes
     register: group.changed
