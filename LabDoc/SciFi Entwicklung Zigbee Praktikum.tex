@@ -55,6 +55,8 @@
 \usepackage{charter} % modernere Serifen Font
 \usepackage[nottoc]{tocbibind}
 \usepackage{float}
+\usepackage[many]{tcolorbox}
+\usetikzlibrary{calc}
 
 %----------------- BibLaTeX ----------------- %
 \usepackage[
@@ -214,7 +216,70 @@ style=alphabetic
 % My Quote
 \newenvironment{customquote}{\begin{quote}\raisebox{-.4\height}{{\Huge\color{darkgray-light} ''}}}{\end{quote}}
 
+\tcbset{mystyle/.style={
+  breakable,
+  enhanced,
+  outer arc=0pt,
+  arc=0pt,
+  colframe=colorscale-yellow,
+  colback=colorscale-yellow!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=colorscale-yellow,
+    outer arc=0pt,
+    arc=0pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
 
+\tcbset{mystyle1/.style={
+  breakable,
+  enhanced,
+  outer arc=0pt,
+  arc=0pt,
+  colframe=colorscale-orange,
+  colback=colorscale-orange!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=colorscale-orange,
+    outer arc=0pt,
+    arc=0pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+\newtcolorbox[auto counter,number within=section]{Hinweis}[1][]{
+  mystyle,
+  title=Hinweis,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=colorscale-orange,text width=\x2-\x1] 
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{Aufgabe}[1][]{
+  mystyle1,
+  title=Aufgabe,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=colorscale-orange,text width=\x2-\x1] 
+        at (title.east) {#1};
+  }
+}
 
 %----------------- LAYOUT SETZEN ----------------- %
 \geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
