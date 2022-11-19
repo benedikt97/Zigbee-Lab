@@ -1,0 +1,70 @@
+- name: Purge srv
+  ansible.builtin.file:
+    path: /srv
+    state: absent
+
+
+- name: Create an recursively change ownership of srv to ansible
+  ansible.builtin.file:
+    path: /srv
+    state: directory
+    recurse: yes
+    owner: ansible
+    group: ansible
+
+- name: Create /srv/mosquitto
+  ansible.builtin.file:
+    path: /srv/Z2m
+    state: directory
+    owner: ansible
+    group: ansible
+
+
+- name: Create /srv/mosquitto
+  ansible.builtin.file:
+    path: /srv/mosquitto 
+    state: directory
+    owner: ansible
+    group: ansible
+
+
+- name: Create /srv/mosquitto/conf
+  ansible.builtin.file:
+    path: /srv/mosquitto/conf
+    state: directory
+    owner: ansible
+    group: ansible
+
+
+- name: Create /srv/homeassistant
+  ansible.builtin.file:
+    path: /srv/mosquitto 
+    state: directory
+    owner: ansible
+    group: ansible
+
+- name: Copy Docker-Compose File
+  become: true
+  ansible.builtin.copy:
+    src: docker-compose.yaml
+    user: ansible 
+    group: ansible
+    dest: /srv/
+
+
+- name: Copy Z2M Configuration
+  become: true
+  ansible.builtin.copy:
+    src: z2m-configuration
+    user: ansible 
+    group: ansible
+    dest: /srv/Z2M/
+
+
+- name: Copy mosquitto Configuration
+  become: true
+  ansible.builtin.copy:
+    src: mosquitto.conf
+    user: ansible 
+    group: ansible
+    dest: /srv/mosquitto/conf/

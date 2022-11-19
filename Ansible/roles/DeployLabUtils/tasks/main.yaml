@@ -1,0 +1,5 @@
+
+- name: Deploy ZigBee Lab
+  tasks:
+    - include: DeployFiles.yaml
+    - include: InstallPackages.yaml
