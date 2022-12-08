@@ -1,27 +1,32 @@
 \chapter{Grundlagen}
 
-In diesem Kapitel sollen alle verwendeten Komponenten und Technologien kurz erklärt werden.
+In diesem Kapitel werden alle verwendeten Komponenten und Technologien kurz erläutert.
 \section{ZigBee}
 
-Die ZigBee Alliance wurde durch die Hersteller \todo{Zigbee Gründer} gegründet, um einen einheitlichen Übertragungstandard
-voranzubringen. ZigBee basiert zwar auf einem offenem IEEE Standard, bringt aber Lizenzpflichtige Komponenten mit.
-Dies verhindert leider maßgeblich eine weitere Ausbreitung des Standards.
+Die ZigBee Alliance wurde durch ein Konsortium von Herstellern gegründet, um einen einheitlichen Übertragungstandard
+im Bereich Heimautomatisierung voranzubringen. ZigBee basiert zwar auf einem offenem IEEE Standard, bringt aber proprietäre Komponenten mit.
+ZigBee ist in Form von weiteren Protokollschichten implementiert, welche oben auf IEEE 802.15.4 aufsetzen.
 
-ZigBee ist ein Kommunikationsprotokoll, welches im Bereich Iot Anwendungen findet. Das Protokoll baut auf dem Standard
-802.40 auf. Genutzt wird es, um IoT fähige Geräte in einem Haushalt, wie zum Beispiel Lampen, Schalter oder Thermostate
-zur Kommunikation zu befähigen. Markantetes Merkmal am Protokoll ist, dass die Geräte keine direkte Funkverbindung
-zu einem zentralen Controlle brauchen, sondern über andere ZigBee fähige Geräte ein Netzwerk aufbauen. Vorteil ist,
-dass ein im Vergleich zur benötigten Sendeleistung sehr großer Radius und Anahl von Geräten abgedeckt werden kann.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/Zigbee Stack.jpg}
+  \caption{ZigBee Protocoll Stack}
+\end{figure}
 
-ZigBee erweitert den IEEE Standard um \todo{Zigbee erweiterungen}
+Bildquelle: \url{https://www.researchgate.net/figure/IEEE820154-ZigBee-protocol-stack-architecture_fig2_265150617}
+
+
+Genutzt wird es, um elektrische Geräte im Haushalt, wie zum Beispiel Lampen, Schalter oder Thermostate
+zur Kommunikation zu befähigen. Markantes Merkmal am Protokoll ist, dass die Geräte keine direkte Funkverbindung
+zu einem zentralen Controller brauchen. Die einzelnen Geräte können als Router fungieren. Dies sorgt dafür,
+dass mir einer geringen Sendeleistung ein geografisch großes Gebiet abgedeckt werden kann. Sende- und Empfangsleistung
+ist vorallem bei kleinen Batteriebetriebenen Geräten der einschränkende Faktor.
 
 
 \section{Texas Instruments CC Chips}
 
-Texas Instruments bietet ein großes Spektrum von Microcontrollern, die den Zigbee Standard beherschen. Die Chips 
-lassen sich in SDK Kits erwerben um eigene Firmwares zu entwickeln. Ebenfalls lassen sich im Internet sehr günstige
-USB-Donge erwerben, welche sich nach belieben Flashen lassen. Dies erspart eine sehr aufwendige PCB Entwicklung
-oder das erwerben des kostenspieligen SDK Kits von Texas Instruments.
+Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware als ZigBee Device
+nutzen lassen können. Als Firmware kann das "Zigbee Stack..." eingesetzt werden
 
 Die aktuelle Chipfamilie TexasInstruments CC26XX:
 
