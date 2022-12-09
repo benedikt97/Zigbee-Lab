@@ -1,11 +1,12 @@
 \chapter{Grundlagen}
 
 In diesem Kapitel werden alle verwendeten Komponenten und Technologien kurz erläutert.
+
 \section{ZigBee}
 
 Die ZigBee Alliance wurde durch ein Konsortium von Herstellern gegründet, um einen einheitlichen Übertragungstandard
 im Bereich Heimautomatisierung voranzubringen. ZigBee basiert zwar auf einem offenem IEEE Standard, bringt aber proprietäre Komponenten mit.
-ZigBee ist in Form von weiteren Protokollschichten implementiert, welche oben auf IEEE 802.15.4 aufsetzen.
+ZigBee ist in Form von weiteren Protokollschichten implementiert, welche auf IEEE 802.15.4 aufsetzen.
 
 \begin{figure}[H]
   \centering
@@ -16,8 +17,9 @@ ZigBee ist in Form von weiteren Protokollschichten implementiert, welche oben au
 Bildquelle: \url{https://www.researchgate.net/figure/IEEE820154-ZigBee-protocol-stack-architecture_fig2_265150617}
 
 
-Genutzt wird es, um elektrische Geräte im Haushalt, wie zum Beispiel Lampen, Schalter oder Thermostate
-zur Kommunikation zu befähigen. Markantes Merkmal am Protokoll ist, dass die Geräte keine direkte Funkverbindung
+Genutzt wird es, um Geräte, wie zum Beispiel Lampen, Schalter oder Thermostate
+zur Kommunikation zu befähigen. Dies kann genutzt werden um die Geräte zu steuern, sowie aktuelle Zustandsdaten abzugragen. 
+Markantes Merkmal am Protokoll ist, dass die Geräte keine direkte Funkverbindung
 zu einem zentralen Controller brauchen. Die einzelnen Geräte können als Router fungieren. Dies sorgt dafür,
 dass mir einer geringen Sendeleistung ein geografisch großes Gebiet abgedeckt werden kann. Sende- und Empfangsleistung
 ist vorallem bei kleinen Batteriebetriebenen Geräten der einschränkende Faktor.
@@ -26,7 +28,7 @@ ist vorallem bei kleinen Batteriebetriebenen Geräten der einschränkende Faktor
 \section{Texas Instruments CC Chips}
 
 Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware als ZigBee Device
-nutzen lassen können. Als Firmware kann das "Zigbee Stack..." eingesetzt werden
+nutzen lassen können. 
 
 Die aktuelle Chipfamilie TexasInstruments CC26XX:
 
@@ -49,9 +51,12 @@ Hier in der Tabelle sind die unterstützten Protokolle der einzelnen Modelle sow
 Spannenderweise ist zu sehen, dass die Top Modelle schon den Standard Thread unterstützen, der vermutlich durch das
 Projekt "Matter" erheblich an bedeutung gewinnt.
 
-Texas Instruments bietet als Basis für ZigBee Eigententwicklungen eine Z-Stack Bibliothek. Diese stellt grundlegende 
+Texas Instruments bietet als Basis für ZigBee Eigententwicklungen eine Z-Stack Bibliothek. Diese stellt alle grundlegende 
 Funktionen um das ZigBee Protokoll zu implementieren. Mit TexasInstruments Code Composer Studio steht eine IDE bereit,
-um den Entwicklungsprozess zu unterstützen.
+um den Entwicklungsprozess zu unterstützen. Auf den entsprechend Leistungsfähigeren Chips lassen sich so noch zusätzliche
+Funktionalitäten einprogrammieren.
+
+Weiter Informationen: \url{https://www.ti.com/tool/Z-STACK#overview}
 
 In dem OpenSource Projekt "zigbee2mqtt" werden ausschließlich Chips von Texas Instruments unterstützt. Es sei erwähnt, 
 dass die meißten gängigen Anbieter von Microchips entsprechende Modelle im Angebot haben. 
@@ -72,15 +77,20 @@ hier mit regelmäígen Updates in Zukunft zu rechnen.
 
 \subsection{RaspberryPi Zigbee Hat}
 
-Als Zigbee Koordinator kommt ein auf dem TI CC2652 basierendem RaspberryPi Hat zum Einsatz. Dieser wird mit einer Firmware aus dem zigbee2Mqtt Repository
-geflasht. 
+Als Zigbee Koordinator kommt ein auf dem TI CC2652 basierendem RaspberryPi Hat vom Hersteller \grqq cod.m \grqq{} zum Einsatz. Dieser wurde vom Hersteller
+zum Einsatz mit \grqq homegear \grqq{} oder \grqq zigbee2Mqtt \grqq{}. Ein Datenblatt sowie ein Manual ist im Anhang.
 
 \subsection{CC2235 Sniffer Stick}
 
 Mit diesem Stick wird die ZigBee Kommunikation zwischen dein einzelnen Devices sowie dem Koordinator mitgeschnitten auf einem bestimmten Kanal mitgeschnitten.
+Es lässt sich beinahe jeder Texas Instruments ZigBee Chip bereits auf einen USB-Stick aufgelötet günstig aus China beziehen. 
+
+\url{https://github.com/virtualabs/cc2531-killerbee-fw}
 
 \subsection{Phillips Hue Komponenten}
 
+Die Phillips Hue Serie setzt vollständig auf den ZigBee Standard auf. Die Produkte haben ein eigenes Öko-System mit entsprechender App und Gateway. Sie sind Kompatibel
+zu dem Software-Gateway zigbee2mqtt.
 Die Lampen werden in dem Versuch als Demonstrationsobjekte eingesetzt. Sie können Ein- und Ausgeschaltet werden, sowie gedimmt werden. Zusätzlich wird einer
 Phillips Hie Fernbedienung verwendet, die zur Steuerung der Lampen dient.
 
@@ -88,46 +98,86 @@ Phillips Hie Fernbedienung verwendet, die zur Steuerung der Lampen dient.
 
 \subsection{Raspbian OS}
 
-RaspbianOS ist eine Linux Distribution, welche direkt vom Hersteller des RaspberryPis speziell auf die Bedürfnisse des Board angepasst werden. Es enthällt eine
-Desktop Umgebung sowie die Grundlegend wichtigen Paketen. Es basiert auf Debian, damit sind auch die entsprechenden Paketquellen verfügbar.
+RaspbianOS ist eine leichtgewichtige Linux Distribution, welche direkt vom Hersteller des RaspberryPis speziell auf die Bedürfnisse des Board angepasst werden. Es enthällt eine
+Desktop Umgebung sowie die grundlegende Paketen. Es basiert auf Debian, damit sind auch die entsprechenden Paketquellen verfügbar.
 
 \subsection{Docker}
 
 Docker ist eine Container Umgebung, um Anwendungen containerisiert auf Linux-Servern laufen lassen zu können. Docker reduziert erheblich den Aufwand, 
-Anwendungen auf mehreren Server auszurollen. Alle Abhängigkeiten sind im Container enthalten, sodass hier keine Komplikationen mit anderen Anwendungen
-zu befürchten sind.
+Anwendungen auf Servern auszurollen. Alle Abhängigkeiten sind im Container enthalten, sodass hier keine Komplikationen mit anderen Anwendungen
+zu befürchten sind. Prozesse laufen in eigenen Namespaces und sind dadurch abgekoppelt vom Host Betriebssystem. Im Unterschied zur Virtualisierung werden
+Systemprozesse gemeinsam genutzt. Dadurch ist die Effizienz höher, als bei taditioneller Virtualisierung.
 
 \subsection{zigbee2mqtt}
 
-zigbee2mqtt ist ein offenes Softwareprojekt auf Zigbee, welches aus mehreren Komponenten besteht.
+zigbee2mqtt ist ein offenes Softwareprojekt und stellt ein \grqq Software-Zigbee-Gateway \grqq dar. Es übernimmt die Funktionalität, die normalerweise entsprechende
+\grqq Bridges \grqq übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit Ihren entsprechenden
+Apps zu kommunizieren, macht zigbee2mqtt die Geräte per mqtt nach außen verfügbar. Auf abstrakterer Ebene bedeutet dies, das es ein Gateway zwischen einem Zigbee Netzwerk und
+einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant \grqq oder \grqq OpenHUB \grqq{} bzw. entsprechende
+Eigenentwicklungen einsetzen.
+
+Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt}
+Homepage: \url{https://www.zigbee2mqtt.io/}
 
 \subsubsection{TI CC Firmware}
 
-Firmware für die Texas Instruments Chips, um diese als Koordinator einsetzen zu können. Die Firmware basiert auf dem Z-Stack von Texas Instruments.
+Firmware für die Texas Instruments Chips, um diese als Koordinator einsetzen zu können. Die Firmware basiert auf dem Z-Stack von Texas Instruments. Sie wird fertig kompiliert
+in einem Git-Repo angeboten. 
 
 \subsubsection{zigbee-herdman}
 
-Dieses Modul verbindet sich direkt mit dem Zigbee Adapter, und steuert Ihn über die TI zStack monitoring and test API. \cite{zstack}
+Dieses Modul verbindet sich direkt mit dem Zigbee Adapter, und steuert Ihn über die \grqq TI zStack monitoring and test API \grqq{}. \cite{zstack}
+
+Zur verdeutlichung, wie dies in Realität aussieht, hier ein Ausschnitt aus der API Dokumentation.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/z-stack-api-excerpt.png}
+  \caption{Z-Stack API Auszug}
+\end{figure}
+
+In diesem Beispiel wird beschrieben, wie man einen SimpleDescriptor-Request an ein Zigbee-Device versendet. Dieser Aufruf ist entsprechend Parametrierbar,
+und wird zur Abfrage der verfügbaren Endpunkte eines Gerätes nach dessen Beitritt in das Netzwerk abgefragt.
 
 \subsubsection{zigbee-herdman-converters}
 
-Dieser Konverter kann proprietäre Cluster die durch Geräte exposed werden umwandeln in standard Cluster. Mit diesem Converter lassen sich sämtliche Geräte
+Dieser Konverter kann proprietäre Cluster die durch Geräte exposed werden umwandeln in Standard Cluster. Mit diesem Converter lassen sich proprietäre Cluster von Geräte
 so adaptieren, dass sie nach Wunsch gesteuert und ausgelesen werden können.
 
 \subsubsection{zigbee2mqtt}
 
 Das Hauptmodul stellt die WebGui sowie eine Webanwendung mit einer SQLite Datenbank. Die Webanwendung und die Datenbank
-verwalten den Zustand des Netzwerkes und die angebundenen Geräte. Die WebGUI dient zur Administration des Koordinators.
+verwalten den Zustand des Netzwerkes und die angebundenen Geräte. Die WebGUI dient zur Administration des Koordinators. 
 
-\todo{ Bild von zigbee2mqtt }
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/z2m.png}
+  \caption{zigbee2mqtt Webfrontend}
+\end{figure}
 
 Die WebGUI enthällt eine große Anzahl von Funktionen, die weitaus tiefer reichen als für die Nutzung notwendig sind.
-Prinzipiell sind die meißten ZigBee Geräte direkt Einsatzfähig, wenn ein Community Mitglied dieses bereits in der Anwendung
-angelegt hat. Es ist auch möglich, eigene Beschreibungen für nich nicht unterstützte Geräte zu erstellen.
+Prinzipiell sind die meißten ZigBee Geräte Kompatibel, wenn ein Community Mitglied dieses bereits in der Anwendung
+angelegt hat. Es ist auch möglich, eigene Beschreibungen für nich nicht unterstützte Geräte zu erstellen.\\
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/z2m-map.png}
+  \caption{zigbee2mqtt Netzwerkvisualisierung}
+\end{figure}
+
+Das Netzwerk lässt sich in einer dynamischen Übersicht visualisieren. Hier die aktiven Verbindung zwischen den Geräten. 
 
 \subsection{Wireshark}
 
 Wireshark ist eine quelloffene Anwendung um Datenstöme Mitzuschneiden und zu Untersuchen. Es kann durch Verwendung
 von Packetsniffern wie nPcap verschiedenste Medien wie zum Beispiel Ethernet und USB mit entsprechenden Protokollen
 verarbeiten.
+
+\subsection{zbWireshark}
+
+Dies ist eine Script aus einer Git-Hub Scriptsammlung. Mit diesem Script lässt sich Wireshark starten und anschließend Pakete über den 
+ ZigBee Sniffer Stick mitschreiben.
+
+\url{https://github.com/silicrax/killerbee/tree/master/tools}
+
+\subsection{Ansible}

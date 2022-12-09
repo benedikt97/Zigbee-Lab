@@ -1,8 +1,40 @@
 \chapter{Life Cycle Management}
 
-In diesem Kapitel geht es um die Pflege, die Bereitstellung sowie die Zuücksetzung des Praktikumversuchs.
+In diesem Kapitel geht es um die Pflege, die Bereitstellung sowie die Zuücksetzung des Praktikumversuchs. Sämtliche Schritte wurden mit Ansible-Playbooks
+automatisiert.
+
+Um ein Raspberry automatisch für einen Versuch vorzubereiten, muss dessen Ip-Adresse in der \grqq hosts \grqq{} Datei eingetragen werden. Anschließend muss der 
+SSH Schlüssel des Ansible Servers auf dem Raspberry hinterlegt werden. Auf dem Raspberry muss ein User \grqq ansible \grqq{} angelegt.
+
+Folgende Schritte müssen ausgeführt werden, um eine Raspberry vorzubereiten.
+\begin{itemize}
+    \item Installation von Raspbian OS
+    \item Anlegen User ansible / <secret>
+    \item Hinterlegen SSH-Key von Ansible Server für ansibe user
+    \item Eintragen Raspberry IP in hosts in Ansible Root Verzeichnis
+    \item Konnektivität Ansibe Server und Raspberry herstellen (ping)
+\end{itemize}
 
 \subsection{Deployment}
+
+Zum ausrollen folgenden Befehl auf dem Ansible Host absetzen.
+
+Anschließend wird
+\begin{itemize}
+    \item Docker Installiert
+    \item Der User Student angelegt
+    \item Die config Files ausgerollt
+    \item Die /etc/hosts Einträge gesetzt
+    \item zbwireshark Installiert
+    \item Die Docker Services gestartet (zigbee2mqtt)
+\end{itemize}
+
+\begin{lstlisting}
+    ansible-playbook DeployLab.yaml -K
+    
+    #BECOME Password:
+    <secret>
+\end{lstlisting}
 
 \subsection{Zurücksetzen des Versuchs}
 

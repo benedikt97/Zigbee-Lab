@@ -221,11 +221,11 @@ style=alphabetic
   enhanced,
   outer arc=0pt,
   arc=0pt,
-  colframe=colorscale-yellow,
-  colback=colorscale-yellow!20,
+  colframe=dkblue,
+  colback=dkblue!20,
   attach boxed title to top left,
   boxed title style={
-    colback=colorscale-yellow,
+    colback=dkblue,
     outer arc=0pt,
     arc=0pt,
     top=3pt,
@@ -253,8 +253,28 @@ style=alphabetic
   fonttitle=\sffamily
   }
 }
+
+\tcbset{mystyle2/.style={
+  breakable,
+  enhanced,
+  outer arc=0pt,
+  arc=0pt,
+  colframe=colorscale-gray,
+  colback=colorscale-gray!10,
+  attach boxed title to top left,
+  boxed title style={
+    colback=colorscale-gray,
+    outer arc=0pt,
+    arc=0pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
 \newtcolorbox[auto counter,number within=section]{Hinweis}[1][]{
-  mystyle,
+  mystyle1,
   title=Hinweis,
   overlay unbroken and first={
       \path
@@ -268,7 +288,7 @@ style=alphabetic
 }
 
 \newtcolorbox[auto counter,number within=section]{Aufgabe}[1][]{
-  mystyle1,
+  mystyle,
   title=Aufgabe,
   overlay unbroken and first={
       \path
@@ -277,6 +297,20 @@ style=alphabetic
         \p2=(frame.north east)
         in
         node[anchor=west,font=\sffamily,color=colorscale-orange,text width=\x2-\x1] 
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{Fragen}[1][]{
+  mystyle2,
+  title=Fragen,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=colorscale-gray,text width=\x2-\x1] 
         at (title.east) {#1};
   }
 }

@@ -1,10 +1,11 @@
 \chapter{Versuchsdurchführung}
 
-In diesem Kapitel wird der Hardware- und der Softwareafaufbau des Versuches beschrieben.
+In diesem Kapitel wird der Versuchsaufbau beschrieben, der LabGuide eingebettet, sowie eine Musterlösung gegeben.
 
 \section{Versuchsaufbau}
 
-Der Student erhällt folgende Komponenten:
+Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfen sie dies, vor Beginn des Versuches.
+
 \begin{itemize}
     \item RespberryPi 3
     \item CC2531 Sniffer Stick
@@ -15,43 +16,22 @@ Der Student erhällt folgende Komponenten:
     \item Ethernet Kabel
 \end{itemize}
 
-Der Student muss KVM Komponenen selbst bereitstellten. Alternativ, wenn der Versuch in der Hochschule durchgeführt werden sollte,
-können diese auch durch die Hochschule gestellt werden. Der ZigBee Kordinator ist als \grqq Hat \grqq{} auf dem Raspberry installiert. Der Sniffer ist per USB an der 
-Frontseite des Raspberrys angeracht.
-
-\section{Versuchssoftware}
-
-Folgende Software wird eingesetzt:
-\begin{itemize}
-    \item RaspbianOS
-    \item Docker
-    \item zigbee2mqtt
-    \item mosquitto
-\end{itemize}
-
-Auf einem RaspberryPi werden die Anwendungen zigbee2mqtt, Mosquitto sowie HomeAssistant per Docker ausgeführt. Die
-Services sind konfiguriert, es sind keine Geräte per Zigbee verbunden. 
-Die jeweligen Webinterfaces sind über eine Webadresse im Browser erreichbar. Der ZigBee Kordinator ist als \grqq Hat \grqq{}
-auf dem Raspberry installiert. Der Sniffer ist per USB an der Frontseite des Raspberrys angeracht.  
-
-Das Deployment des
-Versuchs wird im Kapitel LCM beschrieben.
+Das cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein. Bitte stellen sie selbst einen Monitor mit HDMI Anschluss, sowie Maus und Tastatur bereit.
 
 \section{Aufgabenstellungen}
 
-In diesem Kapitel werden die Aufgabenstellungen aus dem LabGuide genauer beschrieben, sowie eine eine Musterlösung gegeben.
-
-
+Bitte arbeiten sie alle folgenden Aufgabenstellungen ab. Fertigen sie im Anschluss einen Versuchsbericht an. Es reicht, wenn die gestellten Fragen
+implizit beantwortet werden.
 
 \subsection{Aufgabe 1 - Vorbereitungen}
 
 \subsubsection{Vorbereitung}
-Schließen sie an den RaspberryPi einen Monitor, Tastatur, Maus sowie den Sniffer Stick an. Durch Anschluss der
+Schließen sie an den RaspberryPi den Monitor, eine Tastatur und Maus, sowie den Sniffer Stick an. Durch Anschluss der
 Stromversorgung startet der Raspberry automatisch. Melden sie nach starten des Betriebssystemen mit folgenden Zugangsdaten an:
 
 \begin{itemize}
-    \item User: Student 
-    \item Password: ZigbeeLab
+    \item User: student 
+    \item Password: zigbeelab
 \end{itemize}
 
 Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die benötigten Container ausgeführt werden:
@@ -67,11 +47,12 @@ Starten sie den Webbrowser Firefox und besuchen die Webseite:
     https://zigbee2mqtt.local
 \end{lstlisting}
 
-Überprüfen, dass keine Geräte mit dem Koordinator verbunden sind. Im Zweifelsfall können sie den Versuch zurücksetzen.
+Überprüfen Sie  dass keine Geräte mit dem Koordinator verbunden sind. Im Zweifelsfall können sie den Versuch zurücksetzen, oder die Geräte per Hand
+herauslöschen.
 Dies wird in den FAQs beschrieben.
 
 Stellen sie den Kanal, den der Zigbee Koordinator nutzen soll nun auf den durch Ihren Professor vorgegeben Wert.
-Dies verhindert, dass sich die Studenten gegenseitig beeinflussen. Zuhause können sie diesen Schritt überspringen.
+Dies verhindert, dass sich die verschiedenen ZigBee-Netze gegenseitig beeinflussen. Zuhause können sie diesen Schritt überspringen.
 
 \begin{figure}[H]
     \centering
@@ -79,11 +60,11 @@ Dies verhindert, dass sich die Studenten gegenseitig beeinflussen. Zuhause könn
     \caption{Zigbee Kanal Einstellung}
 \end{figure}
 
-Per Default verwendet Zigbee2Mqtt einen zufällig gewählten Netzwerkschlüssel. In dem Versuch wird der Schlüssel aber vorgegeben, um die Pakete
+Standardmäßig verwendet Zigbee2Mqtt einen zufällig gewählten Netzwerkschlüssel. In diesem Versuch wird der Schlüssel vorgegeben, um die Pakete
 entschlüsseln zu können. Bitte setzen sie folgenden Schlüssel:
 
 \begin{lstlisting}
-    0x 00 00 ... 00 <Gruppe>
+    0x 00 00 ... 00 <Gruppennummer>
 \end{lstlisting}
 
 Die Einstellung finden sie unter der Kanal Einstellung als \grqq Network key(string)\grqq{}.
@@ -93,11 +74,13 @@ Achten sie darauf, im Anschluss die Einstellung am Ende der Seite zu bestätigen
 
 \subsubsection{Wireshark Einrichtung}
 Mit folgendem Befehl können sie ein Wireshak Capture auf entsprechenden Kanal starten:
-Starten sie ein Konsolenfester und testen sie, ob der Befehl erfolgreich ausgeführt wird. Wireshark sollte starten, und Pakete sollten ersichtlich sein. Für \grqq 
-<Kanal> \grqq{} setzen sie den von Ihnen gewählten Kanal ein.
+
 \begin{lstlisting}
     > zbwireshark -c <Kanal>
 \end{lstlisting}
+
+Starten sie ein Konsolenfester und testen sie, ob der Befehl erfolgreich ausgeführt wird. Wireshark sollte starten, und Pakete sollten ersichtlich sein. Für \grqq 
+<Kanal> \grqq{} setzen sie den von Ihnen gewählten Kanal ein.
 
 Beenden sie den automatisch gestarteten Capture Vorgang. Gehen sie in das Menü: Bearbeiten > Einstellungen > Protokolle > ZigBee > Edit (Pre-configured Keys) und tragen
 hier den \grqq TC-Link Key\grqq{} und den \grqq Network Key\grqq{} ein. Als \grqq Network Key\grqq{} verwenden sie den in Zigbee2Mqtt gesetzen Key. Der \grqq TC-Link Key\grqq{} ist ein
@@ -106,7 +89,7 @@ Standard-Key, der verwendet werden muss.
     0x 5A 69 67 42 65 65 41 6C 6C 69 61 6E 63 65 30 39 (ZigBeeAlliance09)
 \end{lstlisting}
 
-Manche Hersteller verwenden proprietäre Schlüssel. Die Geräte sind dann nicht mit Koordinatoren anderer Hersteller Kompatibel.
+Manche Hersteller verwenden proprietäre Schlüssel. Die Geräte sind dann nicht mit Koordinatoren anderer Hersteller kompatibel.
 
 \begin{Hinweis}
     Alle Aufgaben sollen mit Wireshark mitgeschnitten werden. Lesen sie die Aufgabenstellung erst durch und machen sie sich den Ablauf klar. Versuchen sie das 
@@ -127,9 +110,53 @@ den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken ebenfalls e
     \caption{Zigbee Anlernen aktivieren}
 \end{figure}
 
-\begin{Hinweis}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.1\grqq{}}
-\end{Hinweis}
+\begin{Aufgabe}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.1\grqq{}}. \\
+    Beantworten sie die nachfolgenden Fragen in Ihrem Versuchsbericht.
+\end{Aufgabe}
+
+\begin{Fragen}
+1. Untersuchen sie den \textbf{Beacon-Request}\\
+Erläutern sie den Frametype und den Command Identifier.\\ 
+Erläutern die Ziel- und Quelladdresse und was sie daraus erschließen können.\\
+
+2. Wie teilt der Koordinator den umliegenden Geräten ab, dass er dem Netzwerk den Beitritt weiterer Geräte erlaubt ?\\
+Zu welchem Frametype gehört der Beacon und durch welchen Wert wird er spezifiziert?\\
+Welche Ziel- und Quelladressen werden verwendet?\\
+
+4. Welchen Wert hat das Feld „Association Permit“ im letzten Beacon des Koordinators und wie ist dieser Wert zu interpretieren? \\
+
+5. Untersuchen Sie den \textbf{Association Request} der Lampe an den Koordinator. \\
+Welchen Wert hat das Feld \grqq Allocate Address \grqq{} und wie ist dieser zu interpretieren?\\
+Welchen Wert hat das Feld \grqq Device Type\grqq{} und wie ist dieser zu interpretieren?\\
+
+7. Untersuchen die den "Data Request" von der Lampe an den Koordinator.\\
+Erläutern Sie die Funktion dieser Nachricht.\\
+Mit welchem Kommandoframe antwortet der Koordinator auf den Data-Request?\\
+Welche Werte besitzen die Felder „Short Address“ und „Association Status“?\\
+
+8. Untersuchen Sie einen \textbf{IEEE802.15.4. Ack-Frame}.\\
+Welche Adressfelder werden benutzt? \\
+Wie findet die Zuordnung zum Daten- oder Kommandoframe statt, der durch die Ack bestätigt wird? \\
+Werden grundsätzlich alle Frames bestätigt?\\
+
+10. Wie lautet die letzte Nachricht, bei der 64-bit-MAC-Adressen verwendet werden und wie\\
+ lautet die erste Nachricht, bei der die 16-Bit-Kurzadresse der beigetretenen Lampe verwendet wird?\\
+
+11. Was ist die letzte Nachricht, die auf dem NWL-Layer unverschlüsselt übertragen wird?\\
+
+12. Erläutern Sie den Zweck der \textbf{Tranport-Key-Nachricht}.\\
+ Wie lautet der Frametype des 802.15.4-Frames, in dem die Transport-Key-Nachricht transportiert wird? \\
+ Wie lautet der ZigBee-NWK Frametype des Frames?\\
+ Treffen Sie möglichst genaue Aussagen zum in der Transport-Key übertragenen Schlüssel (Schlüsseltype). \\
+ Erläutern Sie, wie die Transport-Key-Nachricht kryptographisch gesichert ist.\\
+ Interpretieren Sie den Inhalt des Radius Feldes im NWK-Frame, das die TransportKeyNachricht enthält!\\
+
+13. Erläutern Sie, den Zweck des versendeten \textbf{Active-Endpoint-Requests} und des \textbf{SimpleDescriptor-Requests}.
+ Beschreiben Sie die Information, die in den entsprechenden Response-Nachrichten enthalten ist. 
+ Wie stellt deConz die Information dar?
+ Welche Endpoints werden für den Austausch der untersuchten Request- und ResponseNachrichten verwendet? Interpretieren Sie dies!
+\end{Fragen}
 
 Navigieren sie nun zur Übersichtsseite der Lampe. Diese sollte ähnlich wie folgende Seite aussehen:
 
@@ -139,22 +166,30 @@ Navigieren sie nun zur Übersichtsseite der Lampe. Diese sollte ähnlich wie fol
     \caption{Zigbee Device Übersicht}
 \end{figure}
 
-Vergeben sie in der Übersichsseite der Lampe einen Nutzerfreundlichen namen. Die geschieht über den blauen Button im unteren Teil der Übersicht.
-Dimmen und schalten sie die Lampe über die Weboberfläche. Die ist unter dem Reiter \grqq Details\grqq{} möglich. Starten sie einen weiteren Capture Vorgang, in dem sie einen Schaltvorgang mitschneiden.
+Vergeben sie in der Übersichsseite der Lampe einen nutzerfreundlichen Namen. Die geschieht über den blauen Button im unteren Teil der Übersicht.
+Dimmen und schalten sie die Lampe über die Weboberfläche. Die ist unter dem Reiter \grqq Details\grqq{} möglich. Starten sie einen weiteren Capture Vorgang und
+scheiden in diesem einen Schaltvorgang mit.
+
+\begin{Aufgabe}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.2\grqq{}}. \\
+    Beantworten sie die nachfolgenden Fragen in Ihrem Versuchsbericht.
+\end{Aufgabe}
+
+Durch welche ZigBee-Frames werden die Schaltvorgänge übertragen? \\
+Beschreiben Sie möglichst genau, durch welche Headerfelder die Schaltvorgänge definiert sind! \\
+Welche Endpoints werden für die Schaltvorgänge benutzt? Woher hat der Koordinator Kenntnis über die in der Lampe verwendeten Endpoints? \\
+
+
+
 
 \begin{Hinweis}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.2\grqq{}}
-\end{Hinweis}
-
-\subsubsection{Fragen}
-
-\subsubsection{Hinweise}
 Sollte die Lampe sich nicht Verbinden, kann es notwendig sein die Lampe zurückzusetzen. In den FAQs finden sie zwei Methoden dazu.
+\end{Hinweis}
 
 \subsection{Aufgabe 3 - Joining einer Fernbedienung über die Lampe}
 
 \subsection{Durchführung}
-Für diese Aufgabe sollte nur die eine Lampe mit dem Koordinator verbunden sein. Die Fernbedienung wird nun über die Lampe dem Netzwerk hinzugefügt. Aus diesem Grund wird es nur der Lampe
+Für diese Aufgabe sollte nur eine Lampe mit dem Koordinator verbunden sein. Die Fernbedienung wird nun über die Lampe dem Netzwerk hinzugefügt. Aus diesem Grund wird es nur der Lampe
 erlaubt, ein neues Gerät aufzunehmen. Drücken sie den Setup Button auf der Fernbedienung, bis die LED dauerhaft grün leuchtet. Ein erfolgreiches anlernen wird auch hier in der Weboberfläche
 und durch ein blinken der grünen LED signalisiert. Schneiden sie diesen Vorgang wieder mit Wireshark mit und speichern den Capture unter \grqq <Gruppe> - ZigbeeLab - Aufgabe3\grqq{}.
 
@@ -165,12 +200,42 @@ und durch ein blinken der grünen LED signalisiert. Schneiden sie diesen Vorgang
 \end{figure}
 
 \begin{Aufgabe}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 3\grqq{}}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 3\grqq{}}. \\
+    Beantworten sie die nachfolgenden Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
-\subsubsection{Fragen}
+\begin{Fragen}
+1. Erläutern Sie den Zweck der \textbf{Permit-Join-Request} Nachricht. An welche ZigBee-NWKZieladresse wird die Nachricht versendet? 
+Erläutern Sie das wichtigste Headerfeld!\\
 
-\subsubsection{Hinweise}
+2. Welchem Zweck dient die \textbf{Update Device} Nachricht? Wer ist Absender und wer ist
+Empfänger? Welche Adresse steht im Feld „Device Address“?\\
+
+3. Von welchem Device erhält die Fernbedienung ihre 16 Bit Kurzadresse und wie lautet sie?\\
+
+4. Wie viele \textbf{Transport-Key} Nachrichten wurden ausgetauscht? Erläutern Sie wer jeweils
+der Absender und wer der Empfänger ist. Versuchen Sie die den Vorgang zu erklären und
+gehen Sie dabei auf das Kommandoframe \grqq Tunnel\grqq{} ein. Wie sind die Transport-Key Nachrichten kryptographisch gesichert?
+Was sind die wichtigsten Headerfelder des Tunnel-Kommandoframes?\\
+
+5. Untersuchen Sie die \textbf{Device Announcement} Nachricht der Fernbedienung, welchen
+Zweck hat sie? Schauen Sie sich die \grqq Capability Information \grqq{} an. Handelt es sich um ein
+Full-Function-Device? Welcher Wert steht im Feld „AC Power“ und was sagt dieser Wert aus? \\
+
+6. Untersuchen Sie die \textbf{Active-Endpoint-Request} Nachricht und ihren Weg vom
+Koordinator bis zur Fernbedienung. Vergleichen Sie die Adressen im ZigBee-NWKLayer und im IEEE-Layer und erklären Sie den Zusammenhang. An welchem Headerfeld
+können Sie zweifelsfrei identifizieren, dass es die gleiche Nachricht ist, die nur weitergeleitet wird? \\
+
+7. Untersuchen Sie die \textbf{Simple Descriptor Response}- Nachrichten der Fernbedienung!
+Welche Informationen enthält diese Nachricht? \\
+\end{Fragen}
+
+\begin{Hinweis}
+    Eventuell muss Ihre Fernbedienung zuerst zurückgesetzt werden, bevor sie wieder einem neuen ZigBee Netzwerk beitreten kann.
+    Der Reset-Knopf der Fernbedienung ist empfindlich, und bei Ihnen mit hoher Warscheinlichkeit bereits defekt. Alternativ lässt sich der Phillips Hue
+    Dimmer Switch durch drücken aller 4 Taster für ca. 5 Sekunden zurücksetzen. Ein erfolgreicher Reset wird durch eine abwechselns Grün/Rot blinkende LED
+    signalisiert. Dies stellt ebenfalls die Standardmethode für das Modell V2 dar, die keinen Reset-Knopf mehr besitzt.
+\end{Hinweis}
 
 \subsection{Aufgabe 4 - Binding der Fernbedienung}
 
@@ -180,14 +245,74 @@ Navigieren sie in der Weboberfläche zu der Übersicht Ihrer Lampe. Dort finden 
 Schalten sie nun die Lampe mit der Fernbedienung ein und aus. 
 
 \begin{Hinweis}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 4\grqq{}}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 4\grqq{}}. \\
+    Beantworten sie die nachfolgenden Fragen in Ihrem Versuchsbericht.
 \end{Hinweis}
+
+\begin{Fragen}
+1. Untersuchen Sie die \textbf{Bind Request}- und die \textbf{Bind Response}-Nachricht. 
+Was sind jeweils die NWK-Quell- und NWK-Zieladressen? Erläutern Sie, den Inhalt der BindRequest Nachricht. 
+Was genau bewirkt die Nachricht? In der Nachricht sind nur 64-Bit Adressen enthalten. Stellt das ein Problem dar? \\
+
+2. Warum wird vom Koordinator kein Bind-Request an die Lampe gesendet. \\
+
+3. Betrachten Sie die \textbf{ZCL: OnOff} Nachricht. Geben Sie die NWK-Quell- und Zieladresse an. 
+Welchen Wert hat das On/OFF-Cluster und welches Kommando wird zum Schalten verwendet?\\
+
+4. Interpretieren Sie die von der Fernbedienung gesendeten \textbf{Data Request} Nachrichten?
+Wie groß ist der zeitliche Abstand zwischen zwei Data-Requests? Was löst eine DataRequest-Nachricht beim Empfänger aus? Geben Sie ein Beispiel. 
+\end{Fragen}
 
 \subsection{Aufgabe 5 - Gruppenbildung}
 
-\begin{Hinweis}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 5\grqq{}}
-\end{Hinweis}
+Navigieren sie in der Weboberfläche zu dem Reiter \grqq Groups \grqq{}. Legen sie eine Gruppe mit dem Namen \grqq Hue-Lights-<Gruppe> \grqq{} an.
+Editieren sie nun die Gruppe. Fügen sie die Endpunkte der beiden Lampen, die zum Steuern verwendet werden, der Gruppe hinzu. \\
+Navigieren sie nun wieder zur Binding-Übersicht der Fernbedienung. Entfernen sie das Binding zu der Lampe. Binden sie die Fernbedienung nun mit der soeben
+angelegten Gruppe.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{media/Z2M-Group-Binding.png}
+    \caption{Zigbee Anlernen aktivieren - nur Lampe}
+\end{figure}
+
+Achten sie darauf, alle hier genannten Cluster anzuwählen.
+
+\begin{Aufgabe}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 5\grqq{}}. \\
+    Beantworten sie die nachfolgenden Fragen in Ihrem Versuchsbericht.
+\end{Aufgabe}
+
+\begin{Fragen}
+1. Verdeutlichen Sie sich den Vorgang in dem Sie die vom Koordinator versendeten
+Nachrichten \textbf{Get Group Membership} bzw. \textbf{Add Group} untersuchen. Fassen Sie die
+wichtigsten Informationen der Nachrichten zusammen. \\
+
+2. Betrachten Sie die \textbf{Add Group Response} Nachricht des Empfängers.
+Welche Information ist enthalten? Welcher Zielendpunkt wird im APS-Frame des AddGroup-Befehles verwendet? Geben
+Sie eine Erklärung! \\
+
+3. Wie lautet die Destination Adresse im ZDP-Header der \textbf{Bind Request} Nachricht?
+Welcher Zielendpunkt ist vorhanden? \\
+
+4. Was ist die NWK-Zieladresse der \textbf{ZCL-OnOff} Nachricht? Um welche Art von Nachricht handelt es sich hierbei?
+Finden Sie die von Ihnen eingestellte Gruppen-ID in der „ZCL OnOff“-Nachricht wieder? \\
+\end{Fragen}
+
+\subsection{Weiterführende Fragen}
+
+
+1. Welchem Zweck dienen die „Link Status“ Nachrichten? Über welche Anzahl von „Hops“
+wird diese Nachricht übertragen? Analysieren Sie exemplarisch einige Link-StatusNachrichten und Interpretieren Sie diese! \\
+
+
+2. Untersuchen Sie die „Link Quality Request“- bzw. „Link Quality Response“-Nachrichten.
+Gehen Sie auf den LQI-Wert in der „Link Quality Response“ Nachricht und was bedeutet
+dieser? \\
+
+
+3. Interpretieren Sie „Route Request“ Nachrichten und zugehörige „Route-Response“-
+Nachrichten. 
 
 
 
