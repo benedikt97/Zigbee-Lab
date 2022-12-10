@@ -8,7 +8,7 @@ serial:
 frontend:
   port: 8080
   host: 0.0.0.0
-  url: https://z2m.heusercloud.de
+  url: https://z2m.local
 advanced:
   homeassistant_legacy_entity_attributes: false
   legacy_api: false
