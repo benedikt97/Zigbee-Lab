@@ -47,9 +47,9 @@
     name: ansible
     groups: docker
     append: yes
-    register: group.changed
+  register: groupchanged
 
-- name: Reboot...
-  become: true
-  reboot:
-  when: group.changed
+#- name: Reboot...
+#  become: true
+#  reboot:
+#  when: groupchanged

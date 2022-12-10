@@ -19,19 +19,19 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: unless-stopped
 
-  homeassistant:
-    container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
-    volumes:
-      - ./homeassistant/config:/config
-      - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
-    privileged: true
-    networks:
-      - backbone
-    environment:
-      - VIRTUAL_HOST=homeassistant.local
-      - VIRTUAL_PORT=8123
+#  homeassistant:
+#    container_name: homeassistant
+#    image: "ghcr.io/home-assistant/home-assistant:stable"
+#    volumes:
+#      - ./homeassistant/config:/config
+#      - /etc/localtime:/etc/localtime:ro
+#    restart: unless-stopped
+#    privileged: true
+#    networks:
+#      - backbone
+#    environment:
+#      - VIRTUAL_HOST=homeassistant.local
+#      - VIRTUAL_PORT=8123
 
   zigbee2mqtt:
     container_name: zigbee2mqtt
@@ -67,16 +67,7 @@ services:
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
       
-  mqtt-explorer:
-    container_name: mqtt-explorer
-    image: ccll/mqtt-explorer
-    networks:
-      - backbone
-    restart: always
-    environment:
-      - VIRTUAL_HOST=mqttexplorer.local
-
-      
+     
 networks:
   backbone:
     external: true
