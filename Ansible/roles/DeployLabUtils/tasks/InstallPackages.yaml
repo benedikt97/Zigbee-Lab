@@ -3,5 +3,6 @@
   apt:
     pkg:
       - wireshark
+      - firefox
     state: latest
     update_cache: true
