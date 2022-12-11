@@ -11,24 +11,25 @@ teilnehmen und die Geräte direkt steuern. Dieses Kapitel soll einen Überblick 
 Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Dazu gehören:
 \begin{itemize}
     \item \textbf{Wlan}
-    Wlan ist ein in jedem Haushalt vorhandener Standard, der überwiegend für die Anbindung mobiler Geräte an den
+    Wlan ist ein weit verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
     Internetrouter dient. Dies macht es naheliegend, auch smarte Geräte per WLAN einzubinden. Wlan ist allerdings 
-    nicht auf eine geringe Leistungsfähigkeit der Hosts, in Bezug auf Rechen- und Sendeleistung ausgelegt. Die ist
+    optimier für hohe Übertragungsraten, und nicht für besonders leistungsschwache Endgeräte. Die ist
     gerade für Batteriebetriene Geräte ein enormer Nachteil. Zusätzlich ist es oft nicht gewünscht, Smarte Devices
-    an ein Netzwerk mit Internetzugang anzuschließen
+    an ein Netzwerk mit Internetzugang anzuschließen, da diese sobald sie mit dem Internet kommunizieren auch entsprechende
+    Sicherheitsrisiken darstellen.
 
     \item \textbf{Blueooth}
     Ebenso wie Wlan hatte Bluetooth auch schon vor dem IoT Boom eine erhebliche Verbreitung. Durch Implementierung 
     des Standard Bluetooth LE ist auch die Leistungsfähigkeit von Devices hier eine geringere Problematik. Bluetooth
-    ist aber nicht für hohe Reichweite und viele Geräte konzipiert. Bluetooth hat keine Skalierfähigkeit wenn es darum
-    geht, eine große Menge von Geräten verteilt im Haus zu vernetzen.
+    ist allerdings nicht für hohe Reichweite oder für viele Geräte konzipiert. Der geographische Raum, den eine Bluetooth
+    Bridge abdecken kann, ist also eher gering.
 
     \item \textbf{Z-Wave}
     
     \item \textbf{ZigBee}
     Zigbee ist ein auf den 802.40.5 Standard aufbauendes Protokoll, welches grundlegend für die Anbindung vieler
     Geräte in einem großen räumlichen Areal konzipiert ist. Ein großer konzeptioneller Vorteil ist, dass bei 
-    ZigBee ein Mesh Netzwerk aufgebaut wird. Es können auch Geräte angebunden werden, die keine direkte Funkverbindung
+    ZigBee ein Mesh-Netzwerk aufgebaut wird. Es können auch Geräte angebunden werden, die keine direkte Funkverbindung
     zum Koordinator haben. Zusätzlich sind Funktionen implementiert, welche das Management einer hohen Anzahl von Devices
     erleichtert.
     
@@ -52,7 +53,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
 \subsubsection{Dresden Electronic}
     Dresden Electronic bietet Software und Hardware zum Aufbau von Zigbee Netzwerken an. Es gibt Zigbee USB Adapter und RaspberryPi Hats mit ATMega Chips,
     sowie eine Steuerungssoftware \grqq deCONZ \grqq{}. Als komplette Produktlinie für den nicht technisch visierten Endkungenmarkt gibt es die Produktsparte
-    "Phoscon", hautpsächlich zur smarten Beleuchtung.
+    \grqq Phoscon\grqq{}, hautpsächlich zur smarten Beleuchtung.
 
 \subsubsection*{Weitere Hersteller}
 Weitere bekannte Hersteller/Marken mit Zigbee Devices und Gateways:

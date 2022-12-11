@@ -11,11 +11,8 @@ ZigBee ist in Form von weiteren Protokollschichten implementiert, welche auf IEE
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{media/Zigbee Stack.jpg}
-  \caption{ZigBee Protocoll Stack}
+  \caption{ZigBee Protocoll Stack \\ Bildquelle: \url{https://www.researchgate.net/figure/IEEE820154-ZigBee-protocol-stack-architecture_fig2_265150617}}
 \end{figure}
-
-Bildquelle: \url{https://www.researchgate.net/figure/IEEE820154-ZigBee-protocol-stack-architecture_fig2_265150617}
-
 
 Genutzt wird es, um Geräte, wie zum Beispiel Lampen, Schalter oder Thermostate
 zur Kommunikation zu befähigen. Dies kann genutzt werden um die Geräte zu steuern, sowie aktuelle Zustandsdaten abzugragen. 
@@ -44,7 +41,7 @@ Fällen Bluetooth LE zur Koppelung, daher ist die simultane Unterstüzung diesen
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{media/table265x.png}
-  \caption{Test des Messagebrokers Mosquitto}
+  \caption{TI CC 265X Serie}
 \end{figure}
 
 Hier in der Tabelle sind die unterstützten Protokolle der einzelnen Modelle sowie deren Leistungsfähigkeit aufgeführt.
@@ -107,6 +104,37 @@ Docker ist eine Container Umgebung, um Anwendungen containerisiert auf Linux-Ser
 Anwendungen auf Servern auszurollen. Alle Abhängigkeiten sind im Container enthalten, sodass hier keine Komplikationen mit anderen Anwendungen
 zu befürchten sind. Prozesse laufen in eigenen Namespaces und sind dadurch abgekoppelt vom Host Betriebssystem. Im Unterschied zur Virtualisierung werden
 Systemprozesse gemeinsam genutzt. Dadurch ist die Effizienz höher, als bei taditioneller Virtualisierung.
+
+\subsection{Docker-Compose}
+
+Docker-Compose ist ein Tool, um große Containerumgebungen per YAML zu definieren und automatisch deployen zu lassen. Klassisch kann ein Container 
+per CLI Befehl mit entsprechenden Parametern gestartet werden:
+\begin{lstlisting}
+  docker run hello-world -v ./home:/home -p 80:80
+\end{lstlisting}
+
+Dies ist allerdings für große Umgebungen unhandlich. Alternativ werden Container also Services in einer YAML definiert.
+
+\begin{lstlisting}
+version: '3'
+services:
+  helloworld:
+    container_name: helloworld
+    image: hello-world
+    ports:
+      - 80:80
+    volumes:
+      - ./home:/home
+    restart: unless-stopped
+\end{lstlisting}
+
+Mit einem 
+\begin{lstlisting}
+  docker-compose up -d
+\end{lstlisting}
+
+können dann alle definierten Services gestartet werden. Dies folgt der allgemeinen Container Idee, Umgebungen zu definieren und beliebig ausrollen 
+zu können, anstelle den Zielzustand manuell zu konfigurieren.
 
 \subsection{zigbee2mqtt}
 
@@ -175,9 +203,25 @@ verarbeiten.
 
 \subsection{zbWireshark}
 
-Dies ist eine Script aus einer Git-Hub Scriptsammlung. Mit diesem Script lässt sich Wireshark starten und anschließend Pakete über den 
- ZigBee Sniffer Stick mitschreiben.
+Dies ist ein Script aus einem Git-Hub Repository. Mit diesem Script lässt sich Wireshark starten und anschließend Pakete über den 
+ZigBee Sniffer Stick mitschreiben.
 
 \url{https://github.com/silicrax/killerbee/tree/master/tools}
 
 \subsection{Ansible}
+
+Ansible ist ein Tool zur IT-Automatisierung. Arbeitsabläufe lassen sich ebenfall gut strukturiert in YAML definieren. Ansible verbindet sich per SSH 
+mit den zu konfigurierenden Hosts und führt Python Module aus. Hosts lassen sich in Gruppen, und Tasks in sogenannten Rollen sammeln. So ist es möglich,
+eine Gruppe von Hosts die Rolle \grqq Webapplikation \grqq{}, und einer Gruppe von anderen Hosts der Gruppe \grqq Datenbank \grqq{} zuweisen. 
+Eine Zuweisung von Rollen sihet folgendermaßen aus:
+\begin{lstlisting}
+  - name: Deploy the Lab
+  hosts: localhost
+  roles:
+    - DeployDocker
+    - DeployLabUtils
+\end{lstlisting}
+
+In diesem Beispiel wird auf dem lokalen Host Docker installiert, und das ZigBee Praktikum vorbereitet.
+
+\subsection{}
