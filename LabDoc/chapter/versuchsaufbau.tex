@@ -90,7 +90,7 @@ In diesem Output ist erkennbar, dass Docker einen Listener auf den Ports 80 und 
 
 Der Container wird ebenfalls an das Netzwerk \grqq Backbone \grqq{} angeschlossen. Der Ordner mit den Konfigurationen wird auf den Host gemountet und 
 bleiben damit konsistent, auch wenn der Container als solches getauscht wird. Wenn der gemountete Pfad außerhalb des Containers nicht existiert, wird der 
-Ordner aus dem Containergemountet. Exisitert der Pfad, wird der Ordner vom Host in den Container gemountet. Durch das Linux-Mantra \grqq Everything is a file \grqq{}
+Ordner aus dem Container gemountet. Exisitert der Pfad, wird der Ordner vom Host in den Container gemountet. Durch das Linux-Mantra \grqq Everything is a file \grqq{}
 ist es auch möglich Geräte über die selbe Art und Weise in einen Container zu mounten wie einen regulären Dateipfad. **** ist der Socket zu dem cod.m Modul.
 In den Umgebungsvariablen wird dem Proxy noch mitgeteilt, unter Welcher URL er erreichbar sein soll und auf welchem Port der Webserver läuft. Die Gruppe 
 \grqq dialout \grqq{} ist notwendig, damit der Container Zugriffsrechte. Der Container Prozess läuft mit entsprechenden Rechten.
