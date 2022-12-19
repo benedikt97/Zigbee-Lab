@@ -1,0 +1,15 @@
+info  2022-12-19 13:43:35: Logging to console and directory: '/app/data/log/2022-12-19.13-43-34' filename: log.txt
+info  2022-12-19 13:43:35: Starting Zigbee2MQTT version 1.28.4 (commit #52e545f)
+info  2022-12-19 13:43:35: Starting zigbee-herdsman (0.14.76)
+info  2022-12-19 13:43:40: zigbee-herdsman started (resumed)
+info  2022-12-19 13:43:40: Coordinator firmware version: '{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20220219,"transportrev":2},"type":"zStack3x0"}'
+info  2022-12-19 13:43:40: Currently 0 devices are joined:
+warn  2022-12-19 13:43:40: `permit_join` set to  `true` in configuration.yaml.
+warn  2022-12-19 13:43:40: Allowing new devices to join.
+warn  2022-12-19 13:43:40: Set `permit_join` to `false` once you joined all devices.
+info  2022-12-19 13:43:40: Zigbee: allowing new devices to join.
+info  2022-12-19 13:43:40: Connecting to MQTT server at mqtt://mosquitto:1883
+info  2022-12-19 13:43:41: Connected to MQTT server
+info  2022-12-19 13:43:41: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload '{"state":"online"}'
+info  2022-12-19 13:43:44: Started frontend on port 0.0.0.0:8080
+info  2022-12-19 13:43:44: Zigbee2MQTT started!
