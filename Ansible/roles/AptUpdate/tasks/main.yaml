@@ -1,0 +1,27 @@
+- name: Update apt repo and cache on all Debian/Ubuntu boxes
+  become: true
+  become_user: root
+  apt: 
+    update_cache=yes 
+    force_apt_get=yes 
+#    cache_valid_time=3600
+
+- name: Upgrade all packages on servers
+  become: true
+  become_user: root
+  apt: 
+    upgrade: yes
+#    name: "*" 
+#    state: latest
+
+- name: Remove useless packages from the cache
+  become: true
+  become_user: root
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  become: true
+  become_user: root
+  apt:
+    autoremove: yes

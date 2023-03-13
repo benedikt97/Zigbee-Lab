@@ -1,0 +1,19 @@
+- name: Update Packages
+  hosts: localhost
+  roles:
+    - AptUpdate
+
+- name: Reset Lab
+  hosts: localhost
+  tasks:
+  
+    - name: Stop Containers
+      become: true
+      ansible.builtin.command: docker compose down
+      args:
+        chdir: /srv/
+
+- name: Redeploy the Lab
+  hosts: localhost
+  roles:
+    - ZigBeeLab

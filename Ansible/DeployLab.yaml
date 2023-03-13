@@ -1,5 +1,6 @@
 - name: Deploy the Lab
   hosts: localhost
   roles:
-    - DeployDocker
-    - DeployLabUtils
+    - AptUpdate
+    - Docker
+    - ZigBeeLab
