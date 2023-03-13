@@ -1,0 +1,4 @@
+pycrypto
+pyserial>=2.0
+pyusb
+rangeparser
