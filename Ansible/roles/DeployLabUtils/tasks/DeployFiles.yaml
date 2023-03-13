@@ -58,7 +58,7 @@
     src: z2m-configuration
     owner: ansible 
     group: ansible
-    dest: /srv/Z2M/
+    dest: /srv/Z2M/data/configuration.yaml
 
 
 - name: Copy mosquitto Configuration
