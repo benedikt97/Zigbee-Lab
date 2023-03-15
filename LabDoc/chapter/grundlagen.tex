@@ -4,18 +4,18 @@ In diesem Kapitel werden alle verwendeten Komponenten und Technologien kurz erl�
 
 \section{LR-WPAN - IEEE 802.15.4}
 
-LR-WPAN steht für \grqq Low Rate - Wireless personal area network \grqq{}. Es handelt sich also um eine Kabelloses geschlossenes Netzwerk, welches für 
-niedrige Datenraten ausgelegt ist. Der Standard definiert den Physical Layer sowie den Media-Access Layer und ist Grundlage von ZigBee, Thread, 6LowPAN.
-Im Standard sind mehrere Modulationsverfahren sowie Frequenzbereiche definiert. Peer-to-Peer ist Teil des Standards. Der Medium-Access Layer baut nicht
-auf 802.1d, es handelt sich also nicht um klassische MAC-Pakete. Die Adressen sind kürzer und die Pakete kleiner. 
+LR-WPAN steht für \grqq Low Rate - Wireless personal area network \grqq{}. Es handelt sich um ein drahtloses geschlossenes Netzwerk, welches für 
+niedrige Datenraten ausgelegt ist. Der Standard definiert den Physical Layer sowie den Media-Access Layer und ist damit die Grundlage von ZigBee, Thread und 6LowPAN.
+Im Standard sind mehrere Modulationsverfahren sowie Frequenzbereiche definiert. Peer-to-Peer ist Teil des Standards. Im vergleich zum 802.1d Standard fallen 
+vorallem die kürzeren Adressen auf. Dadurch kann die für den Anwendungsbereich wertvolle Bandbreite und Rechenleistung reduziert werden. 
 
 \section{ZigBee}
 
 Die ZigBee Alliance wurde durch ein Konsortium von Herstellern gegründet, um einen einheitlichen Übertragungstandard
-im Bereich Heimautomatisierung voranzubringen. ZigBee basiert auf einem offenem IEEE Standard, bringt allerdings Komponenten mit die nicht in einem IEEE
+im Bereich Heimautomatisierung voranzubringen. ZigBee basiert auf dem offenem 802.15.4 Standard, bringt allerdings Komponenten mit die nicht in einem IEEE
 Standard definiert sind.
-ZigBee ist in Form von weiteren Protokollschichten implementiert, welche auf IEEE 802.15.4 aufsetzen. ZigBee nutzt DSSS, also Frequenzspreizung als Modulationsverfahren
-und die Kanäle (11 - 26) liegen im 2,4 Ghz Band. Zigbee interferiert damit mit WLAN.
+ZigBee ist in Form von weiteren Protokollschichten implementiert, welche auf IEEE 802.15.4 aufsetzen. ZigBee nutzt DSSS, also Frequenzspreizung als Modulationsverfahren.
+Die genutzten Kanäle, 11 bis 26, liegen im 2,4 Ghz Band. Zigbee interferiert damit mit WLAN.
 
 \begin{figure}[H]
   \centering
@@ -23,18 +23,17 @@ und die Kanäle (11 - 26) liegen im 2,4 Ghz Band. Zigbee interferiert damit mit 
   \caption{ZigBee Protocoll Stack \\ Bildquelle: \url{https://www.researchgate.net/figure/IEEE820154-ZigBee-protocol-stack-architecture_fig2_265150617}}
 \end{figure}
 
-Genutzt wird es, um Geräte, wie zum Beispiel Lampen, Schalter oder Thermostate
-zur Kommunikation zu befähigen. Dies kann genutzt werden um die Geräte zu steuern, sowie aktuelle Zustandsdaten abzufragen. 
-Markante Eigenschaft ist, dass die Geräte keine direkte Funkverbindung
-zu einem zentralen Controller brauchen. Einzelne Geräte können als Router fungieren. Dies sorgt dafür,
+Der Anwendungsbereich für ZigBee ist die Heimautomatisierung. Geräte, hier als Devices bezeichnet, können zentral gesteuert und überwacht werden. 
+Markanter Vorteil von ZigBee ist, dass die Geräte keine direkte Funkverbindung
+zu einem zentralen Controller brauchen. Einzelne Geräte können als Router fungieren, und damit die Reichweite erhöhen. Dies sorgt dafür,
 dass mir einer geringen Sendeleistung ein geografisch großes Gebiet abgedeckt werden kann. Sende- und Empfangsleistung
-ist vorallem bei kleinen Batteriebetriebenen Geräten der einschränkende Faktor.
+ist vorallem bei kleinen Batteriebetriebenen Geräten oft der einschränkende Faktor.
 
 
 \section{Texas Instruments CC Chips}
 
-Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für ZigBee Devices 
-nutzen lassen können. Kleinere Chips können in Enddevices wie Lampen, größere als Koordinator selbst verwendet werden.
+Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für ZigBee Geräte 
+nutzen lassen können. Kleinere Chips können in Endgeräten wie Lampen und Thermostate, größere als Koordinator selbst verwendet werden.
 
 Die aktuelle Chipfamilie TexasInstruments CC26XX:
 
@@ -54,19 +53,19 @@ Fällen Bluetooth LE zur Koppelung, daher ist die Unterstüzung diesen Protokoll
 \end{figure}
 
 In der Tabelle sind die unterstützten Protokolle der einzelnen Modelle sowie deren Leistungsfähigkeit aufgeführt.
-Es ist anzumerken, dass die Top Modelle schon den Standard Thread unterstützen, der vermutlich durch das
-Projekt \grqq Matter\grqq{} erheblich an bedeutung gewinnt.
+Es ist anzumerken, dass die größeren Modelle schon den Standard Thread unterstützen, der vermutlich durch das
+Projekt \grqq Matter\grqq{} erheblich an bedeutung gewinnen wird.
 
-Texas Instruments bietet als Basis für ZigBee Eigententwicklungen eine Z-Stack Bibliothek. Diese stellt alle grundlegende 
-Funktionen um das ZigBee Protokoll zu implementieren. Mit TexasInstruments Code Composer Studio steht eine IDE bereit,
-um den Entwicklungsprozess zu unterstützen. Auf den entsprechend Leistungsfähigeren Chips lassen sich so noch zusätzliche
+Texas Instruments stellt als Basis für ZigBee Anwendungen eine Z-Stack Bibliothek zur Verfügung. Diese stellt alle grundlegenden 
+Funktionen um das ZigBee Protokoll zu implementieren. Mit Texas Instruments Code Composer Studio steht eine IDE bereit,
+um den Entwicklungsprozess zu unterstützen. Auf den entsprechend Leistungsfähigeren Chips lassen sich in freie Speicherbereiche noch zusätzliche
 Funktionalitäten einprogrammieren. Die Chips können mit Programmierboards des Herstellern programmiert werden. Alternativ kann man
 günstig einen USB-Stick mit aufgelöteten CC Chip erwerben, und auch diesem mit entsprechenden Tools programmieren.
 
 Weiter Informationen: \url{https://www.ti.com/tool/Z-STACK#overview}
 
-In dem OpenSource Projekt "zigbee2mqtt" werden ausschließlich Chips von Texas Instruments unterstützt. Es sei erwähnt, 
-dass die meißten gängigen Anbieter von Microchips entsprechende Modelle im Angebot haben. 
+In dem OpenSource Projekt "zigbee2mqtt" werden ausschließlich Chips von Texas Instruments unterstützt. Die meißten gängigen Anbieter von Microchips 
+haben entsprechende Modelle im Angebot. 
 
 \section{Versuchshardware}
 
@@ -74,41 +73,46 @@ dass die meißten gängigen Anbieter von Microchips entsprechende Modelle im Ang
 
 Der RaspberryPi ist ein ARM basierter Computer im Mini-Format. Er dient in diesem Versuch als Server, der die Applikationen
 hostet und gleichzeitig als Versuchs-PC, auf dem der Versuch durchgeführt wird. Die eingesetzten Anwendungen sind 
-als Webservice implementiert.
+als Webservice implementiert und werden per Docker Containerisierung ausgerollt.
 
-Der RaspberryPi besitzt die Nutzer PC typtischen Schnittstellen wie Ethernet, HDMI, sowie USB. Als Hauptspeicher wird eine
+Der RaspberryPi besitzt die PC typtischen Schnittstellen wie Ethernet, HDMI, sowie USB. Als Festspeicher wird eine
 SD-Karte eingestzt. 
 
-Auf dem RaspberryPi wird das Linux-basierte Betriebssystem RaspbianOS eingesetzt. 
+Auf dem RaspberryPi wird das Linux-basierte Betriebssystem RaspbianOS. Dies ist eine von den Entwicklern des RaspberryPis eigenentwickelte und für den RaspberryPis
+angepasste Linux-Distribution. Es baut auf Ubuntu auf.
 
 \subsection{RaspberryPi Zigbee Hat}
 
 Als Zigbee Koordinator wird ein auf dem TI CC2652 basierendem RaspberryPi Hat vom Hersteller \grqq cod.m \grqq{} eingesetzt. Dieser wurde vom Hersteller
 für den Einsatz mit \grqq homegear \grqq{} oder \grqq zigbee2Mqtt \grqq{} entwickelt. Ein Datenblatt sowie ein Manual ist im Anhang.
 
-\subsection{CC2235 Sniffer Stick}
+\subsection{CC2531 Sniffer Stick}
 
-Mit diesem Stick wird die ZigBee Kommunikation zwischen dein einzelnen Devices sowie dem Koordinator mitgeschnitten.
-Der stick basiert auf einem leistungsschwachen Chip, der mit entsprechender Firmware empfangende Pakete empfängt und über die USB Schnittstelle
-berfügbar macht. 
+Mit diesem Stick wird die ZigBee Kommunikation in dem Netzwerk des Versuchaufbaufs mitgeschnitten.
+Der stick basiert auf einem leistungsschwachen Chip, der mit entsprechender \grqq Snifffer \grqq{} Firmware Pakete \grqq over the air \grqq{} mitschneidet.
+Die Pakete lassen sich über die serielle USB-Schnittstellen im Anschluss auslesen, und in Wireshark visualisieren. 
 
-\url{https://github.com/virtualabs/cc2531-killerbee-fw}
+Als Treiber wird ein in C geschriebenes Programm verwendet, welches es ermöglicht den Stick direkt als Interface in Wireshark hinzuzufügen. Der Quellcode findet sich in 
+GitHub unter https://github.com/andrebdo/wireshark-cc2531. Hier ist auch eine Anleitung zum kompilieren. Die hieraus entstehende ausführbare Datei muss in entsprechenden
+Wireshark Ordner kopiert werden, und kann anschließend als Interface ausgewählt werden. Die Funktion nennt sich bei Wireshark \grqq extcap \grqq{}.
+
+todo: Screenshot wireshark
 
 \subsection{Phillips Hue Komponenten}
 
-Die Phillips Hue Serie setzt vollständig auf den ZigBee Standard auf. Die Produkte haben ein eigenes Öko-System mit entsprechender App und Gateway. Sie sind Kompatibel
-zu dem Software-Gateway zigbee2mqtt.
+Die Phillips Hue Serie setzt vollständig auf den ZigBee Standard. Die Produktlinie umfasst alle Komponenten zur Heimautomatisierung. Dies umfasst eine APP,
+ein Gateway sowie vielfältige Endgeräte. Sie sind Kompatibel zu dem Software-Gateway zigbee2mqtt.
 Die Lampen werden in dem Versuch als Demonstrationsobjekte eingesetzt. Sie können Ein- und Ausgeschaltet werden, sowie gedimmt werden. Zusätzlich wird einer
-Phillips Hue Fernbedienung verwendet, die zur Steuerung der Lampen dient. Phillips verwendet bei kleinen Geräten die ZigBee Chips von Atmel, bei größeren 
-sind auch Eigenentwicklungen zu finden.
+Phillips Hue Fernbedienung verwendet, die zur Steuerung der Lampen genutzt wird. Phillips verwendet bei kleinen Geräten die ZigBee Chips von Atmel, bei größeren 
+sind Eigenentwicklungen zu finden.
 
 \section{Eingesetzte Software}
 
 \subsection{Raspbian OS}
 
-RaspbianOS ist eine leichtgewichtige Linux Distribution, welche direkt vom Hersteller des RaspberryPis speziell auf die Bedürfnisse des Board angepasst werden. Es enthällt eine
+RaspbianOS ist eine leichtgewichtige Linux Distribution, welche direkt vom Hersteller des RaspberryPis speziell auf die Bedürfnisse des Board angepasst ist. Es enthällt eine
 Desktop Umgebung sowie die grundlegende Paketen. Es basiert auf Debian, damit sind auch die entsprechenden Paketquellen verfügbar. Durch die große Verbreitung 
-sind viele Anwendungen für das Betriebssystem verfügbar.
+sind viele Anwendungen in den standard Paketquellen verfügbar.
 
 \subsection{Docker}
 
@@ -145,8 +149,8 @@ Mit einem
   docker-compose up -d
 \end{lstlisting}
 
-können dann alle definierten Services gestartet werden. Dies folgt der allgemeinen Container Idee, Umgebungen zu definieren und beliebig ausrollen 
-zu können, anstelle den Zielzustand manuell zu konfigurieren.
+können dann alle definierten Services gestartet werden. Dies folgt der allgemeinen Konvention "Konvention vor Konfiguration". Der Zielzustand wird einmal definiert
+und kann Aufgrund dieser Definition beliebig oft ausgerollt werden.
 
 \subsection{zigbee2mqtt}
 
@@ -159,15 +163,63 @@ Eigenentwicklungen einsetzen.
 Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt}
 Homepage: \url{https://www.zigbee2mqtt.io/}
 
+zigbee2mqtt verwaltet das Zigbee Netzwerk und ermöglicht es dritten Anwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt,
+kündigt zigbee2mqtt das Gerät per MQTT an, und gibt nach erfolgreichem Interview alle Cluster an.
+
+todo: Screenshot MQTT
+
+Anschließend können Drittanwendungen, die die entsprechende Schnittstelle implementiert haben, die Geräte ebenfalls per MQTT steuern.
+
+Zigbee2Mqtt verwaltet 3 persistente Datensätze, welche die Funktionsweiße deutlicher machen. Viele Protokollnahe Funktionen, wie zum Beispiel das Pflegen von Routingtabellen und
+Verschlüsselung der Kommunikation sind direkt in der Hardware implementiert. Diese Funktionen lassen sich wie in der im Punkt TI CC Firmware gezeigen API Steuern und Abfragen.
+Zigbee2mqtt verwaltet in einer eigenen Datenbank die Geräte im Netzwerk sowie deren Eigenschaften.
+Folgende Datensätze finden sich in der Anwendung:
+
+\textbf{coordinator-backup.json}\\
+
+Wie der Name sagt, sind hier die für die Initialisierung beim Start des Koordinators wichtigen Informationen abgelegt. Dies beinhaltet alle dem Netzwerk zugehörigen Geräte.
+Durch löschen dieser Datei wird das Netzwerk vollständig zurückgesetzt. Die einzelnen Teilnehmer müssen nun aber manuell per Touchlink oder nach herstellerspezifischem Verfahrem
+zurückgesetzt werden, um wieder einem neuen Netzwerk beitreten zu können.
+Der Inhalt dieser Datei sieht wie folgt aus:
+\begin{lstlisting}
+  version: '3'
+  services:
+    helloworld:
+      container_name: helloworld
+      image: hello-world
+      ports:
+        - 80:80
+      volumes:
+        - ./home:/home
+      restart: unless-stopped
+  \end{lstlisting}
+
+  \textbf{state.json}\\
+
+  In dieser Datei sind alle aktuellen Zustände Geräte im Netzwerk hinterlegt. Sie dient dazu, bei einem Neustart des Koordinators den alten Zustand wieder herzustellen.
+  Eine Abfrage eines Attributes der Geräte sollte immer über die API erfolgen.
+
+  Der Inhalt sieht wie folgt aus:
+
+  \textbf{state.json}\\
+
+  Dies ist die eigentliche Datenbank von zigbee2mqtt. Da SQLite eingesetzt wird, lässt sich auch hier der Inhalt wie bei einer Textdatei einfach auslesen. Hier sind alle
+  Konfigurationen der Anwendung, aber auch für jedes Device sämtliche Informationen hinterlegt.
+
+  Auszug aus dem Konfigurationsteil:
+  \begin{lstlisting}
+  \end{lstlisting}
+
+  Ein Datensatz eines Devices
+
+
+
 \subsubsection{TI CC Firmware}
 
 Firmware für die Texas Instruments Chips, um diese als Koordinator einsetzen zu können. Die Firmware basiert auf dem Z-Stack von Texas Instruments. Sie wird fertig kompiliert
-in einem Git-Repo angeboten. Die Firmware ist nur sehr geringfügig verändert. 
+in dem Git-Repo von zigbee2mqtt angeboten. Sie kann auf die USB-Koordinatoren direkt per USB geflasht werden, der Einsatz eines Launchpads ist nicht zwingend notwendig. Eine Anleitung
+findet sich auf der Homepage von zigbee2mqtt.  
 
-\subsubsection{zigbee-herdsman}
-
-Dieses Modul stellt API für höhere Anwendungen und übernimmt die Low-Level Zigbee Kommunikation. Es verbindet sich direkt 
-mit dem ZigBee Koordinator steuert Ihn über die \grqq TI zStack monitoring and test API \grqq{}. \cite{zstack}
 
 Zur veranschaulichung, hier ein Ausschnitt aus der API Dokumentation.
 
@@ -180,16 +232,23 @@ Zur veranschaulichung, hier ein Ausschnitt aus der API Dokumentation.
 In diesem Beispiel wird beschrieben, wie man einen SimpleDescriptor-Request an ein Zigbee-Device versendet. Dieser Aufruf ist entsprechend Parametrierbar,
 und wird zur Abfrage der verfügbaren Endpunkte eines Gerätes nach dessen Beitritt in das Netzwerk abgefragt.
 
+\subsubsection{zigbee-herdsman}
+
+Der Herdsman ist die eigentliche Kernanwendung von zigbee2mqtt. Diese Modul verbindert sich direkt über einen seriellen Socket mit dem Koordinator. Über diese Schnittstelle
+spricht Herdsmann die API des Koordinators an um das Netzwerk zu verwalten. Herdsman verwaltet die Datenbank und damit den Zustand des Netzwerkes. Das Modul stellt nach außen
+eine API zur Verfügung, mit der Sich das Netzwerk verwalten lassen kann. Auf diese API greift auch die integrierte WebGui zu.
+
+Die API von Herdman wird im entsprechenden GitHub Repository dokumentiert.
+\url{https://github.com/Koenkk/zigbee-herdsman}
+
 \subsubsection{zigbee-herdman-converters}
 
-Dieser Konverter kann proprietäre Cluster die durch Geräte exposed werden umwandeln in Standard Cluster. Mit diesem Converter lassen sich proprietäre Cluster von Geräte
+Dieser Konverter kann proprietäre Cluster die von selbstentwickelten Devices oder manch Devices von Drittherstellern. Mit diesem Converter lassen sich proprietäre Cluster von Geräte
 so adaptieren, dass sie nach Wunsch gesteuert und ausgelesen werden können.
 
 \subsubsection{zigbee2mqtt}
 
-Das Hauptmodul stellt die WebGui sowie eine Webanwendung mit einer SQLite Datenbank. Die Webanwendung und die Datenbank
-verwalten den Zustand des Netzwerkes und die angebundenen Geräte. Die WebGUI dient zur Administration des Koordinators. 
-
+Dieses Modul umfasst die beiden vorher beschriebenen Module und fügt noch eine WebGUI hinzu. Die WebGUI dient zur einfachem Verwaltung und Visualisierung des Netzwerkes.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{media/z2m.png}
@@ -208,6 +267,8 @@ angelegt hat. Es ist auch möglich, eigene Beschreibungen für nich nicht unters
 
 Das Netzwerk lässt sich in einer dynamischen Übersicht visualisieren. Hier die aktiv genutzen Verbindung zwischen den Geräten. 
 
+
+
 \subsection{Wireshark}
 
 Wireshark ist eine quelloffene Anwendung um Datenstöme Mitzuschneiden und zu Untersuchen. Es kann durch Verwendung
@@ -215,13 +276,6 @@ von Packetsniffern wie nPcap verschiedenste Medien wie zum Beispiel Ethernet und
 verarbeiten.
 
 \todo{Screenshot Wireshark mit Zigbee Paketen}
-
-\subsection{zbWireshark}
-
-Dies ist ein Script aus einem Git-Hub Repository. Mit diesem Script lässt sich Wireshark starten und anschließend Pakete über den 
-ZigBee Sniffer Stick mitschreiben.
-
-\url{https://github.com/silicrax/killerbee/tree/master/tools}
 
 \subsection{Ansible}
 
