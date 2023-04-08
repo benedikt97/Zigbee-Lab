@@ -1,45 +1,45 @@
 \chapter{Marktübersicht Technologien}
 
-IoT für den Heimanwender befindet sich größtenteils in der Hand etablierter Technologie-Unternehmen. Diese entwickeln meißt ein eigenes Öko-System,
-welcher mehr oder weniger Kompatibel mit Produkten anderer Hersteller sind. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue \grqq{}
-als gutes Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
-Der Markt wurde durch sogenannte Heimassistenten stark belebt. Diese zumeißt sprachgesteuerten Geräte erfreuen sich starker beliebtheit. Zu diesen Geräten
-gehört beispielweiße Amazon Alexa. Diese Heimassistenten verfügen Anbindungen zu den proprietären Gatewys, oder können teilweise sogar direkt an PANs wie Zigbee
+\grqq Internet of things \grqq{} beschreibt die Befähigung von Endgeräten mit Datennetzen zu kommunizieren. So können Waschmaschinen einen fertigen Waschgang kommunizieren,
+oder ein Heizungsthermostat sich so die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{}, den dazu
+je nach Übertragunsprotokoll notwendigen \grqq Bridge \grqq{} und einer entsprechenden App zur Steuerung. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue \grqq{}
+als Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
+Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
+Diese Heimassistenten können sich entweder mit den herstellerspezifischen Bridges verbinden, oder können sogar direkt an PANs (Personal-Area-Networks) wie Zigbee
 teilnehmen und die Geräte direkt steuern. Dieses Kapitel soll einen Überblick über die Technologien am Markt verschaffen. 
 
-\section{IoT Funkprotokolle}
+\section{Funkprotokolle}
 Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Dazu gehören:
 \begin{itemize}
     \item \textbf{Wlan}
-    Wlan ist ein weit verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
+    Wlan ist ein verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
     Internetrouter dient. Dies macht es naheliegend, auch smarte Geräte per WLAN einzubinden. Wlan ist allerdings 
-    optimiert für hohe Übertragungsraten, und nicht für leistungsschwache Endgeräte. Die ist
-    gerade für Batteriebetriene Geräte ein Nachteil. Zusätzlich ist es oft nicht gewünscht, Smarte Devices
-    an ein Netzwerk mit Internetzugang anzuschließen, da diese sobald sie mit dem Internet kommunizieren auch entsprechende
-    Sicherheitsrisiken darstellen.
+    optimiert für hohe Übertragungsraten, nicht für leistungsschwache Endgeräte. Dies ist
+    insbesondere für batteriebetriene Geräte nachteilig. Bei WLAN ist es problematisch, viele Geräte mit geringer Bandbreite mit einen Access-Point zu verbinden.
+    Die nutzbare Bandbreite für Geräte wie Notebooks sinkt damit ab. 
 
     \item \textbf{Blueooth}
-    Ebenso wie Wlan hat Bluetooth eine weite Verbreitung bei Endanwendergeräten. Durch Implementierung 
+    Ebenso wie Wlan hat Bluetooth eine weite Verbreitung. Durch Implementierung 
     des Standard Bluetooth LE ist es möglich leistungsschwache und Batteriebetriebene Geräte mit Bluetooth auszustatten. Bluetooth
-    ist allerdings nicht für hohe Reichweite oder für viele Geräte konzipiert. Der geographische Raum, den eine Bluetooth
-    Bridge abdecken kann, ist begrenzt durch die Reichweite des zentralen Gateways.
+    ist allerdings nicht für hohe Reichweiten oder für Netzwerke mit vielen Teilnehmern konzipiert. Primäre Anwendungsfall ist zum Beispiel das Verbinden eines Headsets mit 
+    einem Handy. 
 
     \item \textbf{Z-Wave}
     
-    Z-Wave ist funktional ähnlich wie Zigbee. Das Protokoll ist vollständig proprietäre. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
-    Low-Frequencie Band arbeitet und nicht wie ZigBee mit 2,4 Ghz Wlan interefiert. Die Reichweite ist größer als Zigbee, der Ma
+    Z-Wave ähnelt technologisch Zigbee. Das Protokoll ist vollständig proprietäre. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
+    Low-Frequency Band arbeitet und nicht wie ZigBee im 2,4 Ghz Band. Die Reichweite ist durch die geringere Trägerfrequenz höher.
 
     \item \textbf{ZigBee}
-    Zigbee ist ein auf den 802.40.5 Standard aufbauendes Protokoll, welches grundlegend für die Anbindung vieler
+    Zigbee ist ein auf den 802.40.5 Standard aufbauendes Protokoll, welches grundlegend für die Anbindung vieler leistungsschwacher
     Geräte in einem großen räumlichen Areal konzipiert ist. Ein großer konzeptioneller Vorteil ist, dass bei 
     ZigBee ein Mesh-Netzwerk aufgebaut wird. Es können auch Geräte angebunden werden, die keine direkte Funkverbindung
     zum Koordinator haben. Zusätzlich sind Funktionen implementiert, welche das Management einer hohen Anzahl von Devices
     erleichtert.
     
     \item \textbf{Thread}
-    Thread ist ein Newcomer. Es basiert ebenfalls auf den 802.15.4 Standard. Ebenso wie ZigBee ist es Meshfähig, ein
+    Thread ist ein Funkprotokoll welches ebenfalls auf den 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig, ein
     entscheidentes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
-    theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk erreichbar und addresierbar.
+    theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addresierbar.
 \end{itemize}
 
 \section{Zigbee Anwendungen}
@@ -55,8 +55,8 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     teuer.
 
 \subsubsection{Dresden Electronic}
-    Dresden Electronic bietet Software und Hardware zum Aufbau von Zigbee Netzwerken an. Es gibt Zigbee USB Adapter und RaspberryPi Hats mit ATMega Chips,
-    sowie eine Steuerungssoftware \grqq deCONZ \grqq{}. Als komplette Produktlinie für den nicht technisch visierten Endkungenmarkt gibt es die Produktsparte
+    Dresden Electronic bietet Software und Hardware zum Aufbau von Zigbee Netzwerken an. Es werden Zigbee USB Adapter und RaspberryPi Hats mit ATMega Chips angeboten,
+    sowie eine Steuerungssoftware \grqq deCONZ \grqq{}. Als komplette Produktlinie für den Endanwender gibt es die Produktsparte
     \grqq Phoscon\grqq{}, hautpsächlich zur smarten Beleuchtung.
 
 \subsubsection*{Weitere Hersteller}
@@ -78,20 +78,21 @@ anderer Geräte sicherzustellen, da offiziell meißt nur die Geräte aus dem eig
 
 \subsection{Nicht kommerzielle Anwendungen}
 
-Vorteil von OpenSource Anwendungen ist, dass diese durch eine Community gepflegt und Geräte von drittherstellern beliebig integriert werden können.
+Vorteil von quelloffenen Anwendungen ist, dass diese durch eine Community gepflegt und Geräte von drittherstellern beliebig integriert werden können.
 Grundlegend ist der Zigbee Standard universell, und die Kompatiblität von Geräten verschiedener Hersteller möglich.
 
-\subsubsection{zigbee2Mqtt}
+\subsubsection{zigbee2mqtt}
 
-zigbee2Mqtt ist ein quelloffenes Projekt auf GitHub, welches aus einer Serveranwendung mit WebGUI, und einer Firmware für diverse Texas Instruments Chips besteht.
+\grqq zigbee2mqtt \grqq{} ist ein quelloffenes Projekt auf GitHub, welches aus einer Serveranwendung mit WebGUI, und einer Firmware für diverse Texas Instruments Chips besteht.
 Grundlegende Koordinator Fähigkeiten sind auf der Hardware implementiert, Hardware Abstraktionen sowie die Weiterreichung von Nachrichten an ein MQTT Broker sind
-in der Webanwendung implementiert. Auf der anderen Seite des MQTT Brokers, zur Visualisierung und Steuerung der Devices können Anwendungne wie Homeassistant oder ioHAB eingesetzt
-werden. zigbee2Mqtt bietet über eine Entwicklerkonsole die Möglichkeit, Informationen zu sammeln und direkt Einflussnahme auf die Devices zu nehmen.
+in der Webanwendung implementiert. Über den  MQTT Broker können zur Visualisierung und Steuerung der Geräte können Anwendungne wie Homeassistant oder ioHAB eingesetzt
+werden. 
 
 \subsubsection{ZHA}
 ZHA ist ein direkt in HomeAssistant integriertes Plugin, um Zigbee Koordinatoren direkt in HomeAssistant einzubinden. Vorteil
 von ZHA ist, dass ZigBee Chips mehrere Hersteller unterstützt werden. ZHA unterstützt neben Texas Instruments auch Hardware von Dresden Elektronik,
-Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender extrem vereinfacht, es sind wenige technische Informationen ersichtlich oder konfigurierbar. 
+Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender extrem vereinfacht, es sind wenige technische Informationen ersichtlich oder konfigurierbar.
+Die Endgeräte Kompatiblität ist allerdings schlechter als bei \grqq zigbee2mqtt \grqq{}.
 
 
 

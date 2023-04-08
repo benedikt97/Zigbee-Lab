@@ -12,7 +12,7 @@ vorallem die kürzeren Adressen auf. Dadurch kann die für den Anwendungsbereich
 \section{ZigBee}
 
 Die ZigBee Alliance wurde durch ein Konsortium von Herstellern gegründet, um einen einheitlichen Übertragungstandard
-im Bereich Heimautomatisierung voranzubringen. ZigBee basiert auf dem offenem 802.15.4 Standard, bringt allerdings Komponenten mit die nicht in einem IEEE
+im Bereich Heimautomatisierung voranzubringen. ZigBee basiert auf dem offenem 802.15.4 Standard, bringt allerdings zusätzliche Komponenten mit die nicht in einem IEEE
 Standard definiert sind.
 ZigBee ist in Form von weiteren Protokollschichten implementiert, welche auf IEEE 802.15.4 aufsetzen. ZigBee nutzt DSSS, also Frequenzspreizung als Modulationsverfahren.
 Die genutzten Kanäle, 11 bis 26, liegen im 2,4 Ghz Band. Zigbee interferiert damit mit WLAN.
@@ -23,17 +23,16 @@ Die genutzten Kanäle, 11 bis 26, liegen im 2,4 Ghz Band. Zigbee interferiert da
   \caption{ZigBee Protocoll Stack \\ Bildquelle: \url{https://www.researchgate.net/figure/IEEE820154-ZigBee-protocol-stack-architecture_fig2_265150617}}
 \end{figure}
 
-Der Anwendungsbereich für ZigBee ist die Heimautomatisierung. Geräte, hier als Devices bezeichnet, können zentral gesteuert und überwacht werden. 
-Markanter Vorteil von ZigBee ist, dass die Geräte keine direkte Funkverbindung
-zu einem zentralen Controller brauchen. Einzelne Geräte können als Router fungieren, und damit die Reichweite erhöhen. Dies sorgt dafür,
-dass mir einer geringen Sendeleistung ein geografisch großes Gebiet abgedeckt werden kann. Sende- und Empfangsleistung
+Der Anwendungsbereich für ZigBee ist die Heimautomatisierung. Geräte können zentral gesteuert und überwacht werden. 
+Markante Eigenschaft von ZigBee ist, dass die Geräte keine direkte Funkverbindung
+zu einem zentralen Controller brauchen. Andere Geräte können als Router fungieren, und damit die Reichweite erhöhen. Sende- und Empfangsleistung
 ist vorallem bei kleinen Batteriebetriebenen Geräten oft der einschränkende Faktor.
 
 
 \section{Texas Instruments CC Chips}
 
 Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für ZigBee Geräte 
-nutzen lassen können. Kleinere Chips können in Endgeräten wie Lampen und Thermostate, größere als Koordinator selbst verwendet werden.
+nutzen lassen. Kleinere Varianten können in Endgeräten wie Lampen und Thermostate, größere als Koordinator selbst verwendet werden.
 
 Die aktuelle Chipfamilie TexasInstruments CC26XX:
 
@@ -44,7 +43,7 @@ Die aktuelle Chipfamilie TexasInstruments CC26XX:
 \end{figure}
 
 Als Koordinator werden die Leistungsfähigeren Chips aus der 265X Reihe eingesetzt. ZigBee Geräte nutzen in einigen
-Fällen Bluetooth LE zur Koppelung, daher ist die Unterstüzung diesen Protokolls sinnvoll.
+Anwendungen Bluetooth LE zur Koppelung, daher ist die Unterstüzung diesen Protokolls sinnvoll.
 
 \begin{figure}[H]
   \centering
@@ -64,15 +63,15 @@ günstig einen USB-Stick mit aufgelöteten CC Chip erwerben, und auch diesem mit
 
 Weiter Informationen: \url{https://www.ti.com/tool/Z-STACK#overview}
 
-In dem OpenSource Projekt "zigbee2mqtt" werden ausschließlich Chips von Texas Instruments unterstützt. Die meißten gängigen Anbieter von Microchips 
+In dem OpenSource Projekt \grqq zigbee2mqtt \grqq{} werden ausschließlich Chips von Texas Instruments unterstützt. Die meißten gängigen Anbieter von Microchips 
 haben entsprechende Modelle im Angebot. 
 
 \section{Versuchshardware}
 
 \subsection{RaspberryPi}
 
-Der RaspberryPi ist ein ARM basierter Computer im Mini-Format. Er dient in diesem Versuch als Server, der die Applikationen
-hostet und gleichzeitig als Versuchs-PC, auf dem der Versuch durchgeführt wird. Die eingesetzten Anwendungen sind 
+Der RaspberryPi ist ein ARM basierter Computer im Mini-Format. Er dient in diesem Versuch als Applikationsserver und gleichzeitig als Versuchs-PC, 
+auf dem der Versuch durchgeführt wird. Die eingesetzten Anwendungen sind 
 als Webservice implementiert und werden per Docker Containerisierung ausgerollt.
 
 Der RaspberryPi besitzt die PC typtischen Schnittstellen wie Ethernet, HDMI, sowie USB. Als Festspeicher wird eine
@@ -84,13 +83,12 @@ angepasste Linux-Distribution. Es baut auf Ubuntu auf.
 \subsection{RaspberryPi Zigbee Hat}
 
 Als Zigbee Koordinator wird ein auf dem TI CC2652 basierendem RaspberryPi Hat vom Hersteller \grqq cod.m \grqq{} eingesetzt. Dieser wurde vom Hersteller
-für den Einsatz mit \grqq homegear \grqq{} oder \grqq zigbee2Mqtt \grqq{} entwickelt. Ein Datenblatt sowie ein Manual ist im Anhang.
+für den Einsatz mit \grqq homegear \grqq{} oder \grqq zigbee2Mqtt \grqq{} entwickelt. Ein Datenblatt und Bedienungsanleitung sind im Anhang.
 
 \subsection{CC2531 Sniffer Stick}
 
-Mit diesem Stick wird die ZigBee Kommunikation in dem Netzwerk des Versuchaufbaufs mitgeschnitten.
-Der stick basiert auf einem leistungsschwachen Chip, der mit entsprechender \grqq Snifffer \grqq{} Firmware Pakete \grqq over the air \grqq{} mitschneidet.
-Die Pakete lassen sich über die serielle USB-Schnittstellen im Anschluss auslesen, und in Wireshark visualisieren. 
+Mit diesem Stick wird die ZigBee Kommunikation in des Versuchsnetzwerkes mitgeschnitten.
+Der Stick basiert auf einem leistungsschwachen Chip, der mit entsprechender Firmware Pakete mitschneiden kann. 
 
 Als Treiber wird ein in C geschriebenes Programm verwendet, welches es ermöglicht den Stick direkt als Interface in Wireshark hinzuzufügen. Der Quellcode findet sich in 
 GitHub unter https://github.com/andrebdo/wireshark-cc2531. Hier ist auch eine Anleitung zum kompilieren. Die hieraus entstehende ausführbare Datei muss in entsprechenden
@@ -100,36 +98,41 @@ todo: Screenshot wireshark
 
 \subsection{Phillips Hue Komponenten}
 
-Die Phillips Hue Serie setzt vollständig auf den ZigBee Standard. Die Produktlinie umfasst alle Komponenten zur Heimautomatisierung. Dies umfasst eine APP,
-ein Gateway sowie vielfältige Endgeräte. Sie sind Kompatibel zu dem Software-Gateway zigbee2mqtt.
-Die Lampen werden in dem Versuch als Demonstrationsobjekte eingesetzt. Sie können Ein- und Ausgeschaltet werden, sowie gedimmt werden. Zusätzlich wird einer
-Phillips Hue Fernbedienung verwendet, die zur Steuerung der Lampen genutzt wird. Phillips verwendet bei kleinen Geräten die ZigBee Chips von Atmel, bei größeren 
-sind Eigenentwicklungen zu finden.
+Unter dem Namen \grqq Hue \grqq{} vertreibt Phillips eine Reihe intelligenten Endgeräten sowie entsprechenden Komponenten um diese zu steuern.
+Die Phillips Hue Serie setzt auf ZigBee sowie Bluetooth LE. Unter anderem sind Lampen, Steckdosen, eine Bridge sowie eine App verfügbar.
+Die Bridge stellt bei traditionellen Lösungen die Schnittstelle zwischen der ZigBee Kommunikation zwischen den Geräten und der IP Kommunikation zu beispielßweiser einer Smartphone
+App.  Die Geräte sind Kompatibel zu dem Software-Gateway zigbee2mqtt, benutzen also keine speziellen Schlüssel oder ähnliches.
+Die Lampen werden in dem Versuch als Demonstrationsobjekte eingesetzt. Sie können Ein- und Ausgeschaltet werden, sowie gedimmt werden. Zusätzlich wird eine
+Phillips Hue Fernbedienung verwendet, die zur Steuerung der Lampen genutzt wird.
 
 \section{Eingesetzte Software}
 
 \subsection{Raspbian OS}
 
 RaspbianOS ist eine leichtgewichtige Linux Distribution, welche direkt vom Hersteller des RaspberryPis speziell auf die Bedürfnisse des Board angepasst ist. Es enthällt eine
-Desktop Umgebung sowie die grundlegende Paketen. Es basiert auf Debian, damit sind auch die entsprechenden Paketquellen verfügbar. Durch die große Verbreitung 
-sind viele Anwendungen in den standard Paketquellen verfügbar.
+Desktop Umgebung sowie grundlegende Pakete. Es basiert auf Debian, damit sind entsprechenden reichhaltige Paketquellen verfügbar. 
 
 \subsection{Docker}
 
-Docker ist eine Container Umgebung, um Anwendungen containerisiert auf Linux-Servern ausführen zu können. Docker reduziert erheblich den Aufwand 
-Anwendungen zu betreiben. Alle Abhängigkeiten sind im Container enthalten, sodass hier keine Komplikationen mit anderen Anwendungen
-zu befürchten sind oder Abhängigkeiten fehlen. Prozesse laufen in eigenen Namespaces und sind dadurch abgekoppelt vom Host Betriebssystem. Im Unterschied zur Virtualisierung werden
-Systemprozesse gemeinsam genutzt. Dadurch ist die Effizienz höher als bei taditioneller Virtualisierung.
+Docker ist eine Containerisierungslösung, um Anwendungen containerisiert auf Linux-Servern ausführen zu können. Docker reduziert erheblich den Aufwand 
+Anwendungen zu betreiben. Da alle notwendigen Abhängigkeiten mit einem Container mitgeliefert werden, ist eine Installation meißt komplikationsfrei.
+Prozesse laufen in eigenen Namespaces und sind dadurch abgekoppelt von anderen Containern sowie dem Hostbetriebssystem. Im Unterschied zur Virtualisierung werden
+einige Ressourcen gemeinsam genutzt. Dadurch ist die Effizienz höher als bei taditioneller Virtualisierung, bei der meißt ein vollständiges Betriebssystem virtualisiert wird.
 
 \subsection{Docker-Compose}
 
-Docker-Compose ist ein Tool, um große Containerumgebungen per YAML zu definieren und automatisch deployen. Klassisch kann ein Container 
-per CLI Befehl mit entsprechenden Parametern gestartet werden:
+Docker-Compose ist ein Tool, um große Containerumgebungen im Textformart, hier \grqq YAML \grqq{} zu definieren.
+Ein Container kann entweder per Docker-CLI mit entsprechenden Parametern gestartet werden:
 \begin{lstlisting}
   docker run hello-world -v ./home:/home -p 80:80
 \end{lstlisting}
-Start des Container \grqq hello-world \grqq{}, es wird ein Container gemountet und der Port 80 auf den Host gemappt.
-Dies ist allerdings für große Umgebungen unhandlich. Alternativ werden Container als Services in einer YAML definiert.
+
+Durch diesen Befehl wird der Container \grqq hello-world \grqq aus dem Docker Repository geladen und anschließend gestartet. In diesem ist ein einfacher Webserver der bei
+Aufruf ein \grqq Hello world ! \grqq{} zurückgibt implementiert. Zusätzlich wird der Ordner \grqq home \grqq{} in den Container gemountet. Dieser bleibt auch bei einem
+erneuten Laden des Containers persistent. Dies wird beispielweiße für Konfigurationsdateien oder andere persistente Dateien genutzt. Um den Container auch auf der Schnittstelle
+des Host-Systems verfügbar zu machen, wird der Port 80 auf den Container Port 80 gemappt. Die Funktionsweiße wird später erläutert.
+
+Alternativ zu der Docker-CLI lässt sich der Zielzustand auch beschreiben:
 
 \begin{lstlisting}
 version: '3'
@@ -149,28 +152,25 @@ Mit einem
   docker-compose up -d
 \end{lstlisting}
 
-können dann alle definierten Services gestartet werden. Dies folgt der allgemeinen Konvention "Konvention vor Konfiguration". Der Zielzustand wird einmal definiert
-und kann Aufgrund dieser Definition beliebig oft ausgerollt werden.
+errhält man das selbe Ergebniss wie mit dem vorher gezeigtem CLI Befehl.
 
 \subsection{zigbee2mqtt}
 
-zigbee2mqtt ist ein offenes Softwareprojekt und kann als \grqq Software-Zigbee-Gateway \grqq bezeichnet werden. Es übernimmt die Funktionalität, die normalerweise entsprechende
-\grqq Bridges \grqq der Hersteller übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit Ihren entsprechenden
+zigbee2mqtt ist ein offenes Softwareprojekt und am besten mit \grqq Software-Zigbee-Gateway \grqq beschrieben werden. Es übernimmt die Funktionalität, die normalerweise entsprechende
+\grqq Bridges \grqq der Hersteller übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit ihren
 Apps zu kommunizieren, macht zigbee2mqtt die Geräte per mqtt nach außen verfügbar. Auf abstrakter Ebene bedeutet dies, das es ein Gateway zwischen einem Zigbee Netzwerk und
-einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant \grqq oder \grqq OpenHUB \grqq{} bzw. entsprechende
-Eigenentwicklungen einsetzen.
+einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant \grqq oder \grqq OpenHUB \grqq{} oder auch entsprechende
+Eigenentwicklungen einsetzen. \grqq zigbee2mqtt \grqq{} greift direkt auf den \grqq cod.m \grqq{} ZigBee Adapter zu.
 
 Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt}
 Homepage: \url{https://www.zigbee2mqtt.io/}
 
-zigbee2mqtt verwaltet das Zigbee Netzwerk und ermöglicht es dritten Anwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt,
+\grqq zigbee2mqtt \grqq{} verwaltet ein Zigbee Netzwerk und ermöglicht es Drittanwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt,
 kündigt zigbee2mqtt das Gerät per MQTT an, und gibt nach erfolgreichem Interview alle Cluster an.
 
 todo: Screenshot MQTT
 
-Anschließend können Drittanwendungen, die die entsprechende Schnittstelle implementiert haben, die Geräte ebenfalls per MQTT steuern.
-
-Zigbee2Mqtt verwaltet 3 persistente Datensätze, welche die Funktionsweiße deutlicher machen. Viele Protokollnahe Funktionen, wie zum Beispiel das Pflegen von Routingtabellen und
+Zigbee2Mqtt verwaltet drei Datenbanken, welche die Funktionsweiße deutlich machen. Viele Funktionen, wie zum Beispiel die Verwaltung von Routingtabellen und
 Verschlüsselung der Kommunikation sind direkt in der Hardware implementiert. Diese Funktionen lassen sich wie in der im Punkt TI CC Firmware gezeigen API Steuern und Abfragen.
 Zigbee2mqtt verwaltet in einer eigenen Datenbank die Geräte im Netzwerk sowie deren Eigenschaften.
 Folgende Datensätze finden sich in der Anwendung:
@@ -178,9 +178,10 @@ Folgende Datensätze finden sich in der Anwendung:
 \textbf{coordinator-backup.json}\\
 
 Wie der Name sagt, sind hier die für die Initialisierung beim Start des Koordinators wichtigen Informationen abgelegt. Dies beinhaltet alle dem Netzwerk zugehörigen Geräte.
-Durch löschen dieser Datei wird das Netzwerk vollständig zurückgesetzt. Die einzelnen Teilnehmer müssen nun aber manuell per Touchlink oder nach herstellerspezifischem Verfahrem
+Durch löschen dieser Datei wird das Netzwerk vollständig zurückgesetzt. Die einzelnen Teilnehmer müssen dann manuell per Touchlink oder nach herstellerspezifischem Verfahrem
 zurückgesetzt werden, um wieder einem neuen Netzwerk beitreten zu können.
-Der Inhalt dieser Datei sieht wie folgt aus:
+
+
 \begin{lstlisting}
   version: '3'
   services:
@@ -196,15 +197,13 @@ Der Inhalt dieser Datei sieht wie folgt aus:
 
   \textbf{state.json}\\
 
-  In dieser Datei sind alle aktuellen Zustände Geräte im Netzwerk hinterlegt. Sie dient dazu, bei einem Neustart des Koordinators den alten Zustand wieder herzustellen.
-  Eine Abfrage eines Attributes der Geräte sollte immer über die API erfolgen.
+  In dieser Datei sind alle aktuellen Zustände Geräte im Netzwerk hinterlegt. Sie dient dazu, bei einem Neustart des Koordinators den letzten Zustand wieder herzustellen.
 
-  Der Inhalt sieht wie folgt aus:
 
   \textbf{state.json}\\
 
-  Dies ist die eigentliche Datenbank von zigbee2mqtt. Da SQLite eingesetzt wird, lässt sich auch hier der Inhalt wie bei einer Textdatei einfach auslesen. Hier sind alle
-  Konfigurationen der Anwendung, aber auch für jedes Device sämtliche Informationen hinterlegt.
+  Dies ist die zentrale Datenbank von zigbee2mqtt. Da SQLite eingesetzt wird, lässt sich auch hier der Inhalt wie bei einer Textdatei einfach auslesen. Hier sind alle
+  Konfigurationen der Anwendung, aber auch für jeden Netzwerkteilnehmer Informationen hinterlegt.
 
   Auszug aus dem Konfigurationsteil:
   \begin{lstlisting}
@@ -216,12 +215,12 @@ Der Inhalt dieser Datei sieht wie folgt aus:
 
 \subsubsection{TI CC Firmware}
 
-Firmware für die Texas Instruments Chips, um diese als Koordinator einsetzen zu können. Die Firmware basiert auf dem Z-Stack von Texas Instruments. Sie wird fertig kompiliert
-in dem Git-Repo von zigbee2mqtt angeboten. Sie kann auf die USB-Koordinatoren direkt per USB geflasht werden, der Einsatz eines Launchpads ist nicht zwingend notwendig. Eine Anleitung
+Eine Firmware für die Texas Instruments Chips, um diese als Koordinator einsetzen zu können. Die Firmware basiert auf dem Z-Stack von Texas Instruments. Sie wird fertig kompiliert
+in dem Git-Repo von zigbee2mqtt angeboten. Sie kann auf die USB-Koordinatoren per USB geflasht werden, der Einsatz eines Launchpads ist nicht notwendig. Eine Anleitung
 findet sich auf der Homepage von zigbee2mqtt.  
 
 
-Zur veranschaulichung, hier ein Ausschnitt aus der API Dokumentation.
+Zur Veranschaulichung der Funktionsweiße, ein Ausschnitt aus der API Dokumentation:
 
 \begin{figure}[H]
   \centering
@@ -229,7 +228,7 @@ Zur veranschaulichung, hier ein Ausschnitt aus der API Dokumentation.
   \caption{Z-Stack API Auszug}
 \end{figure}
 
-In diesem Beispiel wird beschrieben, wie man einen SimpleDescriptor-Request an ein Zigbee-Device versendet. Dieser Aufruf ist entsprechend Parametrierbar,
+In diesem Beispiel wird beschrieben, wie man einen SimpleDescriptor-Request an ein Zigbee-Device versendet. Dieser Aufruf ist entsprechend parametrierbar,
 und wird zur Abfrage der verfügbaren Endpunkte eines Gerätes nach dessen Beitritt in das Netzwerk abgefragt.
 
 \subsubsection{zigbee-herdsman}
@@ -248,16 +247,14 @@ so adaptieren, dass sie nach Wunsch gesteuert und ausgelesen werden können.
 
 \subsubsection{zigbee2mqtt}
 
-Dieses Modul umfasst die beiden vorher beschriebenen Module und fügt noch eine WebGUI hinzu. Die WebGUI dient zur einfachem Verwaltung und Visualisierung des Netzwerkes.
+Dieses Modul umschreibt die beiden vorher beschriebenen Module und fügt noch eine Weboberfläche hinzu. Die Weboberfläche dient zur Verwaltung und Visualisierung des Netzwerkes.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{media/z2m.png}
   \caption{zigbee2mqtt Webfrontend}
 \end{figure}
 
-Die WebGUI enthält eine große Anzahl von Funktionen, die weitaus tiefer reichen als für die Nutzung notwendig sind.
-Prinzipiell sind die meißten ZigBee Geräte Kompatibel, wenn ein Community Mitglied dieses bereits in der Anwendung
-angelegt hat. Es ist auch möglich, eigene Beschreibungen für nich nicht unterstützte Geräte zu erstellen.\\
+Die Weboberfläche biete die Möglichkeit alle Endpunkte von Herdsman abzufragen und entsprechend zu steuern.
 
 \begin{figure}[H]
   \centering
@@ -267,30 +264,29 @@ angelegt hat. Es ist auch möglich, eigene Beschreibungen für nich nicht unters
 
 Das Netzwerk lässt sich in einer dynamischen Übersicht visualisieren. Hier die aktiv genutzen Verbindung zwischen den Geräten. 
 
-
-
 \subsection{Wireshark}
 
-Wireshark ist eine quelloffene Anwendung um Datenstöme Mitzuschneiden und zu Untersuchen. Es kann durch Verwendung
-von Packetsniffern wie nPcap verschiedenste Medien wie zum Beispiel Ethernet und USB mit entsprechenden Protokollen
-verarbeiten.
+Wireshark ist eine quelloffene Anwendung um Datenstöme Mitzuschneiden und zu Untersuchen. Wireshark selbst nutzt standardmäßig \grqq npcap \grqq{} um Datenverkehr 
+auf Netzwerkkarten aufzuzeichnen. Es ist möglich über andere Schnittstellen Wireshark Datenströme zur Verfügung zu stellen. Zu diesem Zweck
+können Scripte in den Ordner \grqq .../extcap \grqq{} abgelegt werden, welche 
+Paketströme zurückliefern. Diese Technik wird in diesem Versuch eingesetzt.
 
 \todo{Screenshot Wireshark mit Zigbee Paketen}
 
 \subsection{Ansible}
 
-Ansible ist ein Tool zur IT-Automatisierung. Arbeitsabläufe lassen sich ebenfall gut strukturiert in YAML definieren. Ansible verbindet sich per SSH 
-mit den zu konfigurierenden Hosts und führt Python Module aus. Hosts lassen sich in Gruppen, und Tasks in sogenannten Rollen sammeln. So ist es möglich,
-eine Gruppe von Hosts die Rolle \grqq Webapplikation \grqq{}, und einer Gruppe von anderen Hosts der Gruppe \grqq Datenbank \grqq{} zuweisen. 
-Eine Zuweisung von Rollen sihet folgendermaßen aus:
+Ansible ist ein Werkzeug zur Automatisierung. Arbeitsabläufe lassen sich strukturiert in YAML definieren. Ansible kann Aufgaben auf dem lokalem System und auf Remotesystemen
+ausführen. Aufgaben können in Rollen zusammengefasst werden.  
+Eine Rolle kann einem Host wie folgt zugewiesen werden:
 \begin{lstlisting}
   - name: Deploy the Lab
-  hosts: localhost
-  roles:
+    hosts: localhost
+    roles:
     - DeployDocker
     - DeployLabUtils
 \end{lstlisting}
 
-In diesem Beispiel wird auf dem lokalen Host Docker installiert, und das ZigBee Praktikum vorbereitet.
+Die Rollen \grqq DeployDocker \grqq{} und \grqq DeployLabUtils \grqq{} umfassen eine Menge von Aufgaben zur Installation notwendiger Komponenten und weitere Vorbereitungen
+für den Praktikumsversuch. Diese Rollen werden \grqq localhost \grqq{}, also dem ausführendem System selbst zugewiesen.
 
 \subsection{}
