@@ -1,10 +1,10 @@
 \chapter{Versuchsdurchführung}
 
-In diesem Kapitel wird der Versuchsaufbau beschrieben, der LabGuide eingebettet, sowie eine Musterlösung gegeben.
+In diesem Kapitel wird der Versuchsaufbau beschrieben sowie eine Versuchsanleitung gegeben.
 
 \section{Versuchsaufbau}
 
-Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfen sie dies, vor Beginn des Versuches.
+Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfen sie dies vor Beginn des Versuches.
 
 \begin{itemize}
     \item RespberryPi 3
@@ -16,44 +16,42 @@ Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfe
     \item Ethernet Kabel
 \end{itemize}
 
-Das cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein. Bitte stellen sie selbst einen Monitor mit HDMI Anschluss, sowie Maus und Tastatur bereit.
+Das cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein. 
 
 \section{Aufgabenstellungen}
 
-Bitte arbeiten sie alle folgenden Aufgabenstellungen ab. Fertigen sie im Anschluss einen Versuchsbericht an. Es reicht, wenn die gestellten Fragen
-implizit beantwortet werden.
+Bitte arbeiten sie alle folgenden Aufgabenstellungen durch. Fertigen sie im Anschluss einen Versuchsbericht an.
 
 \subsection{Aufgabe 1 - Vorbereitungen}
 
 \subsubsection{Vorbereitung}
-a) Schließen sie an den RaspberryPi den Monitor, eine Tastatur und Maus, sowie den Sniffer Stick an. Durch Anschluss der
-Stromversorgung startet der Raspberry automatisch. Melden sie nach starten des Betriebssystemen mit folgenden Zugangsdaten an:
+a) Schließen sie an den RaspberryPi Monitor, Tastatur ,Maus sowie den Sniffer-Stick an. Durch Anschluss der
+Stromversorgung startet der Raspberry automatisch. Melden sie sich mit folgenden Zugangsdaten an:
 
 \begin{itemize}
     \item User: student 
     \item Password: zigbeelab
 \end{itemize}
 
-b) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die benötigten Container ausgeführt werden:
+b) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die Container ausgeführt werden:
 \begin{lstlisting}
     > docker ps
 \end{lstlisting}
 
-Es sollten 3 Container im Status \grqq Running\grqq{} sein. Beschreiben sie in eigenen Worten welche Container sie hier sehen.
+Es sollten 3 Container im Status \grqq Running\grqq{} sein. 
 
 \subsubsection{ZigBee2Mqtt Einrichtung}
 
-c) Starten sie den Webbrowser Firefox und besuchen die Webseite:
+c) Starten sie den Webbrowser Firefox und besuchen die Seite:
 \begin{lstlisting}
     https://zigbee2mqtt.local
 \end{lstlisting}
 
-d) Überprüfen Sie  dass keine Geräte mit dem Koordinator verbunden sind. Im Zweifelsfall können sie den Versuch zurücksetzen, oder die Geräte per Hand
-herauslöschen.
+d) Überprüfen Sie, dass keine Geräte mit dem Koordinator verbunden sind. Sollten Geräte in der Netzwerkübersicht ersichtlich sein, setzen sie den Versuch zurück.
 Dies wird in den FAQs beschrieben.\\
 
-c) Stellen sie den Kanal, den der Zigbee Koordinator nutzen soll nun auf den durch Ihren Professor vorgegeben Wert.
-Dies verhindert, dass sich die verschiedenen ZigBee-Netze gegenseitig beeinflussen. Zuhause können sie diesen Schritt überspringen.
+c) Stellen sie den Kanal entsprechend den im Tutorium durch den Anleiter gegebenen Wert sein.
+Dies verhindert eine gegenseitige Beeinflussung der verschiedenen Versuchsaufbauten. Zuhause können sie diesen Schritt überspringen.
 
 \begin{figure}[H]
     \centering
@@ -61,7 +59,7 @@ Dies verhindert, dass sich die verschiedenen ZigBee-Netze gegenseitig beeinfluss
     \caption{Zigbee Kanal Einstellung}
 \end{figure}
 
-d) Standardmäßig verwendet Zigbee2Mqtt einen zufällig gewählten Netzwerkschlüssel. In diesem Versuch wird der Schlüssel vorgegeben, um die Pakete
+d) Standardmäßig verwendet Zigbee2mqtt einen zufällig gewählten Netzwerkschlüssel. In diesem Versuch wird der Schlüssel vorgegeben, um die Pakete
 entschlüsseln zu können. Bitte setzen sie folgenden Schlüssel:
 
 \begin{lstlisting}
@@ -75,16 +73,12 @@ Achten sie darauf, im Anschluss die Einstellung am Ende der Seite zu bestätigen
 
 \subsubsection{Wireshark Einrichtung}
 
-Mit folgendem Befehl können sie ein Wireshak Capture auf entsprechenden Kanal starten:
+e) Starten sie Wireshark. Bei den verfügbaren Schnittstellen sollte sich eine ZigBee Schnittstelle finden. Über das vorangestelle Symbol können sie einen Kanal einstellen.
+Stellen sie den eben eingestellten Zigbee Kanal ein. (Gruppennummer)
 
-\begin{lstlisting}
-    > zbwireshark -c <Kanal>
-\end{lstlisting}
+Starten sie einen Capture Vorgang und warten einigen Sekunden ab.
 
-e) Starten sie ein Konsolenfester und testen sie, ob der Befehl erfolgreich ausgeführt wird. Wireshark sollte starten, und Pakete sollten ersichtlich sein. Für \grqq 
-<Kanal> \grqq{} setzen sie den von Ihnen gewählten Kanal ein.
-
-Beenden sie den automatisch gestarteten Capture Vorgang. Gehen sie in das Menü: Bearbeiten > Einstellungen > Protokolle > ZigBee > Edit (Pre-configured Keys) und tragen
+Beenden sie den gestarteten Capture Vorgang. Gehen sie in das Menü: Bearbeiten > Einstellungen > Protokolle > ZigBee > Edit (Pre-configured Keys) und tragen
 hier den \grqq TC-Link Key\grqq{} und den \grqq Network Key\grqq{} ein. Als \grqq Network Key\grqq{} verwenden sie den in Zigbee2Mqtt gesetzen Key. Der \grqq TC-Link Key\grqq{} ist ein
 Standard-Key, der verwendet werden muss.
 \begin{lstlisting}
@@ -93,14 +87,14 @@ Standard-Key, der verwendet werden muss.
 
 \begin{Hinweis}
     Alle Aufgaben sollen mit Wireshark mitgeschnitten werden. Lesen sie die Aufgabenstellung erst durch und machen sie sich den Ablauf klar. Versuchen sie das 
-    Zeitfenster des Wireshark Mitschnits so kurz wie möglich zu halten, und in dieser Zeit nur die in der Aufgabenstellung beschrieben Aktionen durchzuführen.
-    Anderenfalls wird Ihr Mitschnitt sehr unübersichtlich.
+    Zeitfenster des Wireshark Mitschnits so kurz wie möglich zu halten, und in dieser Zeit nur die in der Aufgabenstellung explizit beschrieben Aktionen durchzuführen.
+    Anderenfalls wird Ihr Mitschnitt unübersichtlich.
 \end{Hinweis}
 
 \subsection{Aufgabe 2 - Joining einer Phillips Hue Lampe}
 a) Schalten sie eine der beiden Zigbee Lampen ein. Die Lampe sollte leuchten. Dies ist das Standard verhalten, wenn die Lampen in keinem ZigBee Netz integriert sind.\\
-b) Starten sie nun ein Wireshark Capture und erlauben in Zigbee2Mqtt das Anlernen von Geräten. Sobald Zigbee2Mqtt ein erfolgreiches Interview gemeldet hat, beenden sie
-den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken ebenfalls einen erfolgreiches Interview.
+b) Starten sie nun ein Wireshark Capture und erlauben in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, beenden sie
+den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken einen erfolgreiches Interview.
 
 \begin{figure}[H]
     \centering
@@ -123,7 +117,7 @@ c) Navigieren sie nun zur Übersichtsseite der Lampe. Diese sollte ähnlich wie 
 
 d) Vergeben sie in der Übersichsseite der Lampe einen nutzerfreundlichen Namen. Dies geschieht über den blauen Button im unteren Teil der Übersicht.\\
 e) Dimmen und schalten sie die Lampe über die Weboberfläche. Die ist unter dem Reiter \grqq Details\grqq{} möglich. Starten sie einen weiteren Capture Vorgang und
-scheiden in diesem einen Schaltvorgang mit.
+schneiden in diesem einen Schaltvorgang mit.
 
 \begin{Aufgabe}
     Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.2\grqq{}}. \\
