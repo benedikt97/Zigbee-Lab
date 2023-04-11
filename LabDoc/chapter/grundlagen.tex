@@ -39,7 +39,7 @@ Die aktuelle Chipfamilie TexasInstruments CC26XX:
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{media/table26xx.png}
-  \caption{Test des Messagebrokers Mosquitto}
+  \caption{TI Device Family}
 \end{figure}
 
 Als Koordinator werden die Leistungsfähigeren Chips aus der 265X Reihe eingesetzt. ZigBee Geräte nutzen in einigen
@@ -53,7 +53,7 @@ Anwendungen Bluetooth LE zur Koppelung, daher ist die Unterstüzung diesen Proto
 
 In der Tabelle sind die unterstützten Protokolle der einzelnen Modelle sowie deren Leistungsfähigkeit aufgeführt.
 Es ist anzumerken, dass die größeren Modelle schon den Standard Thread unterstützen, der vermutlich durch das
-Projekt \grqq Matter\grqq{} erheblich an bedeutung gewinnen wird.
+Projekt \grqq Matter\grqq{} erheblich an Bedeutung gewinnen wird.
 
 Texas Instruments stellt als Basis für ZigBee Anwendungen eine Z-Stack Bibliothek zur Verfügung. Diese stellt alle grundlegenden 
 Funktionen um das ZigBee Protokoll zu implementieren. Mit Texas Instruments Code Composer Studio steht eine IDE bereit,
@@ -263,6 +263,12 @@ Die Weboberfläche biete die Möglichkeit alle Endpunkte von Herdsman abzufragen
 \end{figure}
 
 Das Netzwerk lässt sich in einer dynamischen Übersicht visualisieren. Hier die aktiv genutzen Verbindung zwischen den Geräten. 
+
+\subsection{MQTT}
+
+MQTT \cite{mqtt} ist ein Protokoll, um Nachrichten zwischen Teilnehmen in einem Netzwerk auszutauschen. Alle Nachrichten werden unter einem definierten \grqq Topic \grqq{} 
+an einen zentralen Messagebroker gesendet. Teilnehmer können \grqq Topics \grqq{} abonnieren. Der Broker verwaltet eine Liste mit allen Teilnehmern sowie 
+deren abonnierten \grqq Topics \grqq{}. Wird eine entsprechende Nachricht an den Broker \grqq gepublisht \grqq{}, werden alle \grqq subscriber \grqq{} entsprechend informiert. 
 
 \subsection{Wireshark}
 

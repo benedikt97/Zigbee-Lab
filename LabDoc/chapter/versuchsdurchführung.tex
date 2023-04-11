@@ -7,7 +7,7 @@ In diesem Kapitel wird der Versuchsaufbau beschrieben sowie eine Versuchsanleitu
 Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfen sie dies vor Beginn des Versuches.
 
 \begin{itemize}
-    \item RespberryPi 3
+    \item RespberryPi 3 mit eingesetzter SD-Karte
     \item CC2531 Sniffer Stick
     \item cod.m ZigBee CC2652P2 Raspberry Pi Module
     \item 2 x Phillips Hue White E27
@@ -20,7 +20,7 @@ Das cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein.
 
 \section{Aufgabenstellungen}
 
-Bitte arbeiten sie alle folgenden Aufgabenstellungen durch. Fertigen sie im Anschluss einen Versuchsbericht an.
+Bitte arbeiten sie die folgenden Aufgabenstellungen durch. Fertigen sie im Anschluss einen Versuchsbericht an.
 
 \subsection{Aufgabe 1 - Vorbereitungen}
 
@@ -42,7 +42,7 @@ Es sollten 3 Container im Status \grqq Running\grqq{} sein.
 
 \subsubsection{ZigBee2Mqtt Einrichtung}
 
-c) Starten sie den Webbrowser Firefox und besuchen die Seite:
+c) Starten sie den Webbrowser Firefox und Navigieren zu der Seite:
 \begin{lstlisting}
     https://zigbee2mqtt.local
 \end{lstlisting}
@@ -50,7 +50,7 @@ c) Starten sie den Webbrowser Firefox und besuchen die Seite:
 d) Überprüfen Sie, dass keine Geräte mit dem Koordinator verbunden sind. Sollten Geräte in der Netzwerkübersicht ersichtlich sein, setzen sie den Versuch zurück.
 Dies wird in den FAQs beschrieben.\\
 
-c) Stellen sie den Kanal entsprechend den im Tutorium durch den Anleiter gegebenen Wert sein.
+c) Stellen sie den Kanal entsprechend dem während dem Versuch gegebenen Wert sein.
 Dies verhindert eine gegenseitige Beeinflussung der verschiedenen Versuchsaufbauten. Zuhause können sie diesen Schritt überspringen.
 
 \begin{figure}[H]
@@ -71,10 +71,8 @@ Die Einstellung finden sie unter der Kanal Einstellung als \grqq Network key(str
 Achten sie darauf, im Anschluss die Einstellung am Ende der Seite zu bestätigen. Dafür klicken sie auf den 
 \grqq Submit \grqq{} Button am Ende der Seite
 
-\subsubsection{Wireshark Einrichtung}
-
-e) Starten sie Wireshark. Bei den verfügbaren Schnittstellen sollte sich eine ZigBee Schnittstelle finden. Über das vorangestelle Symbol können sie einen Kanal einstellen.
-Stellen sie den eben eingestellten Zigbee Kanal ein. (Gruppennummer)
+e) Starten sie Wireshark. Bei den verfügbaren Schnittstellen sollte sich eine ZigBee Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den abzuhörenden
+ Kanal einstellen. Stellen sie den eben gewählten Zigbee Kanal ein. (Gruppennummer)
 
 Starten sie einen Capture Vorgang und warten einigen Sekunden ab.
 
@@ -87,13 +85,12 @@ Standard-Key, der verwendet werden muss.
 
 \begin{Hinweis}
     Alle Aufgaben sollen mit Wireshark mitgeschnitten werden. Lesen sie die Aufgabenstellung erst durch und machen sie sich den Ablauf klar. Versuchen sie das 
-    Zeitfenster des Wireshark Mitschnits so kurz wie möglich zu halten, und in dieser Zeit nur die in der Aufgabenstellung explizit beschrieben Aktionen durchzuführen.
-    Anderenfalls wird Ihr Mitschnitt unübersichtlich.
+    Zeitfenster des Wireshark Mitschnitts so kurz wie möglich zu halten, und in dieser Zeit nur die in der Aufgabenstellung explizit beschrieben Aktionen durchzuführen.
 \end{Hinweis}
 
 \subsection{Aufgabe 2 - Joining einer Phillips Hue Lampe}
-a) Schalten sie eine der beiden Zigbee Lampen ein. Die Lampe sollte leuchten. Dies ist das Standard verhalten, wenn die Lampen in keinem ZigBee Netz integriert sind.\\
-b) Starten sie nun ein Wireshark Capture und erlauben in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, beenden sie
+a) Schalten sie eine der beiden Lampen ein. Die Lampe sollte leuchten, wenn sie in keinem Netzwerk registriert ist..\\
+b) Starten sie nun ein Wireshark Mitschnitt und erlauben in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, beenden sie
 den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken einen erfolgreiches Interview.
 
 \begin{figure}[H]
@@ -130,13 +127,11 @@ Sollte die Lampe sich nicht Verbinden, kann es notwendig sein die Lampe zurückz
 
 \subsection{Aufgabe 3 - Joining einer Fernbedienung über die Lampe}
 Für diese Aufgabe sollte nur eine Lampe mit dem Koordinator verbunden sein. Die Fernbedienung wird nun über die Lampe dem Netzwerk hinzugefügt. Aus diesem Grund wird es nur der Lampe
-erlaubt, ein neues Gerät aufzunehmen. 
+erlaubt ein neues Gerät aufzunehmen. 
 
-a)Drücken sie den Setup Button auf der Fernbedienung, bis die LED dauerhaft grün leuchtet. \todo{Workaround 4 Buttons testen} \\
+a) Drücken sie alle 4 Tasten der Fernbedienung, die die LED in verschiedenen Farben blinkt.\\
 b) Erlauben sie den Beitritt neuer Geräte explizit für die bereits verbundene Phillips Lampe.
-Ein erfolgreiches anlernen wird auch hier in der Weboberfläche
-und durch ein blinken der grünen LED signalisiert. 
-
+Ein erfolgreiches anlernen wird auch hier in der Weboberfläche und durch ein blinken der grünen LED signalisiert. 
 
 \begin{figure}[H]
     \centering
@@ -145,21 +140,14 @@ und durch ein blinken der grünen LED signalisiert.
 \end{figure}
 
 \begin{Aufgabe}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 3\grqq{}}. \\
+    Speichern sie den Wireshark Mitschnitt ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 3\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
-
-\begin{Hinweis}
-    Eventuell muss Ihre Fernbedienung zuerst zurückgesetzt werden, bevor sie wieder einem neuen ZigBee Netzwerk beitreten kann.
-    Der Reset-Knopf der Fernbedienung ist empfindlich, und bei Ihnen mit hoher Warscheinlichkeit bereits defekt. Alternativ lässt sich der Phillips Hue
-    Dimmer Switch durch drücken aller 4 Taster für ca. 5 Sekunden zurücksetzen. Ein erfolgreicher Reset wird durch eine abwechselns Grün/Rot blinkende LED
-    signalisiert. Dies stellt ebenfalls die Standardmethode für das Modell V2 dar, die keinen Reset-Knopf mehr besitzt.
-\end{Hinweis}
 
 \subsection{Aufgabe 4 - Binding der Fernbedienung}
 
 a) Navigieren sie in der Weboberfläche zu der Übersicht Ihrer Lampe. Dort finden sie einen Reiter \grqq binden\grqq{}. \\
-b) Binden sie den Endpunkt X Ihrer Lampe mit dem Endpunkt X Ihrer Fernbedienung. \\
+b) Starten sie ein Wireshark Mitschnitt. Binden sie den Endpunkt X Ihrer Lampe mit dem Endpunkt X Ihrer Fernbedienung. \\
 c) Schalten sie nun die Lampe mit der Fernbedienung ein und aus. 
 
 \begin{Hinweis}
@@ -173,14 +161,14 @@ c) Schalten sie nun die Lampe mit der Fernbedienung ein und aus.
 
 a) Navigieren sie in der Weboberfläche zu dem Reiter \grqq Groups \grqq{}. \\
 b) Legen sie eine Gruppe mit dem Namen \grqq Hue-Lights-<Gruppe> \grqq{} an.\\
-c) Editieren sie nun die Gruppe. Fügen sie die Endpunkte der beiden Lampen, die zum Steuern verwendet werden, der Gruppe hinzu. \\
+c) Starten sie einen Wireshark Mitschnitt. Editieren sie nun die Gruppe. Fügen sie die Endpunkte der beiden Lampen, die zum Steuern verwendet werden, der Gruppe hinzu. \\
 d) Navigieren sie nun wieder zur Binding-Übersicht der Fernbedienung. Entfernen sie das Binding zu der Lampe. Binden sie die Fernbedienung nun mit der soeben
 angelegten Gruppe.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{media/Z2M-Group-Binding.png}
-    \caption{Zigbee Anlernen aktivieren - nur Lampe}
+    \caption{Zigbee Group Binding}
 \end{figure}
 
 Achten sie darauf, alle hier genannten Cluster anzuwählen.
@@ -199,7 +187,7 @@ Achten sie darauf, alle hier genannten Cluster anzuwählen.
     Erläutern sie den Frametype und den Command Identifier.\\ 
     Erläutern die Ziel- und Quelladdresse und was sie daraus erschließen können.\\
     
-    2. Wie teilt der Koordinator den umliegenden Geräten ab, dass er dem Netzwerk den Beitritt weiterer Geräte erlaubt ?\\
+    2. Wie teilt der Koordinator den umliegenden Geräten mit, dass er dem Netzwerk den Beitritt weiterer Geräte erlaubt ?\\
     Zu welchem Frametype gehört der Beacon und durch welchen Wert wird er spezifiziert?\\
     Welche Ziel- und Quelladressen werden verwendet?\\
     
@@ -236,7 +224,6 @@ Achten sie darauf, alle hier genannten Cluster anzuwählen.
      Wie stellt deConz die Information dar?
      Welche Endpoints werden für den Austausch der untersuchten Request- und ResponseNachrichten verwendet? Interpretieren Sie dies!
 
-    
     14. Durch welche ZigBee-Frames werden die Schaltvorgänge übertragen? \\
     
     15. Beschreiben Sie möglichst genau, durch welche Headerfelder die Schaltvorgänge definiert sind! \\

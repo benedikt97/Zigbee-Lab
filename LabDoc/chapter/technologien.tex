@@ -1,42 +1,42 @@
 \chapter{Marktübersicht Technologien}
 
-\grqq Internet of things \grqq{} beschreibt die Befähigung von Endgeräten mit Datennetzen zu kommunizieren. So können Waschmaschinen einen fertigen Waschgang kommunizieren,
-oder ein Heizungsthermostat sich so die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{}, den dazu
-je nach Übertragunsprotokoll notwendigen \grqq Bridge \grqq{} und einer entsprechenden App zur Steuerung. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue \grqq{}
+\grqq Internet of things\grqq{} beschreibt die Befähigung von Endgeräten mit Datennetzen zu kommunizieren. So können Waschmaschinen einen fertigen Waschgang kommunizieren,
+oder ein Heizungsthermostat sich die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{}, den dazu
+je nach Übertragunsprotokoll notwendigen \grqq Bridge\grqq{} und einer entsprechenden App zur Steuerung. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
 als Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
 Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
-Diese Heimassistenten können sich entweder mit den herstellerspezifischen Bridges verbinden, oder können sogar direkt an PANs (Personal-Area-Networks) wie Zigbee
-teilnehmen und die Geräte direkt steuern. Dieses Kapitel soll einen Überblick über die Technologien am Markt verschaffen. 
+Diese Heimassistenten können sich entweder mit den herstellerspezifischen Bridges verbinden, oder können direkt an PANs (Personal-Area-Networks) wie Zigbee
+teilnehmen und die Geräte steuern. Dieses Kapitel soll einen Überblick über die relevanten Technologien am Markt verschaffen. 
 
 \section{Funkprotokolle}
 Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Dazu gehören:
 \begin{itemize}
-    \item \textbf{Wlan}
+    \item \textbf{Wlan} \\
     Wlan ist ein verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
     Internetrouter dient. Dies macht es naheliegend, auch smarte Geräte per WLAN einzubinden. Wlan ist allerdings 
-    optimiert für hohe Übertragungsraten, nicht für leistungsschwache Endgeräte. Dies ist
+    optimiert für hohe Übertragungsraten und nicht für leistungsschwache Endgeräte. Dies ist
     insbesondere für batteriebetriene Geräte nachteilig. Bei WLAN ist es problematisch, viele Geräte mit geringer Bandbreite mit einen Access-Point zu verbinden.
     Die nutzbare Bandbreite für Geräte wie Notebooks sinkt damit ab. 
 
-    \item \textbf{Blueooth}
+    \item \textbf{Blueooth}\\
     Ebenso wie Wlan hat Bluetooth eine weite Verbreitung. Durch Implementierung 
-    des Standard Bluetooth LE ist es möglich leistungsschwache und Batteriebetriebene Geräte mit Bluetooth auszustatten. Bluetooth
+    des Standard Bluetooth LE ist es möglich leistungsschwache sowie batteriebetriebene Geräte mit Bluetooth auszustatten. Bluetooth
     ist allerdings nicht für hohe Reichweiten oder für Netzwerke mit vielen Teilnehmern konzipiert. Primäre Anwendungsfall ist zum Beispiel das Verbinden eines Headsets mit 
     einem Handy. 
 
-    \item \textbf{Z-Wave}
+    \item \textbf{Z-Wave}\\
     
-    Z-Wave ähnelt technologisch Zigbee. Das Protokoll ist vollständig proprietäre. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
+    Z-Wave ähnelt technologisch Zigbee. Das Protokoll ist proprietär. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
     Low-Frequency Band arbeitet und nicht wie ZigBee im 2,4 Ghz Band. Die Reichweite ist durch die geringere Trägerfrequenz höher.
 
-    \item \textbf{ZigBee}
-    Zigbee ist ein auf den 802.40.5 Standard aufbauendes Protokoll, welches grundlegend für die Anbindung vieler leistungsschwacher
+    \item \textbf{ZigBee}\\
+    Zigbee \cite{zigbee} ist ein auf den 802.40.5 Standard aufbauendes Protokoll, welches grundlegend für die Anbindung vieler leistungsschwacher
     Geräte in einem großen räumlichen Areal konzipiert ist. Ein großer konzeptioneller Vorteil ist, dass bei 
     ZigBee ein Mesh-Netzwerk aufgebaut wird. Es können auch Geräte angebunden werden, die keine direkte Funkverbindung
     zum Koordinator haben. Zusätzlich sind Funktionen implementiert, welche das Management einer hohen Anzahl von Devices
     erleichtert.
     
-    \item \textbf{Thread}
+    \item \textbf{Thread}\\
     Thread ist ein Funkprotokoll welches ebenfalls auf den 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig, ein
     entscheidentes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
     theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addresierbar.
@@ -51,8 +51,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     kann. Die Pendanten der Firmen Google, Microsoft und Apple benötigen ein dediziertes Zigbee Gateway.
 
 \subsubsection{Phillips Hue}
-    Phillips vertreibt unter dem Namen eine Zigbee Bridge und eine Vielzahl von Devices aus dem Segment Beleuchtung und Steckdosen. Die Hardware ist vergleichsweiße
-    teuer.
+    Phillips vertreibt unter dem Namen eine Zigbee Bridge und eine Vielzahl von Devices aus dem Segment Beleuchtung und Steckdosen. 
 
 \subsubsection{Dresden Electronic}
     Dresden Electronic bietet Software und Hardware zum Aufbau von Zigbee Netzwerken an. Es werden Zigbee USB Adapter und RaspberryPi Hats mit ATMega Chips angeboten,
@@ -83,16 +82,14 @@ Grundlegend ist der Zigbee Standard universell, und die Kompatiblität von Gerä
 
 \subsubsection{zigbee2mqtt}
 
-\grqq zigbee2mqtt \grqq{} ist ein quelloffenes Projekt auf GitHub, welches aus einer Serveranwendung mit WebGUI, und einer Firmware für diverse Texas Instruments Chips besteht.
-Grundlegende Koordinator Fähigkeiten sind auf der Hardware implementiert, Hardware Abstraktionen sowie die Weiterreichung von Nachrichten an ein MQTT Broker sind
-in der Webanwendung implementiert. Über den  MQTT Broker können zur Visualisierung und Steuerung der Geräte können Anwendungne wie Homeassistant oder ioHAB eingesetzt
-werden. 
+\grqq zigbee2mqtt \grqq{} \cite{z2m} ist ein quelloffenes Projekt auf GitHub. Die Anwendung kann anstelle von propietären \grqq Bridges \grqq als ZigBee-Gateway
+eingesetzt werden. Die Anwendung kann ein ZigBee Netzwerk in der Rolle des Koordinators verwalten und die Gerätefunktionen per MQTT nach außen verfügbar machen.
 
 \subsubsection{ZHA}
 ZHA ist ein direkt in HomeAssistant integriertes Plugin, um Zigbee Koordinatoren direkt in HomeAssistant einzubinden. Vorteil
 von ZHA ist, dass ZigBee Chips mehrere Hersteller unterstützt werden. ZHA unterstützt neben Texas Instruments auch Hardware von Dresden Elektronik,
 Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender extrem vereinfacht, es sind wenige technische Informationen ersichtlich oder konfigurierbar.
-Die Endgeräte Kompatiblität ist allerdings schlechter als bei \grqq zigbee2mqtt \grqq{}.
+Die Endgeräte Kompatiblität ist derzeit schlechter als bei \grqq zigbee2mqtt \grqq{}.
 
 
 
