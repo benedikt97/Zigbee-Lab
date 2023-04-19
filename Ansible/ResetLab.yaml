@@ -9,9 +9,8 @@
   
     - name: Stop Containers
       become: true
-      ansible.builtin.command: docker compose down
-      args:
-        chdir: /srv/
+      ansible.builtin.command: docker kill $(docker ps -q)
+      ignore_errors: true
 
 - name: Redeploy the Lab
   hosts: localhost

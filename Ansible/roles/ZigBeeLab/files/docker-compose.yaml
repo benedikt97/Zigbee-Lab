@@ -40,9 +40,9 @@ services:
       - backbone
     volumes:
       - ./Z2M/data:/app/data
-#    devices:
+    devices:
       # CC251
-      # - /dev/ttyUSB0:/dev/ttyACM0
+      - /dev/ttyAMA0:/dev/ttyAMA0
       # CC2530 / GBAN GB2530S
       #- /dev/ttyUSB_cc2530:/dev/ttyACM0
     restart: always
@@ -58,10 +58,6 @@ services:
     networks:
       - backbone
     restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 125M
     volumes:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
@@ -70,4 +66,4 @@ services:
      
 networks:
   backbone:
-    external: true
+#    external: true

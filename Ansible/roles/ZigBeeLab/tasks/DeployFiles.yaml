@@ -1,3 +1,4 @@
+
 - name: Purge srv
   ansible.builtin.file:
     path: /srv
@@ -12,12 +13,20 @@
     owner: ansible
     group: ansible
 
-- name: Create /srv/mosquitto
+- name: Create /srv/Z2M
   ansible.builtin.file:
-    path: /srv/Z2m
+    path: /srv/Z2M
     state: directory
     owner: ansible
     group: ansible
+
+- name: Create /srv/Z2M/data      
+  ansible.builtin.file:
+    path: /srv/Z2M/data
+    state: directory
+    owner: ansible
+    group: ansible
+
 
 
 - name: Create /srv/mosquitto
@@ -58,7 +67,7 @@
     src: z2m-configuration
     owner: ansible 
     group: ansible
-    dest: /srv/Z2M/
+    dest: /srv/Z2M/data/configuration.yaml
 
 
 - name: Copy mosquitto Configuration
