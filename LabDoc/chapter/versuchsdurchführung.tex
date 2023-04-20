@@ -44,34 +44,14 @@ Es sollten 3 Container im Status \grqq Running\grqq{} sein.
 
 c) Starten sie den Webbrowser Firefox und Navigieren zu der Seite:
 \begin{lstlisting}
-    https://zigbee2mqtt.local
+    https://z2m.local
 \end{lstlisting}
 
 d) Überprüfen Sie, dass keine Geräte mit dem Koordinator verbunden sind. Sollten Geräte in der Netzwerkübersicht ersichtlich sein, setzen sie den Versuch zurück.
 Dies wird in den FAQs beschrieben.\\
 
-c) Stellen sie den Kanal entsprechend dem während dem Versuch gegebenen Wert sein.
-Dies verhindert eine gegenseitige Beeinflussung der verschiedenen Versuchsaufbauten. Zuhause können sie diesen Schritt überspringen.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{media/Z2M-Channel.png}
-    \caption{Zigbee Kanal Einstellung}
-\end{figure}
-
-d) Standardmäßig verwendet Zigbee2mqtt einen zufällig gewählten Netzwerkschlüssel. In diesem Versuch wird der Schlüssel vorgegeben, um die Pakete
-entschlüsseln zu können. Bitte setzen sie folgenden Schlüssel:
-
-\begin{lstlisting}
-    0x 00 00 ... 00 <Gruppennummer>
-\end{lstlisting}
-
-Die Einstellung finden sie unter der Kanal Einstellung als \grqq Network key(string)\grqq{}.
-
-Achten sie darauf, im Anschluss die Einstellung am Ende der Seite zu bestätigen. Dafür klicken sie auf den 
-\grqq Submit \grqq{} Button am Ende der Seite
-
-e) Starten sie Wireshark. Bei den verfügbaren Schnittstellen sollte sich eine ZigBee Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den abzuhörenden
+e) Starten sie Wireshark über das Symbol auf dem Desktop. Bei den verfügbaren Schnittstellen sollte sich eine \grqq TI CC22531\grqq{} Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den abzuhörenden
  Kanal einstellen. Stellen sie den eben gewählten Zigbee Kanal ein. (Gruppennummer)
 
 Starten sie einen Capture Vorgang und warten einigen Sekunden ab.
@@ -89,7 +69,7 @@ Standard-Key, der verwendet werden muss.
 \end{Hinweis}
 
 \subsection{Aufgabe 2 - Joining einer Phillips Hue Lampe}
-a) Schalten sie eine der beiden Lampen ein. Die Lampe sollte leuchten, wenn sie in keinem Netzwerk registriert ist..\\
+a) Schalten sie eine der beiden Lampen ein. Setzen sie die zweite Lampe zurück, indem sie auf der Fernbedienung die beiden äußeren Tasten drücken während sie diese dicht an die Lampe halten. Die Lampe muss mehrmals blinken.\\\\
 b) Starten sie nun ein Wireshark Mitschnitt und erlauben in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, beenden sie
 den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken einen erfolgreiches Interview.
 
@@ -121,15 +101,11 @@ schneiden in diesem einen Schaltvorgang mit.
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
-\begin{Hinweis}
-Sollte die Lampe sich nicht Verbinden, kann es notwendig sein die Lampe zurückzusetzen. In den FAQs finden sie zwei Methoden dazu.
-\end{Hinweis}
-
-\subsection{Aufgabe 3 - Joining einer Fernbedienung über die Lampe}
-Für diese Aufgabe sollte nur eine Lampe mit dem Koordinator verbunden sein. Die Fernbedienung wird nun über die Lampe dem Netzwerk hinzugefügt. Aus diesem Grund wird es nur der Lampe
+\subsection{Aufgabe 3 - Joining eines Gerätes über ein anderes Gerät}
+Für diese Aufgabe sollte nur eine Lampe mit dem Koordinator verbunden sein. Die zweite Lampe wird nun über die Lampe dem Netzwerk hinzugefügt. Aus diesem Grund wird es nur der Lampe
 erlaubt ein neues Gerät aufzunehmen. 
 
-a) Drücken sie alle 4 Tasten der Fernbedienung, die die LED in verschiedenen Farben blinkt.\\
+a) Setzen sie die zweite Lampe zurück, indem sie auf der Fernbedienung die beiden äußeren Tasten drücken während sie diese dicht an die Lampe halten. Die Lampe muss mehrmals blinken.\\
 b) Erlauben sie den Beitritt neuer Geräte explizit für die bereits verbundene Phillips Lampe.
 Ein erfolgreiches anlernen wird auch hier in der Weboberfläche und durch ein blinken der grünen LED signalisiert. 
 
@@ -143,6 +119,20 @@ Ein erfolgreiches anlernen wird auch hier in der Weboberfläche und durch ein bl
     Speichern sie den Wireshark Mitschnitt ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 3\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
+
+c) Sehen sie sich die Netzwerkübersicht unter dem Reiter \grqq Karte\grqq{}. Aktivieren sie nur den Haken \grqq isParent\grqq{} \\
+d) Fügen sie die Fernbedienung Ihrem Netzwerk hinzu. Gehen sie dabei wie bisher vor. Die Fernbedienung lässt sich durch das drücken aller 4 Tasten gleichzeitig zurücksetzen. Drücken sie diese solange bis die LED Grün/Orange blinkt
+Die Fernbedienung lässt nun zwar ein neues Netzwerk zu, allerdings sucht sie nicht auf neuen Kanälen. Bei einem Kanalwechsel kann es notwendig sein, die Batterie längere Zeit zu entfernen oder den \grqq Setup \grqq{} Knopf auf der
+Rückseite zu betätigen.\\
+
+Ihre Übersichtsseite sollte wie folgt aussehen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{media/Z2M-Anlernen-Lampe.png}
+    \caption{Zigbee Anlernen aktivieren - nur Lampe}
+\end{figure}
+
 
 \subsection{Aufgabe 4 - Binding der Fernbedienung}
 
@@ -238,23 +228,25 @@ Achten sie darauf, alle hier genannten Cluster anzuwählen.
         2. Welchem Zweck dient die \textbf{Update Device} Nachricht? Wer ist Absender und wer ist
         Empfänger? Welche Adresse steht im Feld „Device Address“?\\
         
-        3. Von welchem Device erhält die Fernbedienung ihre 16 Bit Kurzadresse und wie lautet sie?\\
+        3. Von welchem Device erhält die zweite Lampe ihre 16 Bit Kurzadresse und wie lautet sie?\\
         
         4. Wie viele \textbf{Transport-Key} Nachrichten wurden ausgetauscht? Erläutern Sie wer jeweils
         der Absender und wer der Empfänger ist. Versuchen Sie die den Vorgang zu erklären und
         gehen Sie dabei auf das Kommandoframe \grqq Tunnel\grqq{} ein. Wie sind die Transport-Key Nachrichten kryptographisch gesichert?
         Was sind die wichtigsten Headerfelder des Tunnel-Kommandoframes?\\
         
-        5. Untersuchen Sie die \textbf{Device Announcement} Nachricht der Fernbedienung, welchen
+        5. Untersuchen Sie die \textbf{Device Announcement} Nachricht der zweiten Lampe, welchen
         Zweck hat sie? Schauen Sie sich die \grqq Capability Information \grqq{} an. Handelt es sich um ein
         Full-Function-Device? Welcher Wert steht im Feld „AC Power“ und was sagt dieser Wert aus? \\
         
         6. Untersuchen Sie die \textbf{Active-Endpoint-Request} Nachricht und ihren Weg vom
-        Koordinator bis zur Fernbedienung. Vergleichen Sie die Adressen im ZigBee-NWKLayer und im IEEE-Layer und erklären Sie den Zusammenhang. An welchem Headerfeld
+        Koordinator bis zur zweiten Lampe. Vergleichen Sie die Adressen im ZigBee-NWKLayer und im IEEE-Layer und erklären Sie den Zusammenhang. An welchem Headerfeld
         können Sie zweifelsfrei identifizieren, dass es die gleiche Nachricht ist, die nur weitergeleitet wird? \\
         
-        7. Untersuchen Sie die \textbf{Simple Descriptor Response}- Nachrichten der Fernbedienung!
+        7. Untersuchen Sie die \textbf{Simple Descriptor Response}- Nachrichten der zweiten Lampe!
         Welche Informationen enthält diese Nachricht? \\
+
+        8. Erklären sie die Zahlen, welche in der Kartenansicht an den Verbindungen notiert sind.\\
         \end{Fragen}
         \subsubsection{Aufgabe 4}
         \begin{Fragen}
