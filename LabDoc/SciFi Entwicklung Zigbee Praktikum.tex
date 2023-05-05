@@ -56,6 +56,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{float}
 \usepackage[many]{tcolorbox}
+\usepackage{pdfpages}
 \usetikzlibrary{calc}
 
 %----------------- BibLaTeX ----------------- %
@@ -374,9 +375,12 @@ style=alphabetic
 
 
 %----------------- ANHANG (ROMAN) -------------%
+\chapter{Anhänge}
 \pagestyle{plain}
 \pagenumbering{Roman}
-
+\appendix
+\section{Texas Instruments SimpleLink}
+\includepdf[pages=-]{./SimpleLink.pdf}
 %----------------- VERZEICHNISSE II ---------------------- %
 
 

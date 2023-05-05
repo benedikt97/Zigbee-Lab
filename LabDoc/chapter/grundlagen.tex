@@ -156,16 +156,16 @@ errhält man das selbe Ergebniss wie mit dem vorher gezeigtem CLI Befehl.
 
 \subsection{zigbee2mqtt}
 
-zigbee2mqtt ist ein offenes Softwareprojekt und am besten mit \grqq Software-Zigbee-Gateway \grqq beschrieben werden. Es übernimmt die Funktionalität, die normalerweise entsprechende
-\grqq Bridges \grqq der Hersteller übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit ihren
+zigbee2mqtt ist ein offenes Softwareprojekt und am besten mit \grqq Software-Zigbee-Gateway\grqq{} beschrieben werden. Es übernimmt die Funktionalität, die normalerweise entsprechende
+ Bridges der Hersteller übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit ihren
 Apps zu kommunizieren, macht zigbee2mqtt die Geräte per mqtt nach außen verfügbar. Auf abstrakter Ebene bedeutet dies, das es ein Gateway zwischen einem Zigbee Netzwerk und
-einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant \grqq oder \grqq OpenHUB \grqq{} oder auch entsprechende
-Eigenentwicklungen einsetzen. \grqq zigbee2mqtt \grqq{} greift direkt auf den \grqq cod.m \grqq{} ZigBee Adapter zu.
+einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant\grqq{} oder \grqq OpenHUB\grqq{} oder auch entsprechende
+Eigenentwicklungen einsetzen. \grqq zigbee2mqtt\grqq{} greift direkt auf den \grqq cod.m\grqq{} ZigBee Adapter zu.
 
 Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt}
 Homepage: \url{https://www.zigbee2mqtt.io/}
 
-\grqq zigbee2mqtt \grqq{} verwaltet ein Zigbee Netzwerk und ermöglicht es Drittanwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt,
+\grqq zigbee2mqtt\grqq{} verwaltet ein Zigbee Netzwerk und ermöglicht es Drittanwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt,
 kündigt zigbee2mqtt das Gerät per MQTT an, und gibt nach erfolgreichem Interview alle Cluster an.
 
 todo: Screenshot MQTT
@@ -183,33 +183,97 @@ zurückgesetzt werden, um wieder einem neuen Netzwerk beitreten zu können.
 
 
 \begin{lstlisting}
-  version: '3'
-  services:
-    helloworld:
-      container_name: helloworld
-      image: hello-world
-      ports:
-        - 80:80
-      volumes:
-        - ./home:/home
-      restart: unless-stopped
+  {
+    "metadata": {
+      "format": "zigpy/open-coordinator-backup",
+      "version": 1,
+      "source": "zigbee-herdsman@0.14.103",
+      "internal": {
+        "date": "2023-05-04T19:48:28.936Z",
+        "znpVersion": 1
+      }
+    },
+    "stack_specific": {
+      "zstack": {
+        "tclk_seed": "69a6670050d8354347405537724e1a81"
+      }
+    },
+    "coordinator_ieee": "00124b0026b748c8",
+    "pan_id": "1a62",
+    "extended_pan_id": "00124b0026b748c8",
+    "nwk_update_id": 0,
+    "security_level": 5,
+    "channel": 11,
+    "channel_mask": [
+      11
+    ],
+    "network_key": {
+      "key": "01030507090b0d0f00020406080a0c0d",
+      "sequence_number": 0,
+      "frame_counter": 5552161
+    },
+    "devices": [
+      {
+        "nwk_address": "9a3b",
+        "ieee_address": "0017880104b9359d",
+        "is_child": false,
+        "link_key": {
+          "key": "87b4d0a2668847d8a876fe4454bf654e",
+          "rx_counter": 0,
+          "tx_counter": 121
+        }
+      },
+  ...  
   \end{lstlisting}
+
+  Hier liegen die wichtigsten Parameter über das ZigBee Netzwerk sowie Eckdaten über alle Teilnehmer ab.
 
   \textbf{state.json}\\
 
   In dieser Datei sind alle aktuellen Zustände Geräte im Netzwerk hinterlegt. Sie dient dazu, bei einem Neustart des Koordinators den letzten Zustand wieder herzustellen.
 
-
-  \textbf{state.json}\\
-
-  Dies ist die zentrale Datenbank von zigbee2mqtt. Da SQLite eingesetzt wird, lässt sich auch hier der Inhalt wie bei einer Textdatei einfach auslesen. Hier sind alle
-  Konfigurationen der Anwendung, aber auch für jeden Netzwerkteilnehmer Informationen hinterlegt.
-
-  Auszug aus dem Konfigurationsteil:
   \begin{lstlisting}
+    ...
+    "0xbc33acfffe9587ed": {
+        "brightness": 15,
+        "state": "OFF",
+        "color_mode": "color_temp",
+        "color_temp": 360,
+        "linkquality": 40,
+        "color": {
+            "x": 0.4542,
+            "y": 0.4092
+        },
+        "do_not_disturb": false
+    ...
+  \end{lstlisting}
+  \textbf{database.db}\\
+
+  Dies ist die zentrale Datenbank von zigbee2mqtt. Da SQLite eingesetzt wird, lässt sich auch hier der Inhalt wie bei einer Textdatei einfach auslesen.
+  Es liegt für jedes Device ein Datensatz ab.
+
+  Datensatz des Koordinators:
+  \begin{lstlisting}
+{"id":1,"type":"Coordinator","ieeeAddr":"0x00124b0026b748c8","nwkAddr":0,"manufId":0,"epList":[1,2,3,4,5,6,8,10,11,12,13,47,110,242],
+"endpoints":{"1":{"profId":260,"epId":1,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"2":{"profId":257,"epId":2,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"3":{"profId":260,"epId":3,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"4":{"profId":263,"epId":4,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"5":{"profId":264,"epId":5,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"6":{"profId":265,"epId":6,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"8":{"profId":260,"epId":8,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"10":{"profId":260,"epId":10,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"11":{"profId":260,"epId":11,"devId":1024,"inClusterList":[1281,10],"outClusterList":[1280,1282],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"12":{"profId":49246,"epId":12,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"13":{"profId":260,"epId":13,"devId":5,"inClusterList":[25],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"47":{"profId":260,"epId":47,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"110":{"profId":260,"epId":110,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}},"242":{"profId":41440,"epId":242,"devId":5,"inClusterList":[],"outClusterList":[],"clusters":{},"binds":[],"configuredReportings":[],
+"meta":{}}},"interviewCompleted":true,"meta":{},"lastSeen":1671278654240,"defaultSendRequestWhen":"immediate"}
+
   \end{lstlisting}
 
-  Ein Datensatz eines Devices
+  In diesem Datensatz ist jedes direkt verbundenes Gerät vermerkt sowie die Beziehung zu diesem. 
 
 
 
@@ -277,11 +341,15 @@ auf Netzwerkkarten aufzuzeichnen. Es ist möglich über andere Schnittstellen Wi
 können Scripte in den Ordner \grqq .../extcap \grqq{} abgelegt werden, welche 
 Paketströme zurückliefern. Diese Technik wird in diesem Versuch eingesetzt.
 
-\todo{Screenshot Wireshark mit Zigbee Paketen}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/wireshark.png}
+  \caption{Wireshark}
+\end{figure}
 
 \subsection{Ansible}
 
-Ansible ist ein Werkzeug zur Automatisierung. Arbeitsabläufe lassen sich strukturiert in YAML definieren. Ansible kann Aufgaben auf dem lokalem System und auf Remotesystemen
+Ansible ist ein Werkzeug zur Automatisierung. Arbeitsabläufe lassen sich strukturiert in YAML (yet another markup language) definieren. Ansible kann Aufgaben auf dem lokalem System und auf Remotesystemen
 ausführen. Aufgaben können in Rollen zusammengefasst werden.  
 Eine Rolle kann einem Host wie folgt zugewiesen werden:
 \begin{lstlisting}
@@ -294,5 +362,6 @@ Eine Rolle kann einem Host wie folgt zugewiesen werden:
 
 Die Rollen \grqq DeployDocker \grqq{} und \grqq DeployLabUtils \grqq{} umfassen eine Menge von Aufgaben zur Installation notwendiger Komponenten und weitere Vorbereitungen
 für den Praktikumsversuch. Diese Rollen werden \grqq localhost \grqq{}, also dem ausführendem System selbst zugewiesen.
+Aus technischer Sicht lädt Ansible parametrierte Pythonmodule auf den jewiligen Host per SCP und führt diese dort aus.
 
-\subsection{}
+

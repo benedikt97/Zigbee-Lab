@@ -7,7 +7,7 @@ In diesem Kapitel wird der Versuchsaufbau beschrieben sowie eine Versuchsanleitu
 Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfen sie dies vor Beginn des Versuches.
 
 \begin{itemize}
-    \item RespberryPi 3 mit eingesetzter SD-Karte
+    \item RespberryPi 3 mit eingesetzter microSD-Karte
     \item CC2531 Sniffer Stick
     \item cod.m ZigBee CC2652P2 Raspberry Pi Module
     \item 2 x Phillips Hue White E27
@@ -16,16 +16,17 @@ Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfe
     \item Ethernet Kabel
 \end{itemize}
 
-Das cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein. 
+Ein cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein. 
 
 \section{Aufgabenstellungen}
 
-Bitte arbeiten sie die folgenden Aufgabenstellungen durch. Fertigen sie im Anschluss einen Versuchsbericht an.
+Bitte arbeiten sie die folgenden Aufgabenstellungen durch. Fertigen sie im Anschluss einen Versuchsbericht an. Beantworten sie die anhängenden Fragen
+implizit oder explizit.
 
 \subsection{Aufgabe 1 - Vorbereitungen}
 
 \subsubsection{Vorbereitung}
-a) Schließen sie an den RaspberryPi Monitor, Tastatur ,Maus sowie den Sniffer-Stick an. Durch Anschluss der
+a) Schließen sie an den RaspberryPi Monitor, Tastatur, Maus sowie den Sniffer-Stick an. Durch Anschluss der
 Stromversorgung startet der Raspberry automatisch. Melden sie sich mit folgenden Zugangsdaten an:
 
 \begin{itemize}
@@ -33,7 +34,15 @@ Stromversorgung startet der Raspberry automatisch. Melden sie sich mit folgenden
     \item Password: zigbeelab
 \end{itemize}
 
-b) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die Container ausgeführt werden:
+b) Starten sie den Versuch, in dem sie ein Konsolenfenster öffnen und folgenden Befehl absetzen.
+
+\begin{lstlisting}
+    > docker ps
+\end{lstlisting}
+
+Setzen sie den gewünchten Kanal ein. (Gruppennummer)
+
+c) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die Container ausgeführt werden:
 \begin{lstlisting}
     > docker ps
 \end{lstlisting}
@@ -42,14 +51,10 @@ Es sollten 3 Container im Status \grqq Running\grqq{} sein.
 
 \subsubsection{ZigBee2Mqtt Einrichtung}
 
-c) Starten sie den Webbrowser Firefox und Navigieren zu der Seite:
+d) Starten sie den Webbrowser Firefox und Navigieren zu der Seite:
 \begin{lstlisting}
     https://z2m.local
 \end{lstlisting}
-
-d) Überprüfen Sie, dass keine Geräte mit dem Koordinator verbunden sind. Sollten Geräte in der Netzwerkübersicht ersichtlich sein, setzen sie den Versuch zurück.
-Dies wird in den FAQs beschrieben.\\
-
 
 e) Starten sie Wireshark über das Symbol auf dem Desktop. Bei den verfügbaren Schnittstellen sollte sich eine \grqq TI CC22531\grqq{} Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den abzuhörenden
  Kanal einstellen. Stellen sie den eben gewählten Zigbee Kanal ein. (Gruppennummer)
@@ -69,7 +74,7 @@ Standard-Key, der verwendet werden muss.
 \end{Hinweis}
 
 \subsection{Aufgabe 2 - Joining einer Phillips Hue Lampe}
-a) Schalten sie eine der beiden Lampen ein. Setzen sie die zweite Lampe zurück, indem sie auf der Fernbedienung die beiden äußeren Tasten drücken während sie diese dicht an die Lampe halten. Die Lampe muss mehrmals blinken.\\\\
+a) Schalten sie eine der beiden Lampen ein. Setzen sie die Lampe zurück, indem sie auf der Fernbedienung die beiden äußeren Tasten drücken während sie diese dicht an die Lampe halten. Die Lampe muss mehrmals blinken.\\\\
 b) Starten sie nun ein Wireshark Mitschnitt und erlauben in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, beenden sie
 den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken einen erfolgreiches Interview.
 
@@ -120,7 +125,7 @@ Ein erfolgreiches anlernen wird auch hier in der Weboberfläche und durch ein bl
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
-c) Sehen sie sich die Netzwerkübersicht unter dem Reiter \grqq Karte\grqq{}. Aktivieren sie nur den Haken \grqq isParent\grqq{} \\
+c) Sehen sie sich die Netzwerkübersicht unter dem Reiter \grqq Karte\grqq{} an. Aktivieren sie nur den Haken \grqq isParent\grqq{} \\
 d) Fügen sie die Fernbedienung Ihrem Netzwerk hinzu. Gehen sie dabei wie bisher vor. Die Fernbedienung lässt sich durch das drücken aller 4 Tasten gleichzeitig zurücksetzen. Drücken sie diese solange bis die LED Grün/Orange blinkt
 Die Fernbedienung lässt nun zwar ein neues Netzwerk zu, allerdings sucht sie nicht auf neuen Kanälen. Bei einem Kanalwechsel kann es notwendig sein, die Batterie längere Zeit zu entfernen oder den \grqq Setup \grqq{} Knopf auf der
 Rückseite zu betätigen.\\

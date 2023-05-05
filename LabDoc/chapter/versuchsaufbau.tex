@@ -8,10 +8,10 @@
 
 In dieser Abbildung wird der schematische Versuchsaufbau gezeigt. Die drei Anwendungen werden als Docker Container ausgeführt. Sie kommunizieren
 untereinander über ein eigenes Docker Netzwerk. Dies ist eine von Docker verwaltete Linux Bridge. Nur der NGINX Reverse Proxy hat zwei Ports, die
-auf das Host Interface gemappt werden. Die Webfrontends sind damit über den lokal installierten Browser über das Loopback-Interface erreichbar. Damit ist der Raspberry Applikationsserver
+auf die Host Schnittstelle gemappt werden. Die Webfrontends sind damit über den lokal installierten Browser über das Loopback-Interface erreichbar. Damit ist der Raspberry Applikationsserver
 und Versuchs-PC zugleich.
 
-Es werden entsprechende Namen in der lokalen \grqq hosts \grqq{} Konfigurationsdatei hinterlegt, um lokal Domainnamen auflösen zu können.
+Es werden entsprechende Namen in der lokalen \grqq hosts\grqq{} Konfigurationsdatei hinterlegt, um lokal Domainnamen auflösen zu können.
 
 Der cod.m Zigbeecontroller wird direkt an den Docker Container durchgereicht. Der Sniffer Stick ist regulär am Host angeschlossen. 
 
@@ -39,9 +39,9 @@ Die Container werden mit \grqq Docker-Compose \grqq{} verwaltet. Im folgenden we
       restart: unless-stopped
 \end{lstlisting}
 
-Der Proxy basiert auf einem Image des Proxys NGINX \cite{nginxpm}. Vorteil dieses erweiterten Images ist es,
+Der Proxy basiert auf einem Image des Proxys NGINX \cite{nginxpm}. Vorteil dieses erweiterten NGINX ist es,
 dass dieser automatisiert seine Konfigurationen anpasst. Dafür wird bei einem Service eine entsprechende Umgebungsvariablen gesetzt. Über den 
-\grqq docker.sock \grqq{} erfährt der Proxy, ob Container gestartet werden, und mit welchen Umgebungsvariablen. Wird ein Container mit der Umgebungsvariable 
+\grqq docker.sock\grqq{} erfährt der Proxy ob Container gestartet werden sowie deren Umgebungsvariablen. Wird ein Container mit der Umgebungsvariable 
 \grqq VIRTUAL\_HOST=z2m.local \grqq{} gestartet, wird automatisch eine Weiterleitung für alle Anfragen mit dem Header \grqq z2m.local\grqq{} eingerichtet auf den entsprechenden Container.
 Alle Servicecontainer sind in einer eigenen L2-Domäne und von außen nicht direkt erreichbar. Der Proxy Container ist der einzige, dem externe Ports zugewiesen werden.
 Dafür werden von Docker Regeln in die \grqq iptables \grqq{} Tabellen geschrieben.
@@ -61,7 +61,7 @@ Die Regeln in der Tabelle \grqq DOCKER \grqq{} werden durch Docker geschrieben. 
   \caption{Raspberry netstat}
 \end{figure}
 
-In dieser AUsgabe ist erkennbar, dass Docker auf die Ports 80 und 443 lauscht.
+In dieser Ausgabe ist erkennbar, dass Docker auf die Ports 80 und 443 lauscht.
 
 \subsubsection{zigbee2mqtt}
 \begin{lstlisting}
@@ -82,16 +82,16 @@ In dieser AUsgabe ist erkennbar, dass Docker auf die Ports 80 und 443 lauscht.
     - dialout
 \end{lstlisting}
 
-Dem Container wird ebenfalls Netzwerk \grqq backbone \grqq{} zugewiesen. Ein Verzeichnis mit Konfigurationen und persistenten Datensätzen wird auf den Host gemountetn. Wenn der gemountete Pfad außerhalb des Containers nicht existiert, wird der 
+Dem Container wird ebenfalls Netzwerk \grqq backbone\grqq{} zugewiesen. Ein Verzeichnis mit Konfigurationen und persistenten Datensätzen wird auf den Host gemountetn. Wenn der gemountete Pfad außerhalb des Containers nicht existiert, wird der 
 bestehende Ordner aus dem Container kopiert. Exisitert der Pfad, wird der Ordner vom Host in den Container gemountet. 
-Bei Linux können Geräte über das selbe Verfahren wie Verzeichnisse adressiert werden. \grqq - /dev/ttyUSB0:/dev/ttyACM0 \grqq{} reicht den ZigBee Adapter an 
+Bei Linux können Geräte über das selbe Verfahren wie Verzeichnisse adressiert werden. \grqq - /dev/ttyUSB0:/dev/ttyACM0\grqq{} reicht den ZigBee Adapter an 
 den Docker Container weiter.
 In den Umgebungsvariablen wird dem Proxy noch mitgeteilt, unter Welcher URL er erreichbar sein soll und auf welchem Port der Webserver läuft. Die Gruppe 
-\grqq dialout \grqq{} ist notwendig, damit der Container Zugriffsrechte auf die serielle Schnittstelle des Hosts erhällt.
+\grqq dialout\grqq{} ist notwendig, damit der Container Zugriffsrechte auf die serielle Schnittstelle des Hosts erhällt.
 
 Folgend die zentrale Konfigurationsdatei von \grqq zigbee2mqtt \grqq{}.
 \begin{lstlisting}
-  homeassistant: true
+homeassistant: true
 permit_join: false
 mqtt:
   base_topic: zigbee2mqtt
@@ -134,7 +134,7 @@ kann. Im weiteren wird der Pfad angegeben, auf den der cod.m Adapter gemountet w
     - ./mosquitto/log:/mosquitto/log
 \end{lstlisting}
 
-Als MQTT Broker wird \grqq mosquitto \grqq{} eingesetzt. Für diesen Container wurde der maximal erlaubte Arbeitsspeicher begrenzt. Die Konfigurationen 
+Als MQTT Broker wird \grqq mosquitto \grqq{} eingesetzt. Die Konfigurationen 
 wurden auch hier entsprechend auf den Host gemountet. Als Konfigurationsdatei wird das Standardtemplate verwendet, welches nur an zwei 
 entsprechenden Stellen modifiziert ist.
 
@@ -153,7 +153,7 @@ Netwerkes erreichbar ist. Zusätzlich wird der Port definiert, auf dem der MQTT 
 
 \subsection{Namensauflösung}
 
-Für eine lokale Namensauflösung werden die Hosts in die \grqq \textbackslash etc \textbackslash hosts \grqq{} eingetragen. Dies wird automatisch in der Ansible
+Für eine lokale Namensauflösung werden die Hosts in die \grqq \textbackslash etc\textbackslash hosts\grqq{} eingetragen. Dies wird automatisch in der Ansible
 Rolle \grqq DeployLab \grqq{} gemacht.
 
 \begin{lstlisting}
@@ -166,7 +166,7 @@ Rolle \grqq DeployLab \grqq{} gemacht.
 
 \subsection{Anwendungen}
 
-Für den Versuch wird weiterhin lediglich ein Webbrowser sowie Wireshark benötigt. Die beiden Anwendungen werden per Ansible installiert:
+Für den Versuch wird weiterhin ein Webbrowser sowie Wireshark benötigt. Die beiden Anwendungen werden per Ansible installiert:
 \begin{lstlisting}
   - name: Install required Packages
   become: true
