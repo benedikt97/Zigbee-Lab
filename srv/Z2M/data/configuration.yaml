@@ -22,7 +22,7 @@ advanced:
     port: 123
     protocol: tcp4
     type: '5424'
-  channel: 20
+  channel: {{ channel }}
   homeassistant_legacy_entity_attributes: false
   legacy_api: false
   legacy_availability_payload: false

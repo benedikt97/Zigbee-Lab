@@ -63,8 +63,8 @@
 
 - name: Copy Z2M Configuration
   become: true
-  ansible.builtin.copy:
-    src: z2m-configuration
+  ansible.builtin.template:
+    src: z2m-configuration.j2
     owner: ansible 
     group: ansible
     dest: /srv/Z2M/data/configuration.yaml
@@ -77,3 +77,41 @@
     owner: ansible 
     group: ansible
     dest: /srv/mosquitto/config/
+
+- name: Copy ZigBee Keys
+  become: true
+  ansible.builtin.copy:
+    src: zigbee_pc_keys
+    owner: ansible 
+    group: ansible
+    dest: /root/.config/wireshark/zigbee_pc_keys
+    
+- name: Copy ZigBee Keys
+  become: true
+  ansible.builtin.copy:
+    src: preferences
+    owner: ansible 
+    group: ansible
+    dest: /root/.config/wireshark/preferences
+
+- name: Copy extcap interface
+  become: true
+  ansible.builtin.copy:
+    src: cc2531
+    owner: ansible 
+    group: ansible
+    dest: /usr/lib/arm-linux-gnueabihf/wireshark/extcap
+    
+- name: Copy wireshark shortcut
+  become: true
+  ansible.builtin.copy:
+    src: wireshark.desktop
+    owner: ansible 
+    group: ansible
+    dest: /home/ansible/Desktop/wireshark.desktop
+
+
+
+
+
+

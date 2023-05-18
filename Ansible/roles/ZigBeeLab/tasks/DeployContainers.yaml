@@ -1,2 +1,0 @@
-- name: Start Containers, may take a minute, check with docker ps
-  ansible.builtin.command: /srv docker compose up -d
