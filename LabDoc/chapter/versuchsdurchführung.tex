@@ -142,23 +142,9 @@ Ihre Übersichtsseite sollte wie folgt aussehen.
 \subsection{Aufgabe 4 - Binding der Fernbedienung}
 
 a) Navigieren sie in der Weboberfläche zu der Übersicht Ihrer Lampe. Dort finden sie einen Reiter \grqq binden\grqq{}. \\
-b) Starten sie ein Wireshark Mitschnitt. Binden sie den Endpunkt X Ihrer Lampe mit dem Endpunkt X Ihrer Fernbedienung. \\
-c) Schalten sie nun die Lampe mit der Fernbedienung ein und aus. 
-
-\begin{Hinweis}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 4\grqq{}}. \\
-    Beantworten sie die Fragen in Ihrem Versuchsbericht.
-\end{Hinweis}
-
-
-
-\subsection{Aufgabe 5 - Gruppenbildung}
-
-a) Navigieren sie in der Weboberfläche zu dem Reiter \grqq Groups \grqq{}. \\
-b) Legen sie eine Gruppe mit dem Namen \grqq Hue-Lights-<Gruppe> \grqq{} an.\\
-c) Starten sie einen Wireshark Mitschnitt. Editieren sie nun die Gruppe. Fügen sie die Endpunkte der beiden Lampen, die zum Steuern verwendet werden, der Gruppe hinzu. \\
-d) Navigieren sie nun wieder zur Binding-Übersicht der Fernbedienung. Entfernen sie das Binding zu der Lampe. Binden sie die Fernbedienung nun mit der soeben
-angelegten Gruppe.
+b) Starten sie ein Wireshark Mitschnitt. Binden sie den Endpunkt 11 Ihrer Lampe mit dem Endpunkt Ihrer Fernbedienung. Betätigen sie direkt nach dem Anlegen der Bindung
+eine Taste auf der Fernbedienung. Zum Batteriesparen \grqq schläft\grqq{} diese periodisch und kann in dieser Zeit keine Bindungsanfragen annehmen. Die Hersteller gehen davon
+aus, das die Fernbedienung gewöhnlich per Touchlink gebunden wird. Warten sie bis zigbee2mqtt ein erfolgreiches binding meldet. \\
 
 \begin{figure}[H]
     \centering
@@ -166,13 +152,37 @@ angelegten Gruppe.
     \caption{Zigbee Group Binding}
 \end{figure}
 
-Achten sie darauf, alle hier genannten Cluster anzuwählen.
+Achten sie darauf alle hier gezeigten Cluster anzuwählen. Jedes Cluster wird einzeln gebunden.
+
+c) Schalten sie nun die Lampe mit der Fernbedienung ein und aus. 
+
+\begin{Hinweis}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 4\grqq{}}. \\
+    Beantworten sie die Fragen in Ihrem Versuchsbericht.
+\end{Hinweis}
+
+d) Entfernen sie im Anschluss dieses Binding. Drücken sie auch hier eine Taste der Fernbedienung damit diese geweckt wird.
+
+\subsection{Aufgabe 5 - Gruppenbildung}
+
+a) Navigieren sie in der Weboberfläche zu dem Reiter \grqq Groups \grqq{}. \\
+b) Legen sie eine Gruppe mit dem Namen \grqq Hue-Lights-<Gruppe> \grqq{} an.\\
+c) Starten sie einen Wireshark Mitschnitt. Editieren sie nun die Gruppe. Fügen sie die Endpunkte der beiden Lampen, die zum Steuern verwendet werden, der Gruppe hinzu. \\
+
 
 \begin{Aufgabe}
     Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 5\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
+d) Navigieren sie nun wieder zur Binding-Übersicht der Fernbedienung. Binden sie die Fernbedienung nun mit der soeben
+angelegten Gruppe. Achten sie auch hier darauf eine Taste der Fernbedienung zu betätigen.
+e) Schalten sie die Gruppe mit der Fernbedienung ein und aus.
+
+\begin{Aufgabe}
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 5.1\grqq{}}. \\
+    Beantworten sie die Fragen in Ihrem Versuchsbericht.
+\end{Aufgabe}
 
 \subsection{Fragen}
 \subsubsection{Aufgabe 2}

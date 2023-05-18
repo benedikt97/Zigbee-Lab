@@ -1,7 +1,7 @@
 \chapter{Marktübersicht Technologien}
 
 \grqq Internet of things\grqq{} beschreibt die Befähigung von Endgeräten mit Datennetzen zu kommunizieren. So können Waschmaschinen einen fertigen Waschgang kommunizieren,
-oder ein Heizungsthermostat sich die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{}, den dazu
+oder ein Heizungsthermostat sich die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{} und den dazu
 je nach Übertragunsprotokoll notwendigen \grqq Bridge\grqq{} und einer entsprechenden App zur Steuerung. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
 als Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
 Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
@@ -38,7 +38,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     
     \item \textbf{Thread}\\
     Thread ist ein Funkprotokoll welches ebenfalls auf den 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig, ein
-    entscheidentes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
+    entscheidendes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
     theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addresierbar.
 \end{itemize}
 
@@ -82,14 +82,14 @@ Grundlegend ist der Zigbee Standard universell, und die Kompatiblität von Gerä
 
 \subsubsection{zigbee2mqtt}
 
-\grqq zigbee2mqtt \grqq{} \cite{z2m} ist ein quelloffenes Projekt auf GitHub. Die Anwendung kann anstelle von propietären \grqq Bridges \grqq als ZigBee-Gateway
+zigbee2mqtt \cite{z2m} ist ein quelloffenes Projekt auf GitHub. Die Anwendung kann anstelle von propietären Bridges als ZigBee-Gateway
 eingesetzt werden. Die Anwendung kann ein ZigBee Netzwerk in der Rolle des Koordinators verwalten und die Gerätefunktionen per MQTT nach außen verfügbar machen.
 
 \subsubsection{ZHA}
 ZHA ist ein direkt in HomeAssistant integriertes Plugin, um Zigbee Koordinatoren direkt in HomeAssistant einzubinden. Vorteil
-von ZHA ist, dass ZigBee Chips mehrere Hersteller unterstützt werden. ZHA unterstützt neben Texas Instruments auch Hardware von Dresden Elektronik,
-Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender extrem vereinfacht, es sind wenige technische Informationen ersichtlich oder konfigurierbar.
-Die Endgeräte Kompatiblität ist derzeit schlechter als bei \grqq zigbee2mqtt \grqq{}.
+von ZHA ist, dass ZigBee Chips mehrerer Hersteller unterstützt werden. ZHA unterstützt neben Texas Instruments auch Hardware von Dresden Elektronik,
+Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender komfortabler als zigbee2mqtt, es sind wenige technische Informationen ersichtlich oder konfigurierbar.
+Die Endgeräte Kompatiblität ist derzeit schlechter als bei zigbee2mqtt.
 
 
 
