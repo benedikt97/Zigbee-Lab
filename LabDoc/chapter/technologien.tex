@@ -1,9 +1,9 @@
 \chapter{Marktübersicht Technologien}
 
 \grqq Internet of things\grqq{} beschreibt die Befähigung von Endgeräten mit Datennetzen zu kommunizieren. So können Waschmaschinen einen fertigen Waschgang kommunizieren,
-oder ein Heizungsthermostat sich die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{} und den dazu
+oder ein Heizungsthermostat sich die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{} und der dazu
 je nach Übertragunsprotokoll notwendigen \grqq Bridge\grqq{} und einer entsprechenden App zur Steuerung. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
-als Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
+als Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger Smartphone App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
 Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
 Diese Heimassistenten können sich entweder mit den herstellerspezifischen Bridges verbinden, oder können direkt an PANs (Personal-Area-Networks) wie Zigbee
 teilnehmen und die Geräte steuern. Dieses Kapitel soll einen Überblick über die relevanten Technologien am Markt verschaffen. 
@@ -15,7 +15,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     Wlan ist ein verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
     Internetrouter dient. Dies macht es naheliegend, auch smarte Geräte per WLAN einzubinden. Wlan ist allerdings 
     optimiert für hohe Übertragungsraten und nicht für leistungsschwache Endgeräte. Dies ist
-    insbesondere für batteriebetriene Geräte nachteilig. Bei WLAN ist es problematisch, viele Geräte mit geringer Bandbreite mit einen Access-Point zu verbinden.
+    insbesondere für batteriebetriene Geräte nachteilbehaftet. Bei WLAN ist es problematisch, viele Geräte mit geringer Bandbreite mit einen Access-Point zu verbinden.
     Die nutzbare Bandbreite für Geräte wie Notebooks sinkt damit ab. 
 
     \item \textbf{Blueooth}\\
@@ -26,7 +26,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
 
     \item \textbf{Z-Wave}\\
     
-    Z-Wave ähnelt technologisch Zigbee. Das Protokoll ist proprietär. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
+    Z-Wave \cite{zwave} ähnelt technologisch Zigbee. Das Protokoll ist proprietär. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
     Low-Frequency Band arbeitet und nicht wie ZigBee im 2,4 Ghz Band. Die Reichweite ist durch die geringere Trägerfrequenz höher.
 
     \item \textbf{ZigBee}\\
@@ -37,7 +37,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     erleichtert.
     
     \item \textbf{Thread}\\
-    Thread ist ein Funkprotokoll welches ebenfalls auf den 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig, ein
+    Thread \cite{thread} ist ein Funkprotokoll welches ebenfalls auf den 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig, ein
     entscheidendes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
     theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addresierbar.
 \end{itemize}
@@ -47,7 +47,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
 \subsection{Kommerzielle Anwendungen}
 
 \subsubsection{Amazon Echo}
-    Der Heimassistent Amazon Echo ab Generation 4 ist der einzige seiner Art, der eine Zigbee Integration hat und damit als Gateway und Koordinator dienen
+    Der Heimassistent Amazon Echo ab Generation 4 ist der einzige seiner Art der eine Zigbee Integration hat und damit als Gateway und Koordinator fungieren
     kann. Die Pendanten der Firmen Google, Microsoft und Apple benötigen ein dediziertes Zigbee Gateway.
 
 \subsubsection{Phillips Hue}
