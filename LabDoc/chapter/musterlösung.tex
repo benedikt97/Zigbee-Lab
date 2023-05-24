@@ -1,8 +1,8 @@
 \chapter{Musterlösung}
-
+\section{Einleitung}
 Alle Wireshark Mitschnitte liegen als \grqq *.pcapng \grqq{} Datei bei.
 
-\subsection{Aufgabe 2.1 - Joining einer Phillips Hue Lampe}
+\section{Aufgabe 2.1 - Joining einer Phillips Hue Lampe}
 
 \begin{figure}[H]
     \centering
@@ -10,8 +10,8 @@ Alle Wireshark Mitschnitte liegen als \grqq *.pcapng \grqq{} Datei bei.
     \caption{Wireshark Ausschnitt - Joining einer Lampe Teil 1}
 \end{figure}
 
-Im ersten Teil ist der Physikalische Verbindungsaufbau zu sehen. Mit Paket 2 erlaubt der Koordinator
-allen Mitgliegern die Aufnahme weiterer Geräte. Paket 5 ist ein Beacon der Lampe, welcher den Beitrittswunsch
+Im ersten Teil ist der Verbindungsaufbau zu sehen. Mit Paket 2 erlaubt der Koordinator
+allen Mitgliedern die Aufnahme weiterer Geräte. Paket 5 ist ein Beacon der Lampe, welcher den Beitrittswunsch
 signalisiert. Auf diesen Antwortet der Koordinator jeweils mit einem Beacon Response. Nun folgt ein Association
 Request sowie Data Request der Lampe (19). In der Association Response (23) bekommt die Lampe
 Ihre kurze Adresse zugewiesen. In Paket 25 wird der Transport Key zur verschlüsselten Kommunikation 
@@ -23,10 +23,10 @@ Ihre kurze Adresse zugewiesen. In Paket 25 wird der Transport Key zur verschlüs
     \caption{Wireshark Ausschnitt - Joining einer Lampe Teil 2}
 \end{figure}
 
-Im Anschluss fragen die Geräte gegenseitig ihre Aktiven Endpunkte über \grqq Node Descriptor\grqq{} Nachrichten ab. Die einzelnen Endpunkte werden im Anschluss per \grqq 
-Active Endpoint Requests\grqq{} interviewed und per \grqq Simple Descriptor\grqq{} Nachrichten beschrieben.
+Im Anschluss fragen die Geräte gegenseitig ihre aktiven Endpunkte über \grqq Node Descriptor\grqq{} Nachrichten ab. Die einzelnen Endpunkte werden im Anschluss per \grqq 
+Active Endpoint Requests\grqq{} abgefragt und per \grqq Simple Descriptor\grqq{} Nachrichten beschrieben.
 
-\subsection{Aufgabe 2.2 - Schalten einer Lampe}
+\section{Aufgabe 2.2 - Schalten einer Lampe}
 
 \begin{figure}[H]
     \centering
@@ -34,23 +34,22 @@ Active Endpoint Requests\grqq{} interviewed und per \grqq Simple Descriptor\grqq
     \caption{Wireshark Ausschnitt - Schalten einer Lampe}
 \end{figure}
 
-Hier ein ein Ein- und Auschaltvorgang einer Lampe zu sehen. Zum Schalten wird jeweils ein \grqq ZigBee Kommando Frame\grqq{} versendet, welches erst Physikalisch und 
-anschließend auf ZigBee Ebene bestätigt wird.
+Hier ein ein Ein- und Auschaltvorgang einer Lampe zu sehen. Zum Schalten wird jeweils ein \grqq ZigBee Kommando Frame\grqq{} versendet.
 
-\subsection{Aufgabe 3 - Joining einer Fernbedienung über die Lampe}
+\section{Aufgabe 3 - Joining einer Fernbedienung über die Lampe}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{media/lsg-3-1.png}
-    \caption{Wireshark Ausschnitt - Schalten einer Lampe}
+    \caption{Wireshark Ausschnitt - Permit Join über Lampe}
 \end{figure}
 
-Hier erteilt der Koordinator der Lampe die Erlaubniss neue Geräte in das Netzwerk aufzunehmen.
+Hier erteilt der Koordinator der Lampe die Erlaubnis neue Geräte in das Netzwerk aufzunehmen.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{media/lsg-3-2.png}
-    \caption{Wireshark Ausschnitt - Schalten einer Lampe 1}
+    \caption{Wireshark Ausschnitt - Beitritt über Lampe}
 \end{figure}
 
 Die hat zur Folge, dass die Lampe auf die Beacon-Requests der Lampe mit Beitrittswunsch reagiert. Diese Beacons dienen dazu, das Netzwerk der neuen Lampe bekannt zu machen.
@@ -58,7 +57,7 @@ Mit Nachricht 24 erfragt die neue Lampe einen Beitritt in das Netzwerk. Der Lamp
 macht die bestehende Lampe das neue Gerät dem Koordinator bekannt. Dieser versendet im Anschluss den Netzwerk Schlüssel. Dieser wird in einem Tunnel verschlüsselt bis zu dem letzten
 Gerät vor dem neuen Teilnehmer übermittelt. Im Anschluss erfolgt das Interview des neuen Gerätes, dies ist identisch zu Aufgabe 2.
 
-\subsection{Aufgabe 4 - Binding der Fernbedienung}
+\section{Aufgabe 4 - Binding der Fernbedienung}
 
 \begin{figure}[H]
     \centering
@@ -66,7 +65,7 @@ Gerät vor dem neuen Teilnehmer übermittelt. Im Anschluss erfolgt das Interview
     \caption{Wireshark Ausschnitt - Binden einer Lampe 1}
 \end{figure}
 
-Die Bindung wird durch ein Bind-Request von dem Koordinator an die Fernbedienung initiiert. Hier Paket 67 und 71.
+Die Bindung wird durch ein Bind-Request von dem Koordinator an die Fernbedienung initiiert. Dies erfolgt durch Paket 67 und 71.
 
 \begin{figure}[H]
     \centering
@@ -85,12 +84,12 @@ Im Anschluss beginnt die Fernbedienung mit Polling, um zu überprüfen ob weiter
 
 Die ZCL Nachricht wird nun direkt von der Fernbedienung an die Lampe als Unicast geschickt.
 
-\subsection{Aufgabe 5 - Gruppenbildung}
+\section{Aufgabe 5 - Gruppenbildung}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{media/lsg-5-1.png}
-    \caption{Wireshark Ausschnitt - Schalten einer Lampe mit Binding}
+    \caption{Wireshark Ausschnitt - Hinzufügen zu einer Gruppe}
 \end{figure}
 
 Zuerst wird die Gruppe angelegt. Dafür wird an die jeweiligen Geräte eine Add Group Nachricht gesendet. Diese wird mit einer jeweiligen Respone
@@ -99,19 +98,19 @@ Nachricht bestätigt.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{media/lsg-5-2.png}
-    \caption{Wireshark Ausschnitt - Schalten einer Lampe mit Binding}
+    \caption{Wireshark Ausschnitt - Schalten einer Lampe über eine Gruppe}
 \end{figure}
 
 Im Anschluss wird die Gruppe an den Endpunkt der Fernbedienung gebunden. Der Fernbedienung wird diesmal als Ziel die Gruppen Broadcast Adresse
 0x000F sowie der Adressmodus Gruppe mitgeteilt. Auch dies wird von der Fernbedienung wieder bestätigt. Das Reporting welches im Anschluss 
-konfiguriert wird ist eine Eigenart von zigbee2mqtt. Damit wird der Koordinator um Zustandsänderungen der Lampe informiert, um diese Informationen
+konfiguriert wird ist eine Eigenart von zigbee2mqtt. Damit wird der Koordinator bei Zustandsänderungen der Lampe informiert, um diese Informationen
 beispielweiße an eine zentrale Heimautomatisierung weiterzugeben.
 
 Beim Schalten wird das ZCL Kommando nun an die Gruppenadresse 0x000F versendet. Die zu schaltenden Geräte überprüfen selbst ob sie in der Gruppe sind 
 oder nicht. Prinzipiell erhällt jedes Gerät im Netzwerk das Kommando.
 
-\subsection{Fragen}
-\subsubsection{Aufgabe 2}
+
+
 
 
 

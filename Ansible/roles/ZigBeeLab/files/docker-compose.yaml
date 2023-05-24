@@ -41,10 +41,7 @@ services:
     volumes:
       - ./Z2M/data:/app/data
     devices:
-      # CC251
       - /dev/ttyAMA0:/dev/ttyAMA0
-      # CC2530 / GBAN GB2530S
-      #- /dev/ttyUSB_cc2530:/dev/ttyACM0
     restart: always
     environment:
       - VIRTUAL_HOST=z2m.local
@@ -66,4 +63,3 @@ services:
      
 networks:
   backbone:
-#    external: true

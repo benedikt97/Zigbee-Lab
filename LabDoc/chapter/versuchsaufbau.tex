@@ -1,4 +1,5 @@
 \chapter{Versuchsaufbau}
+\section{Einleitung}
 
 \begin{figure}[H]
     \centering
@@ -15,11 +16,11 @@ Es werden entsprechende Namen in der lokalen \grqq hosts\grqq{} Konfigurationsda
 
 Der cod.m Zigbeecontroller wird direkt an den Docker Container durchgereicht. Der Sniffer Stick ist regulär am Host angeschlossen. 
 
-\subsection{Containerverwaltung}
+\section{Containerverwaltung}
 
-Die Container werden mit \grqq Docker-Compose \grqq{} verwaltet. Im folgenden werden die Definitionen der einzelnen Services erläutert.
 
-\subsubsection{Nginx Proxy}
+
+\subsection{Nginx Proxy}
 \begin{lstlisting}
     proxy:
       container_name: nginx
@@ -40,7 +41,7 @@ Die Container werden mit \grqq Docker-Compose \grqq{} verwaltet. Im folgenden we
 \end{lstlisting}
 
 Der Proxy basiert auf einem Image des Proxys NGINX \cite{nginxpm}. Vorteil dieses erweiterten NGINX ist es,
-dass dieser automatisiert seine Konfigurationen anpasst. Dafür wird bei einem Service eine entsprechende Umgebungsvariablen gesetzt. Über den 
+dass dieser automatisiert seine Konfigurationen verwaltet. Dafür wird bei einem Service eine entsprechende Umgebungsvariablen gesetzt. Über den 
 \grqq docker.sock\grqq{} erfährt der Proxy ob Container gestartet werden sowie deren Umgebungsvariablen. Wird ein Container mit der Umgebungsvariable 
 \grqq VIRTUAL\_HOST=z2m.local \grqq{} gestartet, wird automatisch eine Weiterleitung für alle Anfragen mit dem Header \grqq z2m.local\grqq{} eingerichtet auf den entsprechenden Container.
 Alle Servicecontainer sind in einer eigenen L2-Domäne und von außen nicht direkt erreichbar. Der Proxy Container ist der einzige, dem externe Ports zugewiesen werden.
@@ -63,33 +64,33 @@ Die Regeln in der Tabelle \grqq DOCKER \grqq{} werden durch Docker geschrieben. 
 
 In dieser Ausgabe ist erkennbar, dass Docker auf die Ports 80 und 443 lauscht.
 
-\subsubsection{zigbee2mqtt}
+\subsection{zigbee2mqtt}
 \begin{lstlisting}
   zigbee2mqtt:
-  container_name: zigbee2mqtt
-  image: koenkk/zigbee2mqtt
-  networks:
-    - backbone
-  volumes:
-    - ./Z2M/data:/app/data
-  devices:
-    - /dev/ttyUSB0:/dev/ttyACM0
-  restart: always
-  environment:
-    - VIRTUAL_HOST=z2m.local
-    - VIRTUAL_PORT=8080
-  group_add:
-    - dialout
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    networks:
+      - backbone
+    volumes:
+      - ./Z2M/data:/app/data
+    devices:
+       - /dev/ttyAMA0:/dev/ttyAMA0
+    restart: always
+    environment:
+      - VIRTUAL_HOST=z2m.local
+      - VIRTUAL_PORT=8080
+    group_add:
+      - dialout
 \end{lstlisting}
 
-Dem Container wird ebenfalls Netzwerk \grqq backbone\grqq{} zugewiesen. Ein Verzeichnis mit Konfigurationen und persistenten Datensätzen wird auf den Host gemountetn. Wenn der gemountete Pfad außerhalb des Containers nicht existiert, wird der 
+Dem Container wird ebenfalls das Netzwerk \grqq backbone\grqq{} zugewiesen. Ein Verzeichnis mit Konfigurationen und persistenten Datensätzen wird auf den Host gemountetn. Wenn der gemountete Pfad außerhalb des Containers nicht existiert, wird der 
 bestehende Ordner aus dem Container kopiert. Exisitert der Pfad, wird der Ordner vom Host in den Container gemountet. 
 Bei Linux können Geräte über das selbe Verfahren wie Verzeichnisse adressiert werden. \grqq - /dev/ttyUSB0:/dev/ttyACM0\grqq{} reicht den ZigBee Adapter an 
 den Docker Container weiter.
 In den Umgebungsvariablen wird dem Proxy noch mitgeteilt, unter Welcher URL er erreichbar sein soll und auf welchem Port der Webserver läuft. Die Gruppe 
 \grqq dialout\grqq{} ist notwendig, damit der Container Zugriffsrechte auf die serielle Schnittstelle des Hosts erhällt.
 
-Folgend die zentrale Konfigurationsdatei von \grqq zigbee2mqtt \grqq{}.
+Folgend die zentrale Konfigurationsdatei von \grqq zigbee2mqtt\grqq{}.
 \begin{lstlisting}
 homeassistant: true
 permit_join: false
@@ -110,12 +111,12 @@ device_options:
   legacy: false
 \end{lstlisting}
 
-Es wird der \grqq Homeassistant \grqq{} Modus aktiviert, Damit werden die Nachrichten an den MQTT Broker für Homeassistant verständlich gestaltet.
-Das Beitreten neuer Geräte ist standardmäßig aus und muss explizit erlaubt werden. Desweiteren wird ein MQTT Server angegeben, sowie ein \grqq base-topic \grqq{}
-definiert. Docker löst Containernamen in Dockernetzwerken zu IP-Adressen auf, sodass hier als Server einfach der entsprechende Containernamen angegeben werden
+Es wird der \grqq Homeassistant\grqq{} Modus aktiviert, Damit werden die Nachrichten an den MQTT Broker für Homeassistant verständlich gestaltet.
+Das Beitreten neuer Geräte ist standardmäßig deaktiviert und muss explizit erlaubt werden. Desweiteren wird ein MQTT Server angegeben, sowie ein \grqq base-topic\grqq{}
+definiert. Docker löst Containernamen in Dockernetzwerken zu IP-Adressen auf, sodass hier als Server der entsprechende Containernamen angegeben werden
 kann. Im weiteren wird der Pfad angegeben, auf den der cod.m Adapter gemountet wurde, sowie entsprechende Einstellung für den Webserver gesetzt.
 
-\subsubsection{mosquitto}
+\subsection{mosquitto}
 
 \begin{lstlisting}
   mosquitto:
@@ -134,7 +135,7 @@ kann. Im weiteren wird der Pfad angegeben, auf den der cod.m Adapter gemountet w
     - ./mosquitto/log:/mosquitto/log
 \end{lstlisting}
 
-Als MQTT Broker wird \grqq mosquitto \grqq{} eingesetzt. Die Konfigurationen 
+Als MQTT Broker wird \grqq mosquitto\grqq{} eingesetzt. Die Konfigurationen 
 wurden auch hier entsprechend auf den Host gemountet. Als Konfigurationsdatei wird das Standardtemplate verwendet, welches nur an zwei 
 entsprechenden Stellen modifiziert ist.
 
@@ -148,13 +149,13 @@ listener 1883
 ... 
 \end{lstlisting}
 
-Es wird der Zugriff von nicht authentifizierten Geräten erlaubt. Dies stellt kein Risiko dar, da der Container nur innerhalb des \grqq backbone \grqq{} 
+Es wird der Zugriff von nicht authentifizierten Geräten erlaubt. Dies stellt kein Risiko dar, da der Container nur innerhalb des \grqq backbone\grqq{} 
 Netwerkes erreichbar ist. Zusätzlich wird der Port definiert, auf dem der MQTT Service läuft. 1883 ist der standardmäßige Port für MQTT.
 
-\subsection{Namensauflösung}
+\section{Namensauflösung}
 
 Für eine lokale Namensauflösung werden die Hosts in die \grqq \textbackslash etc\textbackslash hosts\grqq{} eingetragen. Dies wird automatisch in der Ansible
-Rolle \grqq DeployLab \grqq{} gemacht.
+Rolle \grqq DeployLab\grqq{} gemacht.
 
 \begin{lstlisting}
 - name: Add Hosts Entrys
@@ -164,7 +165,7 @@ Rolle \grqq DeployLab \grqq{} gemacht.
     line: 127.0.0.1 z2m.local
 \end{lstlisting}
 
-\subsection{Anwendungen}
+\section{Anwendungen}
 
 Für den Versuch wird weiterhin ein Webbrowser sowie Wireshark benötigt. Die beiden Anwendungen werden per Ansible installiert:
 \begin{lstlisting}
