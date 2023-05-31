@@ -306,6 +306,19 @@ Zur Veranschaulichung der Funktionsweiße, ein Ausschnitt aus der API Dokumentat
 In diesem Beispiel wird beschrieben, wie man einen SimpleDescriptor-Request an ein Zigbee-Device versendet. Dieser Aufruf ist entsprechend parametrierbar,
 und wird zur Abfrage der verfügbaren Endpunkte eines Gerätes nach dessen Beitritt in das Netzwerk abgefragt.
 
+Die Firmware, die auf dem Koordinator zum Einsatz kommt basiert auf einem Beispiel Projekt für einen ZigBee Koordinator von Texas Instruments. Dieses ist
+im SDK Kit des TI CC2652 Chips enthalten, und kann mit dem Texas Instruments Code Compose Studio bearbeitet werden. Die Firmware kann selbst kompiliert werden,
+in dem auf dieses Beispiel ein Git Patch angewendet wird. Dieser ist unter folgender URL zu finden.
+\url{https://github.com/Koenkk/Z-Stack-firmware/blob/master/coordinator/Z-Stack_3.x.0/firmware.patch} .
+Die Änderungen, die vorgenommen werden können hier nachgelesen werden. Eine Anleitung zum kompilieren liegt ebenfalls im Git Repository ab.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/cc-device.png}
+  \caption{TI Code Compose Studio}
+\end{figure}
+Im Bild ist das geöffnete Koordinator Projekt mit den verschiedenen Konfigurationen die vorgenommen werden können.
+
 \subsubsection{zigbee-herdsman}
 
 Der Herdsman ist die eigentliche Kernanwendung von zigbee2mqtt. Diese Modul verbindert sich direkt über einen seriellen Socket mit dem Koordinator. Über diese Schnittstelle
