@@ -1,7 +1,0 @@
-- name: Install required Packages
-  become: true
-  apt:
-    pkg:
-      - wireshark
-    state: latest
-    update_cache: true
