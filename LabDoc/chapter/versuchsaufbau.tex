@@ -8,9 +8,9 @@
   \end{figure}
 
 In dieser Abbildung wird der schematische Versuchsaufbau gezeigt. Die drei Anwendungen werden als Docker Container ausgeführt. Sie kommunizieren
-untereinander über ein eigenes Docker Netzwerk. Dies ist eine von Docker verwaltete Linux Bridge. Nur der NGINX Reverse Proxy hat zwei Ports, die
-auf die Host Schnittstelle gemappt werden. Die Webfrontends sind damit über den lokal installierten Browser über das Loopback-Interface erreichbar. Damit ist der Raspberry Applikationsserver
-und Versuchs-PC zugleich.
+untereinander über ein eigenes Docker Netzwerk. Dies ist eine von Docker verwaltete Linux Bridge. Nur der NGINX Reverse Proxy hat zwei Ports die
+auf die Host Schnittstelle gemappt werden. Die Webfrontends sind damit über den lokal installierten Browser über das Loopback-Interface erreichbar. 
+Damit ist der Raspberry Applikationsserver und Versuchs-PC zugleich.
 
 Es werden entsprechende Namen in der lokalen \grqq hosts\grqq{} Konfigurationsdatei hinterlegt, um lokal Domainnamen auflösen zu können.
 
@@ -41,18 +41,17 @@ Der cod.m Zigbeecontroller wird direkt an den Docker Container durchgereicht. De
 \end{lstlisting}
 
 Der Proxy basiert auf einem Image des Proxys NGINX \cite{nginxpm}. Vorteil dieses erweiterten NGINX ist es,
-dass dieser automatisiert seine Konfigurationen verwaltet. Dafür wird bei einem Service eine entsprechende Umgebungsvariablen gesetzt. Über den 
-\grqq docker.sock\grqq{} erfährt der Proxy ob Container gestartet werden sowie deren Umgebungsvariablen. Wird ein Container mit der Umgebungsvariable 
-\grqq VIRTUAL\_HOST=z2m.local \grqq{} gestartet, wird automatisch eine Weiterleitung für alle Anfragen mit dem Header \grqq z2m.local\grqq{} eingerichtet auf den entsprechenden Container.
+dass dieser automatisiert seine Konfigurationen verwaltet. Dafür wird bei einem Service eine Umgebungsvariable gesetzt. Über den 
+\grqq docker.sock\grqq{} erfährt der Proxy ob Container gestartet werden und kann auf deren Umgebungsvariablen zugreifen. Wird ein Container mit der Umgebungsvariable 
+\grqq VIRTUAL\_HOST=z2m.local \grqq{} gestartet, wird automatisch eine Weiterleitung für alle Anfragen mit dem Header \grqq z2m.local\grqq{} auf den Container eingerichtet.
 Alle Servicecontainer sind in einer eigenen L2-Domäne und von außen nicht direkt erreichbar. Der Proxy Container ist der einzige, dem externe Ports zugewiesen werden.
-Dafür werden von Docker Regeln in die \grqq iptables \grqq{} Tabellen geschrieben.
+Dies wird durch entsprechende \grqq iptables\grqq{} Einträge umgesezt.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{media/rasp-iptables.png}
   \caption{Raspberry iptables}
 \end{figure}
-
 Die Regeln in der Tabelle \grqq DOCKER \grqq{} werden durch Docker geschrieben. Eigene Regeln können in der Tabelle 
 \grqq DOCKER-USER \grqq{} definiert werden.
 
@@ -61,7 +60,6 @@ Die Regeln in der Tabelle \grqq DOCKER \grqq{} werden durch Docker geschrieben. 
   \includegraphics[width=1\textwidth]{media/rasp-netstat.png}
   \caption{Raspberry netstat}
 \end{figure}
-
 In dieser Ausgabe ist erkennbar, dass Docker auf die Ports 80 und 443 lauscht.
 
 \subsection{zigbee2mqtt}
@@ -90,7 +88,7 @@ den Docker Container weiter.
 In den Umgebungsvariablen wird dem Proxy noch mitgeteilt, unter Welcher URL er erreichbar sein soll und auf welchem Port der Webserver läuft. Die Gruppe 
 \grqq dialout\grqq{} ist notwendig, damit der Container Zugriffsrechte auf die serielle Schnittstelle des Hosts erhällt.
 
-Folgend die zentrale Konfigurationsdatei von \grqq zigbee2mqtt\grqq{}.
+Die zentrale Konfigurationsdatei von \grqq zigbee2mqtt\grqq{}:
 \begin{lstlisting}
 homeassistant: true
 permit_join: false

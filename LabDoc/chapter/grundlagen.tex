@@ -4,19 +4,18 @@ In diesem Kapitel werden alle verwendeten Komponenten und Technologien kurz erl�
 
 \section{LR-WPAN - IEEE 802.15.4}
 
-LR-WPAN \cite{lrwpan} steht für \grqq Low Rate - Wireless personal area network \grqq{}. Es handelt sich um ein drahtloses geschlossenes Netzwerk, welches für 
+LR-WPAN \cite{lrwpan} steht für \grqq Low Rate - Wireless personal area network\grqq{}. Es handelt sich um ein drahtloses geschlossenes Netzwerk, welches für 
 niedrige Datenraten ausgelegt ist. Der Standard definiert den Physical Layer sowie den Media-Access Layer und bildet die Grundlage von ZigBee, Thread und 6LowPAN.
 Im Standard sind mehrere Modulationsverfahren sowie Frequenzbereiche definiert. Der Standard beinhaltet sowohl die klassische Stern Topologie, als auch die bei 
-ZigBee verwendete Peer-to-Peer Topologie. Weiteres Schlüsselfeatures sind Kollisionsvermeidung sowie Echtzeifunktionalitäten. Im vergleich zum 802.1d Standard 
+ZigBee verwendete Peer-to-Peer Topologie. Weiteres Schlüsselfeatures sind Kollisionsvermeidung sowie Echtzeifunktionalitäten. Im Vergleich zum 802.1d Standard 
 fallen vorallem die kürzeren Adressen auf. Dadurch kann die für den Anwendungsbereich wertvolle Bandbreite und Rechenleistung reduziert werden. 
 
 \section{ZigBee}
 
 Die ZigBee Alliance wurde durch ein Konsortium von Herstellern gegründet, um einen einheitlichen Übertragungstandard
-im Bereich Heimautomatisierung voranzubringen. ZigBee basiert auf dem offenem 802.15.4 Standard, bringt allerdings zusätzliche Komponenten mit die nicht in einem IEEE
-Standard definiert sind.
+im Bereich Heimautomatisierung voranzubringen. ZigBee basiert auf dem offenem 802.15.4 Standard, bringt allerdings zusätzliche Komponenten mit.
 ZigBee ist in Form von weiteren Protokollschichten implementiert, welche auf IEEE 802.15.4 aufsetzen. ZigBee nutzt DSSS, also Frequenzspreizung als Modulationsverfahren.
-Die genutzten Kanäle, 11 bis 26, liegen im 2,4 Ghz Band. Zigbee interferiert damit mit WLAN.
+Die genutzten Kanäle, 11 bis 26, liegen im 2,4 Ghz Band. Zigbee interferiert damit mit WLAN und Bluetooth.
 
 \begin{figure}[H]
   \centering
@@ -27,14 +26,14 @@ Die genutzten Kanäle, 11 bis 26, liegen im 2,4 Ghz Band. Zigbee interferiert da
 Der Anwendungsbereich für ZigBee ist die Heimautomatisierung. Geräte können zentral gesteuert und überwacht werden. 
 Markante Eigenschaft von ZigBee ist, dass die Geräte keine direkte Funkverbindung
 zu einem zentralen Controller brauchen. Andere Geräte können als Router fungieren, und damit die Reichweite erhöhen. Sende- und Empfangsleistung
-ist vorallem bei kleinen Batteriebetriebenen Geräten oft der einschränkende Faktor.
-
+ist vorallem bei kleinen batteriebetriebenen Geräten oft der einschränkende Faktor.
 
 
 \section{Texas Instruments CC Chips}
 
-Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für ZigBee Geräte 
-nutzen lassen. Kleinere Varianten können in Endgeräten wie Lampen und Thermostate, größere als Koordinator selbst verwendet werden.
+Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für Devices als ZigBee SoC 
+nutzen lassen.Alternativ kann mit so einem Microcontroller auch ein Koordinator betrieben werden. Kleinere Varianten können in Endgeräten wie Lampen und Thermostate, 
+größere als Koordinator selbst verwendet werden.
 
 Die aktuelle Chipfamilie TexasInstruments CC26XX:
 
@@ -80,7 +79,7 @@ Der RaspberryPi besitzt die PC typischen Schnittstellen wie Ethernet, HDMI, und 
 
 \subsection{RaspberryPi Zigbee Hat}
 
-Als Zigbee Koordinator wird ein auf dem TI CC2652 basierendem RaspberryPi Hat vom Hersteller \grqq cod.m\grqq{} eingesetzt. Dieser wurde vom Hersteller
+Als Zigbee Koordinator wird ein auf dem TI CC2652 basierendem RaspberryPi Hat vom Hersteller cod.m eingesetzt. Dieser wurde vom Hersteller
 für den Einsatz mit \grqq homegear\grqq{} oder \grqq zigbee2Mqtt\grqq{} entwickelt. Ein Datenblatt und Bedienungsanleitung sind im Anhang.
 
 \begin{figure}[H]
@@ -89,7 +88,8 @@ für den Einsatz mit \grqq homegear\grqq{} oder \grqq zigbee2Mqtt\grqq{} entwick
   \caption{ZigBee cod.m Koordinator \\ Bildquelle: cod.m Produktfoto}
 \end{figure}
 
-Durch einen Lötjumper kann zwischen einer aufgedruckten und einer per \grqq ufl\grqq{} angeschlossenen Antenne gewechselt werden.
+Durch einen Lötjumper kann zwischen einer aufgedruckten und einer per \grqq ufl\grqq{} angeschlossenen Antenne gewechselt werden. Im Auslieferungszustand
+ist es notwendig, eine externe Antenne anzuschließen.
 
 \subsection{CC2531 Sniffer Stick}
 
@@ -97,12 +97,12 @@ Mit diesem Stick wird die ZigBee Kommunikation des Versuchsnetzwerkes mitgeschni
 Der Stick basiert auf einem leistungsschwachen Chip, der mit entsprechender Firmware ZigBee Kommunikation mitschneiden kann. 
 
 Als Treiber wird ein in C geschriebenes Programm verwendet, welches es ermöglicht den Stick direkt als Interface in Wireshark hinzuzufügen. Der Quellcode findet sich in 
-GitHub unter https://github.com/andrebdo/wireshark-cc2531. Eine Anleitung zum kompilieren ist im Repository enthalten. Die hieraus entstehende ausführbare Datei muss in ein
-entsprechendes Verzeichnis kopiert werden, und kann anschließend als Interface in Wireshark ausgewählt werden. Die Funktion nennt sich bei Wireshark \grqq extcap \grqq{}.
+GitHub unter \url{https://github.com/andrebdo/wireshark-cc2531}. Eine Anleitung zum kompilieren ist im Repository enthalten. Die hieraus entstehende ausführbare Datei muss in ein
+entsprechendes Verzeichnis kopiert werden, und kann anschließend als Interface in Wireshark ausgewählt werden. Die Funktion nennt sich bei Wireshark \grqq extcap\grqq{}.
 
 \subsection{Phillips Hue Komponenten}
 
-Unter dem Namen \grqq Hue \grqq{} vertreibt Phillips eine Reihe von vernetzten Endgeräten sowie entsprechende Komponenten um diese zu steuern.
+Unter dem Namen \grqq Hue\grqq{} vertreibt Phillips eine Reihe von vernetzten Endgeräten sowie entsprechende Komponenten um diese zu steuern.
 Die Phillips Hue Serie setzt auf ZigBee sowie Bluetooth LE. Unter anderem sind Lampen, Steckdosen, eine Bridge sowie eine App verfügbar.
 Die Bridge stellt bei traditionellen Lösungen die Schnittstelle zwischen dem ZigBee Netzwerk und der IP Kommunikation zu einer Smartphone
 App oder ähnlichem. Die Endgeräte sind Kompatibel zu dem Software-Gateway zigbee2mqtt, benutzen also keine speziellen Schlüssel.
@@ -114,7 +114,7 @@ Phillips Hue Fernbedienung verwendet, die zur Steuerung der Lampen genutzt wird.
 \subsection{Raspbian OS}
 
 RaspbianOS ist eine leichtgewichtige Linux Distribution, welche direkt vom Hersteller des RaspberryPis speziell auf die Bedürfnisse des Board angepasst ist. Es enthällt eine
-Desktop Umgebung sowie grundlegende Pakete. Es basiert auf Debian, damit sind entsprechenden reichhaltige Paketquellen verfügbar. 
+Desktop Umgebung sowie grundlegende Pakete. Es basiert auf Debian, damit sind entsprechende gut gepflegte Paketquellen verfügbar. 
 
 \subsection{Docker}
 
@@ -125,18 +125,18 @@ einige Ressourcen gemeinsam genutzt. Dadurch ist die Effizienz höher als bei ta
 
 \subsection{Docker-Compose}
 
-Docker-Compose ist ein Tool, um Containerumgebungen im Textformat, hier \grqq YAML \grqq{}, zu beschreiben.
+Docker-Compose ist ein Tool, um Containerumgebungen im Textformat, hier YAML, zu beschreiben.
 Ein Container kann im einfachen Fall per Docker-CLI mit entsprechenden Parametern gestartet werden:
 \begin{lstlisting}
   docker run hello-world -v ./home:/home -p 80:80
 \end{lstlisting}
 
-Durch diesen Befehl wird der Container \grqq hello-world \grqq aus dem Docker Repository geladen und anschließend gestartet. In diesem ist ein einfacher Webserver der bei
-Aufruf ein \grqq Hello world ! \grqq{} zurückgibt implementiert. Zusätzlich wird der Ordner \grqq home \grqq{} in den Container gemountet. Dieser bleibt auch bei einem
+Durch diesen Befehl wird der Container \grqq hello-world\grqq{} aus dem Docker Repository geladen und anschließend gestartet. In diesem ist ein einfacher Webserver der bei
+Aufruf ein \grqq Hello world !\grqq{} zurückgibt implementiert. Zusätzlich wird der Ordner \grqq home\grqq{} in den Container gemountet. Dieser bleibt auch bei einem
 erneuten Laden des Containers persistent. Dies wird beispielweiße für Konfigurationsdateien oder andere persistente Dateien genutzt. Um den Container auch auf der Schnittstelle
 des Host-Systems verfügbar zu machen, wird der Port 80 auf den Container Port 80 gemappt. Die Funktionsweise wird später erläutert.
 
-Als handliche Alternativ zu der Docker-CLI lässt sich der Zielzustand auch in einer Textdatei beschreiben:
+Als handliche Alternative zu der Docker-CLI lässt sich der Zielzustand auch in einer Textdatei beschreiben:
 
 \begin{lstlisting}
 version: '3'
@@ -156,7 +156,7 @@ Mit einem
   docker-compose up -d
 \end{lstlisting}
 
-errhält man das selbe Ergebniss wie mit dem vorher gezeigtem CLI Befehl.
+gelangt man zum selben Ergebniss wie mit dem vorher gezeigtem CLI Befehl. Durch die Beschreibung in der Textdatei ist das Ergebniss allerdings reproduzierbar.
 
 \subsection{zigbee2mqtt}
 
@@ -168,14 +168,14 @@ errhält man das selbe Ergebniss wie mit dem vorher gezeigtem CLI Befehl.
 
 zigbee2mqtt ist ein offenes Softwareprojekt und kann am besten mit dem Begriff \grqq Software-Zigbee-Gateway\grqq{} beschrieben werden. Es übernimmt die Funktionalität, die normalerweise entsprechende
 Bridges der Hersteller übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit entsprechenden
-Apps zu kommunizieren, macht zigbee2mqtt die Geräte per mqtt nach außen verfügbar. Auf abstrakter Ebene bedeutet dies, dass es ein Gateway zwischen einem Zigbee Netzwerk und
+Apps zu kommunizieren, macht zigbee2mqtt die Geräte per MQTT nach außen verfügbar. Auf abstrakter Ebene heißt das, dass es ein Gateway zwischen einem Zigbee Netzwerk und
 einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant\grqq{} oder \grqq OpenHUB\grqq{} oder auch entsprechende
-Eigenentwicklungen einsetzen. \grqq zigbee2mqtt\grqq{} greift direkt auf den \grqq cod.m\grqq{} ZigBee Adapter zu.
+Eigenentwicklungen einsetzen. Zigbee2mqtt greift direkt auf den cod.m ZigBee Adapter zu.
 
-Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt}
+Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt} \\
 Homepage: \url{https://www.zigbee2mqtt.io/}
 
-\grqq zigbee2mqtt\grqq{} verwaltet ein Zigbee Netzwerk und ermöglicht es Drittanwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt, 
+Zigbee2mqtt verwaltet das Zigbee Netzwerk und ermöglicht es Drittanwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt, 
 kündigt zigbee2mqtt das Gerät per MQTT an, und teilt der Anwendunge nach erfolgreichem Interview die verfügbaren Cluster des neuen Teilnehmers mit.
 
 Zigbee2Mqtt verwaltet drei Datenbanken, welche die Funktionsweiße deutlich machen. Viele Funktionen, wie zum Beispiel die Verwaltung von Routingtabellen und
@@ -283,17 +283,37 @@ In dieser Datenbank sind alle Geräte, welche direkt mit dem Koordinator verbund
 
 \subsubsection{zigbee-herdsman}
 
-Der Herdsman ist die eigentliche Kernanwendung von zigbee2mqtt. Diese Modul verbindert sich direkt über einen seriellen Socket mit dem Koordinator. Über diese Schnittstelle
+Der Herdsman ist die eigentliche Kernanwendung von zigbee2mqtt. Dieses Modul verbindet sich direkt über einen serielle Schnittstelle mit dem Koordinator. Über diese Schnittstelle
 spricht Herdsmann die API des Koordinators an um das Netzwerk zu verwalten. Herdsman verwaltet die Datenbank und damit den Zustand des Netzwerkes. Das Modul stellt nach außen
-eine API zur Verfügung, mit der Sich das Netzwerk verwalten lassen kann. Auf diese API greift auch die integrierte WebGui zu.
+eine API zur Verfügung, mit der sich das Netzwerk verwalten lassen kann. Auf diese API greift auch die integrierte WebGui zu.
 
-Die API von zigbee-herdsman wird im entsprechenden GitHub Repository dokumentiert.
+Die API von zigbee-herdsman wird im entsprechenden GitHub Repository dokumentiert. \\
 \url{https://github.com/Koenkk/zigbee-herdsman}
 
 \subsubsection{zigbee-herdman-converters}
 
-Dieser Konverter kann proprietäre Cluster die von selbstentwickelten Devices oder manch Devices von Drittherstellern. Mit diesem Converter lassen sich proprietäre Cluster von Geräte
-so adaptieren, dass sie nach Wunsch gesteuert und ausgelesen werden können.
+Dieses Modul dient zur Abstraktion verschiedenster Geräte für zigbee2mqtt. Das Modul hat ein eigenes Repository. Es liegt für jeden Hersteller von unterstützen Smart Devices eine Typescript
+Datei ab, in der die Geräte definiert werden. Die Geräte werden Anhang ihrer ID erkannt. Anschließend werden die Cluster beschrieben sowie die gültigen parametrierbaren Werte.
+
+\begin{lstlisting}
+const definitions: Definition[] = [
+    {
+        fingerprint: [{modelID: 'TS130F', manufacturerName: '_TZ3000_vd43bbfq'}, {modelID: 'TS130F', manufacturerName: '_TZ3000_fccpjz5z'}],
+        model: 'QS-Zigbee-C01',
+        vendor: 'Lonsonho',
+        description: 'Curtain/blind motor controller',
+        fromZigbee: [fz.cover_position_tilt, fz.tuya_cover_options],
+        toZigbee: [tz.cover_state, tz.cover_position_tilt, tz.tuya_cover_calibration, tz.tuya_cover_reversal],
+        meta: {coverInverted: true},
+        exposes: [e.cover_position(), e.enum('moving', ea.STATE, ['UP', 'STOP', 'DOWN']),
+            e.binary('calibration', ea.ALL, 'ON', 'OFF'), e.binary('motor_reversal', ea.ALL, 'ON', 'OFF'),
+            e.numeric('calibration_time', ea.STATE).withUnit('S').withDescription('Calibration time')],
+    },
+  \end{lstlisting}
+
+  An dieser Stelle wird ein Rolladenmotor von Lonsonho definiert. Damit kann dieser durch zigbee2mqtt erkannt und gesteuert werden. In weiten Modulen werden dann die Werte die von den Geräten kommen
+  beziehungsweiße an diese gesendet werden auf einen globalen Standard konvertiert. Damit können Rolladenmotoren von verschiedenen Herstellern mit einer Anwendung identisch gesteuert werden. Das 
+  Repository findet sich unter \url{https://github.com/Koenkk/zigbee-herdsman-converters}. Durch den quelloffenen Ansatz ließe sich ein Gerät, welches bisher noch nicht unterstützt wird, hier nachpflegen.
 
 \subsubsection{zigbee2mqtt}
 
@@ -345,21 +365,20 @@ Die Änderungen, die vorgenommen werden können hier nachgelesen werden. Eine An
   \includegraphics[width=1\textwidth]{media/cc-device.png}
   \caption{TI Code Compose Studio}
 \end{figure}
-In der Abbildund ist das geöffnete Projekt im Code Compose Studio mit den verschiedenen Konfigurationen die vorgenommen werden können.
+In der Abbildung ist das geöffnete Projekt im Code Compose Studio mit den verschiedenen Konfigurationen die vorgenommen werden können.
 
 \subsection{MQTT}
 
-MQTT \cite{mqtt} ist ein Protokoll, um Nachrichten zwischen Teilnehmen in einem IP Netzwerk auszutauschen. Alle Nachrichten werden unter einem definierten \grqq Topic \grqq{} 
-an einen zentralen Messagebroker gesendet. Teilnehmer können \grqq Topics \grqq{} abonnieren. Der Broker verwaltet eine Liste mit allen Teilnehmern sowie 
-deren abonnierten \grqq Topics \grqq{}. Wird eine entsprechende Nachricht an den Broker gesendet, werden alle Abonennten des Topics entsprechend informiert.
+MQTT \cite{mqtt} ist ein Protokoll, um Nachrichten zwischen Teilnehmen in einem IP Netzwerk auszutauschen. Alle Nachrichten werden unter einem definierten Topic
+an einen zentralen Messagebroker gesendet. Teilnehmer können Topics abonnieren. Der Broker verwaltet eine Liste mit allen Teilnehmern sowie 
+deren abonnierten Topics. Wird eine entsprechende Nachricht an den Broker gesendet, werden alle Abonennten des Topics entsprechend informiert.
 In dem Versuch wird der quelloffene MQTT Broker \grqq mosquitto\grqq{} eingesetzt. 
 
 \subsection{Wireshark}
 
-Wireshark ist eine quelloffene Anwendung um Datenstöme mitzuschneiden und zu untersuchen. Wireshark selbst nutzt standardmäßig \grqq npcap \grqq{} um Datenverkehr 
+Wireshark ist eine quelloffene Anwendung um Datenstöme mitzuschneiden und zu untersuchen. Wireshark selbst nutzt standardmäßig \grqq npcap\grqq{} um Datenverkehr 
 auf Netzwerkkarten aufzuzeichnen. Es ist möglich über andere Schnittstellen Wireshark Datenströme zur Verfügung zu stellen. Zu diesem Zweck
-können ausführbare Dateien in einen Ordner \grqq .../extcap \grqq{} abgelegt werden, welche 
-Paketströme zurückliefern. 
+können ausführbare Dateien in einen Ordner \grqq .../extcap \grqq{} abgelegt werden, welche Paketströme zurückliefern. 
 
 \begin{figure}[H]
   \centering
@@ -380,7 +399,7 @@ Eine Rolle kann einem Host wie folgt zugewiesen werden:
     - DeployLabUtils
 \end{lstlisting}
 
-Die Rollen \grqq DeployDocker \grqq{} und \grqq DeployLabUtils \grqq{} umfassen eine Menge von Aufgaben zur Installation notwendiger Komponenten und weitere Vorbereitungen
+Die Rollen \grqq DeployDocker\grqq{} und \grqq DeployLabUtils\grqq{} umfassen eine Menge von Aufgaben zur Installation notwendiger Komponenten und weitere Vorbereitungen
 für den Praktikumsversuch. Diese Rollen werden \grqq localhost \grqq{}, also dem ausführendem System selbst zugewiesen.
 Aus technischer Sicht lädt Ansible parametrierte Pythonmodule auf den jewiligen Host per SCP und führt diese dort aus.
 

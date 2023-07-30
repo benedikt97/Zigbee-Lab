@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Wireshark
+Icon=wireshark
+Exec=sudo wireshark
+Terminal=true
+X-KeepTerminal=true

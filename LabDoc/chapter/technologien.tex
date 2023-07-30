@@ -1,9 +1,9 @@
 \chapter{Marktübersicht Technologien}
 
 \grqq Internet of things\grqq{} beschreibt die Befähigung von Endgeräten mit Datennetzen zu kommunizieren. So können Waschmaschinen einen fertigen Waschgang kommunizieren,
-oder ein Heizungsthermostat sich die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices \grqq{} und der dazu
-je nach Übertragunsprotokoll notwendigen \grqq Bridge\grqq{} und einer entsprechenden App zur Steuerung. Hier ist der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
-als Beispiel zu nennen. Die Produktgruppe umfasst eine Bridge mit zugehöriger Smartphone App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
+oder ein Heizungsthermostat die Außentemperatur aus dem Wetterbericht beziehen. Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices\grqq{} und der dazu
+je nach Übertragunsprotokoll notwendigen \grqq Bridge\grqq{} sowie einer entsprechenden App zur Steuerung. Der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
+kann als Beispiel genannt werden. Die Produktgruppe umfasst eine Bridge mit zugehöriger Smartphone App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
 Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
 Diese Heimassistenten können sich entweder mit den herstellerspezifischen Bridges verbinden, oder können direkt an PANs (Personal-Area-Networks) wie Zigbee
 teilnehmen und die Geräte steuern. Dieses Kapitel soll einen Überblick über die relevanten Technologien am Markt verschaffen. 
@@ -13,33 +13,41 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
 \begin{itemize}
     \item \textbf{Wlan} \\
     Wlan ist ein verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
-    Internetrouter dient. Dies macht es naheliegend, auch smarte Geräte per WLAN einzubinden. Wlan ist allerdings 
+    Internetrouter dient. Dies macht es naheliegend, auch smarte Geräte per WLAN zu vernetzen. Wlan ist allerdings 
     optimiert für hohe Übertragungsraten und nicht für leistungsschwache Endgeräte. Dies ist
-    insbesondere für batteriebetriene Geräte nachteilbehaftet. Bei WLAN ist es problematisch, viele Geräte mit geringer Bandbreite mit einen Access-Point zu verbinden.
-    Die nutzbare Bandbreite für Geräte wie Notebooks sinkt damit ab. 
+    insbesondere für batteriebetriene Geräte nachteilig. Zusätzlich benötigt jedes Endgerät Zeitslots um Daten zu Senden und zu Empfangen. Diese müssten auch für Geräte freigehalten werden, die eigentlich
+    sehr wenig Bandbreite benötigen. Viele Geräte können sich also nachteilig auf die Performance eines Wlan Netzwerks auswirken. Dieses Problem ist seit WIFI6 mit OFDMA durch mehrere Subcarrier 
+    zumindest weniger stark ausgeprägt.
 
     \item \textbf{Blueooth}\\
     Ebenso wie Wlan hat Bluetooth eine weite Verbreitung. Durch Implementierung 
     des Standard Bluetooth LE ist es möglich leistungsschwache sowie batteriebetriebene Geräte mit Bluetooth auszustatten. Bluetooth
     ist allerdings nicht für hohe Reichweiten oder für Netzwerke mit vielen Teilnehmern konzipiert. Primäre Anwendungsfall ist zum Beispiel das Verbinden eines Headsets mit 
-    einem Handy. 
+    einem Handy. Seit 2017 existier der Standard \grqq Bluetooth Mesh\grqq. Dieser löst Probleme des normalen Bluetooths um es für IoT einzusetzen. Bisher gibt es keine bekannten
+    größeren Ecosysteme in denen es eingesetzt wird. Ein Benchmark zeigt keine Vorteile gegenüber ZigBee und Thread. \cite{sila}
 
     \item \textbf{Z-Wave}\\
-    
     Z-Wave \cite{zwave} ähnelt technologisch Zigbee. Das Protokoll ist proprietär. Der Hauptunterschied ist, dass Z-Wave in einem frei nutzbaren
-    Low-Frequency Band arbeitet und nicht wie ZigBee im 2,4 Ghz Band. Die Reichweite ist durch die geringere Trägerfrequenz höher.
+    Low-Frequency Band arbeitet und nicht wie ZigBee im 2,4 Ghz Band. Die Reichweite ist durch die geringere Trägerfrequenz höher. Die Verbreitung am 
+    Markt ist allerdings geringer.
 
     \item \textbf{ZigBee}\\
     Zigbee \cite{zigbee} ist ein auf den 802.40.5 Standard aufbauendes Protokoll, welches grundlegend für die Anbindung vieler leistungsschwacher
     Geräte in einem großen räumlichen Areal konzipiert ist. Ein großer konzeptioneller Vorteil ist, dass bei 
     ZigBee ein Mesh-Netzwerk aufgebaut wird. Es können auch Geräte angebunden werden, die keine direkte Funkverbindung
     zum Koordinator haben. Zusätzlich sind Funktionen implementiert, welche das Management einer hohen Anzahl von Devices
-    erleichtert.
+    erleichtert. Ein großer Nachteil der bei ZigBee oft angeführt wird ist, dass die Geräte nicht direkt per IPv6 adressierbar sind. 2013 wurde 
+    ein Standard mit mit dem Namen \grqq ZigBee IP\grqq{} veröffentlicht, der IPv6 supportet. Auf diesem wiederum basiert ZigBee Smart Enegery, welches in 
+    intelligenten Stromzählern eingesetzt wird. In Großbrittanien sind diese bereits im Einsatz\cite{se}, in Deutschland sollen zumindest bis 2032 die alten Stromzähler 
+    durch vernetzte ersetzt werden. \cite{bmwk}
     
     \item \textbf{Thread}\\
-    Thread \cite{thread} ist ein Funkprotokoll welches ebenfalls auf den 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig, ein
+    Thread \cite{thread} ist ein Funkprotokoll welches ebenfalls auf dem 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig. Ein
     entscheidendes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
-    theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addresierbar.
+    theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addresierbar. Dies ist vorallem für die Anbindung 
+    von Geräten im öffentlichem Raum wie Parkuhren extrem vorteilhaft. Bisher setzt nur Google mit dem Heimassistenten Nest im größeren kommerziellen
+    Umfeld ein. Es gibt erste Hersteller wie eve und nanoleaf welche entsprechende Smart Devices anbieten. Eine Liste mit zertifizerten Produkten ist 
+    hier zu finden: \url{https://www.threadgroup.org/What-is-Thread/Thread-Benefits#certifiedproducts}
 \end{itemize}
 
 \section{Zigbee Anwendungen}
@@ -61,6 +69,7 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
 \subsubsection*{Weitere Hersteller}
 Weitere bekannte Hersteller/Marken mit Zigbee Devices und Gateways:
 \begin{itemize}
+    \item \textbf{Telekom} - QIVICON
     \item \textbf{Logitech} - Harmony Hub
     \item \textbf{LIDL} - Silvercrest
     \item \textbf{TUYA} - Smart Life

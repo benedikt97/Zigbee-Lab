@@ -1,0 +1,55 @@
+- name: Install required system packages
+  become: true
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - raspberrypi-kernel
+      - raspberrypi-kernel-headers
+    state: latest
+    update_cache: true
+
+- name: add GPG key
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/raspbian/gpg
+    state: present
+
+- name: Add Docker Repository
+  become: true
+  apt_repository:
+    repo: deb [arch=armhf] https://download.docker.com/linux/raspbian {{ ansible_distribution_release }} stable
+    state: present
+
+- name: Update apt and install docker
+  become: true
+  apt:
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: latest
+    update_cache: true
+
+- name: Manually Install docker-compose binary 2.29
+  become: true
+  ansible.builtin.copy:
+    src: docker-compose
+    dest: /usr/libexec/docker/cli-plugins
+    mode: u+x,g-x,o-x
+
+- name: Add ansible to group docker
+  become: true
+  ansible.builtin.user:
+    name: ansible
+    groups: docker
+    append: yes
+  register: groupchanged
+
+#- name: Reboot...
+#  become: true
+#  reboot:
+#  when: groupchanged

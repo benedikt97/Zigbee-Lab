@@ -1,0 +1,6 @@
+- name: Deploy the Lab
+  hosts: localhost
+  roles:
+    - AptUpdate
+    - Docker
+    - ZigBeeLab

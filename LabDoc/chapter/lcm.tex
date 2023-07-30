@@ -7,8 +7,14 @@ Folgende Schritte müssen ausgeführt werden, um ein RaspberryPi vorzubereiten.
 \begin{itemize}
     \item Installation von Raspbian OS
     \item Anlegen eines Users
-    \item Klonen des GitHub Repositorys nlab4hsrm zigbeelab
+    \item Klonen des GitHub Repositorys 
 \end{itemize}
+
+Das Repository kann mit Git und folgendem befehl geklont werden:
+\begin{lstlisting}
+    git clone nlab4hsrm/ZigBeeLabHSRM
+\end{lstlisting}
+Am besten wird das Repository direkt in den Homefolder des Users geklont, der später den Versuch durchführt. Damit kann dieser selbständig den Versuch zurücksetzen.
 
 Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLabl.yaml.
 \begin{lstlisting}
@@ -45,6 +51,8 @@ Anschließend können die Container mit folgendem Befehl neu gestartet werden.
 \begin{lstlisting}
     docker compose up -d /srv/docker-compose.yaml
 \end{lstlisting}
+
+Sämtliche Software wird onehin bei jedem Zurücksetzen des Versuchen aktualisiert.
 
 \section{Troubleshooting}
 
