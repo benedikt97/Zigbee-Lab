@@ -3,25 +3,24 @@
 In diesem Kapitel geht es um die Pflege, die Bereitstellung sowie das Zurücksetzen des Praktikumversuchs. Sämtliche Schritte wurden mit Ansible-Playbooks
 automatisiert.
 
-Folgende Schritte müssen ausgeführt werden, um eine Raspberry vorzubereiten.
+Folgende Schritte müssen ausgeführt werden, um ein RaspberryPi vorzubereiten.
 \begin{itemize}
     \item Installation von Raspbian OS
-    \item Anlegen User ansible / ansible
-    \item Kopieren von Ansible-Playbooks auf Raspberry (bspw. SCP)
+    \item Anlegen eines Users
+    \item Klonen des GitHub Repositorys nlab4hsrm zigbeelab
 \end{itemize}
 
-Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen.
+Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLabl.yaml.
 \begin{lstlisting}
     ansible-playbook DeployLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
 
 Anschließend wird
 \begin{itemize}
-    \item Docker Installiert
-    \item Der User Student angelegt
-    \item Die /etc/hosts Einträge gesetzt
-    \item Die Docker Umgebung vorbereitet im Ordner srv
-    \item Die Docker Services gestartet (zigbee2mqtt)
+    \item Docker Installiert.
+    \item Die /etc/hosts Einträge gesetzt.
+    \item Die Docker Umgebung vorbereitet.
+    \item Die Versuchsumgebung mit allen Komponenten gestartet.
 \end{itemize}
 
 \section{Zurücksetzen des Versuchs}
@@ -49,18 +48,13 @@ Anschließend können die Container mit folgendem Befehl neu gestartet werden.
 
 \section{Troubleshooting}
 
-Es empfiehlt sich bei Problemen die Container zu stoppen und erneut ohne den Parameter -d zu starten.
-
-\begin{lstlisting}
-    docker compose up /srv/docker-compose.yaml
-\end{lstlisting}
-
-Nun kann der vollständige Log beobachtet werden, welcher zumeißt hilfreich ist.
-Alternativ kann man sich den Log eines Containers mit folgendem Befehl Live betrachten:
+Es empfiehlt sich bei Problemen sich den Log der Container anzuschauen.
 
 \begin{lstlisting}
     docker attach <container-name>
 \end{lstlisting}
+
+In der Regel ist es am sinnvollsten, mit dem Log von zigbee2mqtt zu starten. Dieser ist erfahrungsgemäßg bei einer Fehlersuche sehr hilfreich.
 
 
 

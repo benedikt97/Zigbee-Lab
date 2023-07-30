@@ -16,7 +16,7 @@ Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfe
     \item Ethernet Kabel
 \end{itemize}
 
-Ein cod.m Modul sollte bereits auf Ihrem Raspberry montiert sein. 
+Ein cod.m Zigbee Modul sollte bereits auf Ihrem Raspberry montiert sein. 
 
 \section{Aufgabenstellungen}
 
@@ -27,7 +27,7 @@ implizit oder explizit.
 
 \subsubsection{Vorbereitung}
 a) Schließen sie an den RaspberryPi Monitor, Tastatur, Maus sowie den Sniffer-Stick an. Durch Anschluss der
-Stromversorgung startet der Raspberry automatisch. 
+Stromversorgung startet der RaspberryPi automatisch. 
 
 b) Starten sie den Versuch, in dem sie ein Konsolenfenster öffnen und folgenden Befehl absetzen.
 
@@ -59,6 +59,15 @@ d) Setzen sie alle ZigBee Komponenten des Versuchs zurück. Dafür drücken sie 
 Die Phillips Hue Lampen können auschließlich per Touchlink zurückgesetzt werden. Drücken sie dazu die äußeren Taste der Fernbedienung und halten diese direkt an 
 die Lampe. Warten sie bis die Lampe mehrmals aufblinkt. Dies kann mehrere Versuche mit verschiedenen Fernbedienungspositionen benötigen. Schalten sie im Anschluss
 die beiden Lampen wieder aus.
+
+Alternativ bietet zigbee2mqtt ebenfalls eine Touchlink Funktionalität. Bringen sie dafür die Lampe direkt an den Koordinator und Scannen in dem zigbee2mqtt Webinterface nach 
+Touchlink Geräten. Im Anschluss kann die Lampe hier zurückgesetzt werden. Auch hier wird das durch mehrmaliges blinken der Lampe signalisiert.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{media/z2m-touchlink.png}
+    \caption{Touchlink - Lampen zurücksetzen}
+\end{figure}
 
 \begin{Hinweis}
     Alle Aufgaben sollen mit Wireshark mitgeschnitten werden. Lesen sie die Aufgabenstellung erst durch und machen sie sich den Ablauf klar. Versuchen sie das 
