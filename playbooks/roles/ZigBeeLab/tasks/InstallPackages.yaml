@@ -3,5 +3,6 @@
   apt:
     pkg:
       - wireshark
+      - docker.io
     state: latest
     update_cache: true

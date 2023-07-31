@@ -2,5 +2,5 @@
   hosts: localhost
   roles:
     - AptUpdate
-    - Docker
+#    - Docker
     - ZigBeeLab

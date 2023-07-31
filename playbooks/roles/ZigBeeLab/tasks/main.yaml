@@ -1,9 +1,9 @@
 - name: Deploy ZigBee Lab
-  become: True
-  include: DeployFiles.yaml
+  include: InstallPackages.yaml
 
 - name: Deploy ZigBee Lab
-  include: InstallPackages.yaml
+  become: True
+  include: DeployFiles.yaml
 
 - name: Start Container
   become: True
