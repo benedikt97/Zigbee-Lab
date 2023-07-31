@@ -95,9 +95,16 @@ Es empfiehlt sich bei Problemen sich den Log der Container anzuschauen.
 
 In der Regel ist es am sinnvollsten, mit dem Log von zigbee2mqtt zu starten. Dieser ist erfahrungsgemäßg bei einer Fehlersuche sehr hilfreich.
 
-
-
-
+Ein gängier Fehler ist, das der Container zigbee2mqtt regelmäßig neustartet. Diese Information erhällt man mit einem
+\begin{lstlisting}
+    docker ps
+\end{lstlisting}
+Die Gründe dafür können vielfältig sein. Am häufigsten ist ein Problem mit dem Zugriff auf die UART Schnittstelle. Ebenfalls kann ein belegter Funkkanal
+oder eine doppelte PAN-ID in der Umgebung Grund für Probleme sein. 
+Der Grund kann aus der Log des Containers ermittelt werden:
+\begin{lstlisting}
+    docker attach zigbee2mqtt
+\end{lstlisting}
 
 
 
