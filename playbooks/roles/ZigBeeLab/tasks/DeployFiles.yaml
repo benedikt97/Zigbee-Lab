@@ -116,13 +116,13 @@
     group: ansible
     dest: /usr/lib/arm-linux-gnueabihf/wireshark/extcap
     
-- name: Copy wireshark shortcut
-  become: true
-  ansible.builtin.copy:
-    src: wireshark.desktop
-    owner: ansible 
-    group: ansible
-    dest: /home/ansible/Desktop/wireshark.desktop
+#- name: Copy wireshark shortcut
+#  become: true
+#  ansible.builtin.copy:
+#    src: wireshark.desktop
+#    owner: ansible 
+#    group: ansible
+#    dest: /home/ansible/Desktop/wireshark.desktop
 
 
 
