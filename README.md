@@ -1,5 +1,7 @@
 # ZigbeeHSRM
 
-# ToDo
-- Wireshark needs Sudo
-- Ansible Playbook for setting Channel
+ZigBee Versuch für IoT. 
+
+Dokumentation unter LabDoc
+Versuchsanleitung unter LabGuide
+Deployment Playbooks für RaspBerryPi unter Playbooks
