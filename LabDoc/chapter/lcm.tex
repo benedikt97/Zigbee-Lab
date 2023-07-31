@@ -8,17 +8,24 @@ Folgende Schritte müssen ausgeführt werden, um ein RaspberryPi vorzubereiten.
     \item Installation von Raspbian OS
     \item Anlegen eines Users
     \item Klonen des GitHub Repositorys 
+    \item Installation von Ansible
 \end{itemize}
 
 Das Repository kann mit Git und folgendem befehl geklont werden:
 \begin{lstlisting}
-    git clone nlab4hsrm/ZigBeeLabHSRM
+    git clone https://github.com/nlab4hsrm/ZigbeeHSRM.git
 \end{lstlisting}
-Am besten wird das Repository direkt in den Homefolder des Users geklont, der später den Versuch durchführt. Damit kann dieser selbständig den Versuch zurücksetzen.
+Am besten wird das Repository direkt in den Homefolder des Users geklont, der später den Versuch durchführt. Damit kann dieser selbständig den Versuch zurücksetzen. Im Anschluss liegt ein Ordner
+\grqq ZigbeeHSRM\grqq{} ab. In diesem sind die Playbooks und der LabGuide enthalten.\\
+Zusätzlich muss noch Ansible installiert werden:
+\begin{lstlisting}
+    sudo apt install ansible
+\end{lstlisting}
+
 
 Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLabl.yaml.
 \begin{lstlisting}
-    ansible-playbook DeployLab.yaml -K -e "channel=<channelnumber>"
+    ansible-playbook ~/ZigbeeHSRM/playbooks/DeployLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
 
 Anschließend wird
@@ -34,7 +41,7 @@ Anschließend wird
 Zum zurücksetzen wird das Playbook \grqq ResetLab\grqq{} ausgeführt.
 
 \begin{lstlisting}
-    ansible-playbook ResetLab.yaml -K -e "channel=<channelnumber>"
+    ansible-playbook ~/ZigbeeHSRM/playbooks/ResetLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
 
 \section{Update der eingesetzten Software}
