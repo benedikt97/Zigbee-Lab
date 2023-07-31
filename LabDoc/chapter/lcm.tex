@@ -9,6 +9,7 @@ Folgende Schritte müssen ausgeführt werden, um ein RaspberryPi vorzubereiten.
     \item Anlegen eines Users
     \item Klonen des GitHub Repositorys 
     \item Installation von Ansible
+    \item UART auf Raspberry vorbereiten
 \end{itemize}
 
 Das Repository kann mit Git und folgendem befehl geklont werden:
@@ -22,11 +23,15 @@ Zusätzlich muss noch Ansible installiert werden:
     sudo apt install ansible
 \end{lstlisting}
 
+systemctl disable hciuart
+disable bt in config
+
 
 Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLabl.yaml.
 \begin{lstlisting}
     ansible-playbook ~/ZigbeeHSRM/playbooks/DeployLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
+Im Anschluss muss das jeweilige Passwort des Users angegeben werden. Der User benötigt Root Rechte.
 
 Anschließend wird
 \begin{itemize}
