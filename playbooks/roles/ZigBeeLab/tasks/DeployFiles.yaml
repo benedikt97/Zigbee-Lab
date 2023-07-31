@@ -115,6 +115,7 @@
     owner: ansible 
     group: ansible
     dest: /usr/lib/arm-linux-gnueabihf/wireshark/extcap
+    mode: u+x,g+x,o+x
     
 #- name: Copy wireshark shortcut
 #  become: true
