@@ -31,15 +31,10 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - docker-compose-plugin
     state: latest
     update_cache: true
 
-- name: Manually Install docker-compose binary 2.29
-  become: true
-  ansible.builtin.copy:
-    src: docker-compose
-    dest: /usr/libexec/docker/cli-plugins
-    mode: u+x,g-x,o-x
 
 - name: Add ansible to group docker
   become: true
