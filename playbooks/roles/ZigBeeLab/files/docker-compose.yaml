@@ -46,8 +46,8 @@ services:
     environment:
       - VIRTUAL_HOST=z2m.local
       - VIRTUAL_PORT=8080
-    group_add:
-      - dialout
+#    group_add:
+#      - dialout
 
   mosquitto:
     container_name: mosquitto
