@@ -4,12 +4,7 @@
     pkg:
       - wireshark
       - docker.io
+      - docker-compose
     state: latest
     update_cache: true
 
-- name: Manually Install docker-compose binary 2.29
-  become: true
-  ansible.builtin.copy:
-    src: docker-compose
-    dest: /usr/libexec/docker/cli-plugins
-    mode: u+x,g-x,o-x
