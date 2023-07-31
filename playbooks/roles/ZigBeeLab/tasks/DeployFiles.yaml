@@ -78,6 +78,20 @@
     group: ansible
     dest: /srv/mosquitto/config/
 
+- name: Create /root/.config/wireshark
+  ansible.builtin.file:
+    path: /root/.config/wireshark 
+    state: directory
+    owner: root
+    group: root
+
+- name: Create /root/.config/wireshark/prefences
+  ansible.builtin.file:
+    path: /root/.config/wireshark/preferences
+    state: directory
+    owner: root
+    group: root
+
 - name: Copy ZigBee Keys
   become: true
   ansible.builtin.copy:
@@ -86,7 +100,7 @@
     group: ansible
     dest: /root/.config/wireshark/zigbee_pc_keys
     
-- name: Copy ZigBee Keys
+- name: Copy Wireshark config
   become: true
   ansible.builtin.copy:
     src: preferences
