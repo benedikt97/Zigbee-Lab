@@ -5,11 +5,12 @@ automatisiert.
 
 Folgende Schritte müssen ausgeführt werden, um ein RaspberryPi vorzubereiten.
 \begin{itemize}
-    \item Installation von Raspbian OS
+    \item Installation von Raspbian OS 32 Bit
     \item Anlegen eines Users
     \item Klonen des GitHub Repositorys 
     \item Installation von Ansible
     \item UART auf Raspberry vorbereiten
+    \item Ansible Playbook Ausführen
 \end{itemize}
 
 Das Repository kann mit Git und folgendem befehl geklont werden:
@@ -23,8 +24,24 @@ Zusätzlich muss noch Ansible installiert werden:
     sudo apt install ansible
 \end{lstlisting}
 
-systemctl disable hciuart
-disable bt in config
+Bevor der Versuch ausgerollt werden kann, ist es zusätzlich notwendig manuell die UART Schnittstelle des Raspberrys zu konfigurieren. Dazu wird zuerst das Tool rasp-config aufgerufen.
+\begin{lstlisting}
+    sudo raspi-config
+\end{lstlisting}
+Hier muss unter dem Menüpunkt \grqq 3 Interface Options\grqq{} die Konfiguration für \grqq I6 Serial Port\grqq{} gestartet werden. Im ersten Schritt wir der Zugriff auf die Shell über den seriellen
+Port deaktiviert. In zweitem Schritt wird die Serielle Schnittstelle dann aktiviert. 
+
+Anschließend wird Bluetooth deaktiviert. Dies passiert durch hinzufügen folgender Zeile in die Datei \grqq /boot/config.txt\grqq{}
+\begin{lstlisting}
+    dtoverlay=disable-bt
+\end{lstlisting}
+
+Im letzten Schritt muss noch der Dienst \grqq hciuart\grqq{} deaktiviert werden, da dieser ansonsten auf die Schnittstelle zugreift
+\begin{lstlisting}
+    systemctl disable hciuart
+\end{lstlisting}
+
+Danach muss der RaspberryPi neu gestartet werden! 
 
 
 Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLabl.yaml.
@@ -48,6 +65,8 @@ Zum zurücksetzen wird das Playbook \grqq ResetLab\grqq{} ausgeführt.
 \begin{lstlisting}
     ansible-playbook ~/ZigbeeHSRM/playbooks/ResetLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
+Hinweis: Das Playbook funktioniert nur in der 32-Bit Version von RaspbianOS. Für 64-Bit muss ein anderes Docker Repository im Playbook angegeben werden.
+Es wird dann arm64 anstelle von armhf benötigt. Dies ist allerdings nicht getestet.
 
 \section{Update der eingesetzten Software}
 
