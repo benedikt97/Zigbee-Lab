@@ -4,9 +4,9 @@
 oder ein Heizungsthermostat die Außentemperatur aus dem Wetterbericht beziehen. Es lassen sich also Daten von den Geräten sammeln und die Geräte auch steuern. Im Heimbereich 
 wird die Vernetzung von Geräten zur Automatisierung von zum Beispiel Steckdosen und Lampen verwendet.
 Viele Hersteller haben mittlerweile ein breites Portfolio an sogenannten \grqq Smart Devices\grqq{} und der dazu
-je nach Übertragunsprotokoll notwendigen \grqq Bridge\grqq{} sowie einer entsprechenden App zur Steuerung. Der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
+je nach Übertragungsprotokoll notwendigen \grqq Bridge\grqq{} sowie einer entsprechenden App zur Steuerung. Der Hersteller Phillips mit seiner Produktmarke \grqq Hue\grqq{}
 kann als Beispiel genannt werden. Die Produktgruppe umfasst eine Bridge mit zugehöriger Smartphone App, sowie den klassischen Komponenten wie Lampen, Steckdose und Schalter.
-Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
+Der Markt wurde durch Heimassistenten stark belebt. Amazons Alexa, der Google Echo Dot und die Pendanten von Apple und Microsoft sind in immer mehr Haushalten zu finden.
 Diese Heimassistenten können sich entweder mit den herstellerspezifischen Bridges verbinden, oder können direkt an PANs (Personal-Area-Networks) wie Zigbee
 teilnehmen und die Geräte steuern. Dieses Kapitel soll einen Überblick über die relevanten Technologien am Markt verschaffen. 
 
@@ -17,15 +17,15 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     Wlan ist ein verbreiteter und etablierter Standard, der überwiegend für die Anbindung mobiler Geräte an den
     Internetrouter genutzt wird. Dies macht es naheliegend, auch smarte Geräte per WLAN zu vernetzen. Wlan ist allerdings 
     optimiert für hohe Übertragungsraten und nicht für leistungsschwache Endgeräte. Dies ist
-    insbesondere für batteriebetriene Geräte nachteilig. Zusätzlich benötigt jedes Endgerät Zeitslots um Daten zu Senden und zu Empfangen. Diese müssten auch für Geräte freigehalten werden, die eigentlich
+    insbesondere für batteriebetriebene Geräte nachteilig. Zusätzlich benötigt jedes Endgerät Zeitslots um Daten zu Senden und zu Empfangen. Diese müssten auch für Geräte freigehalten werden, die eigentlich
     sehr wenig Bandbreite benötigen. Viele Geräte können sich also nachteilig auf die Performance eines Wlan Netzwerks auswirken. Dieses Problem ist seit WIFI6 mit OFDMA durch mehrere Subcarrier 
     zumindest weniger stark ausgeprägt.
 
-    \item \textbf{Blueooth}\\
+    \item \textbf{Bluetooth}\\
     Ebenso wie Wlan hat Bluetooth eine weite Verbreitung. Durch Implementierung 
     des Standard Bluetooth LE ist es möglich leistungsschwache sowie batteriebetriebene Geräte mit Bluetooth auszustatten. Bluetooth
     ist allerdings nicht für hohe Reichweiten oder für Netzwerke mit vielen Teilnehmern konzipiert. Primäre Anwendungsfall ist zum Beispiel das Verbinden eines Headsets mit 
-    einem Handy. Seit 2017 existiert der Standard \grqq Bluetooth Mesh\grqq. Dieser löst Probleme des normalen Bluetooths um es für IoT einzusetzen. Bisher gibt es keine bekannten
+    einem Handy. Seit 2017 existiert der Standard \grqq Bluetooth Mesh\grqq. Dieser löst Probleme des normalen Bluetooth um es für IoT einzusetzen. Bisher gibt es keine bekannten
     größeren Ecosysteme in denen es eingesetzt wird. Ein Benchmark zeigt keine Vorteile gegenüber ZigBee und Thread. \cite{sila}
 
     \item \textbf{Z-Wave}\\
@@ -39,17 +39,17 @@ Aktuell gibt es mehrere Funkprotokolle, welche im Bereich IoT relevant sind. Daz
     ZigBee ein Mesh-Netzwerk aufgebaut wird. Es können auch Geräte angebunden werden, die keine direkte Funkverbindung
     zum Koordinator haben. Zusätzlich sind Funktionen implementiert, welche das Management einer hohen Anzahl von Devices
     erleichtert. Ein großer Nachteil der bei ZigBee oft angeführt wird ist, dass die Geräte nicht direkt per IPv6 adressierbar sind. 2013 wurde 
-    ein Standard mit mit dem Namen \grqq ZigBee IP\grqq{} veröffentlicht, der IPv6 supportet. Auf diesem wiederum basiert ZigBee Smart Enegery, welches in 
-    intelligenten Stromzählern eingesetzt wird. In Großbrittanien sind diese bereits im Einsatz\cite{se}, in Deutschland sollen zumindest bis 2032 die alten Stromzähler 
-    durch vernetzte ersetzt werden. \cite{bmwk}. Insgesammt gibt es neben Zigbee IP noch die beiden Erweiterungen ZigBee Pro und ZigBee RF4CE. Diese Erweiterungen spielen
+    ein Standard mit mit dem Namen \grqq ZigBee IP\grqq{} veröffentlicht, der IPv6 unterstützt. Auf diesem wiederum basiert ZigBee Smart Energy, welches in 
+    intelligenten Stromzählern eingesetzt wird. In Großbritannien sind diese bereits im Einsatz\cite{se}, in Deutschland sollen zumindest bis 2032 die alten Stromzähler 
+    durch vernetzte ersetzt werden. \cite{bmwk}. Insgesamt gibt es neben Zigbee IP noch die beiden Erweiterungen ZigBee Pro und ZigBee RF4CE. Diese Erweiterungen spielen
     bei der Heimautomatisierung allerdings keine Rolle.
     
     \item \textbf{Thread}\\
     Thread \cite{thread} ist ein Funkprotokoll welches ebenfalls auf dem 802.15.4 Standard basiert. Ebenso wie ZigBee ist es Meshfähig. Ein
     entscheidendes Unterscheidungsmerkmal ist allerdings, dass die Geräte per IPv6 adressiert werden. Daher sind die Geräte
-    theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk addressierbar. Dies ist vorallem für die Anbindung 
+    theoretisch ohne die Verwendung einer Bridge aus einem herkömmlichen Ethernet Netzwerk adressierbar. Dies ist vor allem für die Anbindung 
     von Geräten im öffentlichem Raum wie Parkuhren vorteilhaft. Bisher setzt nur Google mit seinem Heimassistenten Nest im größeren kommerziellen
-    Umfeld Thread ein. Es gibt erste Hersteller wie eve und nanoleaf welche entsprechende Smart Devices anbieten. Eine Liste mit zertifizerten Produkten ist 
+    Umfeld Thread ein. Es gibt erste Hersteller wie eve und nanoleaf welche entsprechende Smart Devices anbieten. Eine Liste mit zertifizierten Produkten ist 
     hier zu finden: \url{https://www.threadgroup.org/What-is-Thread/Thread-Benefits#certifiedproducts}
 \end{itemize}
 
@@ -69,7 +69,7 @@ Hier werden nur Anwendungen für die den Heimanwender behandelt. Zigbee wird zus
 \subsubsection{Dresden Electronic}
     Dresden Electronic bietet Software und Hardware zum Aufbau von Zigbee Netzwerken an. Es werden Zigbee USB Adapter und RaspberryPi Hats mit ATMega Chips angeboten,
     sowie eine Steuerungssoftware \grqq deCONZ \grqq{}. Als komplette Produktlinie für den Endanwender gibt es die Produktsparte
-    \grqq Phoscon\grqq{}, hautpsächlich zur smarten Beleuchtung.
+    \grqq Phoscon\grqq{}, hauptsächlich zur smarten Beleuchtung.
 
 \subsubsection*{Weitere Hersteller}
 Weitere bekannte Hersteller/Marken mit Zigbee Devices und Gateways:
@@ -82,28 +82,28 @@ Weitere bekannte Hersteller/Marken mit Zigbee Devices und Gateways:
     \item \textbf{SONOFF} - Günstige Hardware jeder Art
     \item \textbf{homee} -  modular Smart Home Central
     \item \textbf{Osram} - Lightify
-    \item \textbf{Ledvance} - Zigbeefähige Steckdosen und Lampen \grqq Smart+ \grqq{}
+    \item \textbf{Ledvance} - Zigbee fähige Steckdosen und Lampen \grqq Smart+ \grqq{}
 \end{itemize}
 
-Nachteil dieser Lösungen ist die Kompatiblität zu Geräten von Drittherstellern, welche vollständig in der Hand des Herstellers ist. In der Regel ist aus
-wirtschaftlichen Gründen die Unterstützung konkurrierender Hersteller nicht gewünscht. Es ist schwierig, bei Anschaffung eines dieser Systeme die Kompatiblität
-anderer Geräte sicherzustellen, da offiziell meißt nur die Geräte aus dem eigenem Haus unterstützt sind.
+Nachteil dieser Lösungen ist die Kompatibilität zu Geräten von Drittherstellern, welche vollständig in der Hand des Herstellers ist. In der Regel ist aus
+wirtschaftlichen Gründen die Unterstützung konkurrierender Hersteller nicht gewünscht. Es ist schwierig, bei Anschaffung eines dieser Systeme die Kompatibilität
+anderer Geräte sicherzustellen, da offiziell meist nur die Geräte aus dem eigenem Haus unterstützt sind.
 
 \subsection{Nicht kommerzielle Anwendungen}
 
 Vorteil von quelloffenen Anwendungen ist, dass diese durch eine Community gepflegt und Geräte von drittherstellern beliebig integriert werden können.
-Grundlegend ist der Zigbee Standard universell, und die Kompatiblität von Geräten verschiedener Hersteller möglich.
+Grundlegend ist der Zigbee Standard universell, und die Kompatibilität von Geräten verschiedener Hersteller möglich.
 
 \subsubsection{zigbee2mqtt}
 
-zigbee2mqtt \cite{z2m} ist ein quelloffenes Projekt auf GitHub. Die Anwendung kann anstelle von propietären Bridges als ZigBee-Gateway
+Zigbee2mqtt \cite{z2m} ist ein quelloffenes Projekt auf GitHub. Die Anwendung kann anstelle von proprietären Bridges als ZigBee-Gateway
 eingesetzt werden. Die Anwendung kann ein ZigBee Netzwerk in der Rolle des Koordinators verwalten und Funktionen per MQTT nach außen verfügbar machen.
 
 \subsubsection{ZHA}
 ZHA ist ein direkt in Homeassistant integriertes Plugin, um Zigbee Koordinatoren direkt in Homeassistant einzubinden. Vorteil
 von ZHA ist, dass ZigBee Chips mehrerer Hersteller unterstützt werden. ZHA unterstützt neben Texas Instruments auch Hardware von Dresden Elektronik,
-Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender komfortabler als zigbee2mqtt, es sind wenige technische Informationen ersichtlich oder konfigurierbar.
-Die Endgeräte Kompatiblität ist derzeit schlechter als bei zigbee2mqtt.
+Silicon Labs, DIGI und ZiGate. ZHA ist für den Anwender komfortabler als Zigbee2mqtt, es sind wenige technische Informationen ersichtlich oder konfigurierbar.
+Die Endgeräte Kompatibilität ist derzeit schlechter als bei Zigbee2mqtt.
 
 
 

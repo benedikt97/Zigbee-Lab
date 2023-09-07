@@ -34,7 +34,7 @@ Active Endpoint Requests\grqq{} abgefragt und per \grqq Simple Descriptor\grqq{}
     \caption{Wireshark Ausschnitt - Schalten einer Lampe}
 \end{figure}
 
-Hier ein ein Ein- und Auschaltvorgang einer Lampe zu sehen. Zum Schalten wird jeweils ein \grqq ZigBee Kommando Frame\grqq{} versendet.
+Hier ein ein Ein- und Ausschaltvorgang einer Lampe zu sehen. Zum Schalten wird jeweils ein \grqq ZigBee Kommando Frame\grqq{} versendet.
 
 \section{Aufgabe 3 - Joining einer Fernbedienung über die Lampe}
 
@@ -92,7 +92,7 @@ Die ZCL Nachricht wird nun direkt von der Fernbedienung an die Lampe als Unicast
     \caption{Wireshark Ausschnitt - Hinzufügen zu einer Gruppe}
 \end{figure}
 
-Zuerst wird die Gruppe angelegt. Dafür wird an die jeweiligen Geräte eine Add Group Nachricht gesendet. Diese wird mit einer jeweiligen Respone
+Zuerst wird die Gruppe angelegt. Dafür wird an die jeweiligen Geräte eine Add Group Nachricht gesendet. Diese wird mit einer jeweiligen Response
 Nachricht bestätigt.
 
 \begin{figure}[H]
@@ -103,11 +103,11 @@ Nachricht bestätigt.
 
 Im Anschluss wird die Gruppe an den Endpunkt der Fernbedienung gebunden. Der Fernbedienung wird diesmal als Ziel die Gruppen Broadcast Adresse
 0x000F sowie der Adressmodus Gruppe mitgeteilt. Auch dies wird von der Fernbedienung wieder bestätigt. Das Reporting welches im Anschluss 
-konfiguriert wird ist eine Eigenart von zigbee2mqtt. Damit wird der Koordinator bei Zustandsänderungen der Lampe informiert, um diese Informationen
+konfiguriert wird ist eine Eigenart von Zigbee2mqtt. Damit wird der Koordinator bei Zustandsänderungen der Lampe informiert, um diese Informationen
 beispielweiße an eine zentrale Heimautomatisierung weiterzugeben.
 
 Beim Schalten wird das ZCL Kommando nun an die Gruppenadresse 0x000F versendet. Die zu schaltenden Geräte überprüfen selbst ob sie in der Gruppe sind 
-oder nicht. Prinzipiell erhällt jedes Gerät im Netzwerk das Kommando.
+oder nicht. Prinzipiell erhält jedes Gerät im Netzwerk das Kommando.
 
 
 

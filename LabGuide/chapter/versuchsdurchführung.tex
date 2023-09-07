@@ -5,7 +5,7 @@
 Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfen sie dies vor Beginn des Versuches.
 
 \begin{itemize}
-    \item RespberryPi 3 mit eingesetzter microSD-Karte
+    \item RaspberryPi 3 mit eingesetzter microSD-Karte
     \item CC2531 Sniffer Stick
     \item cod.m ZigBee CC2652P2 Raspberry Pi Module
     \item 2 x Phillips Hue White E27
@@ -35,7 +35,7 @@ Eine Smartphone App greift per REST-API auf die Bridge zu. Mit der App können n
 \end{figure}
 
 In diesem Versuch wird anstelle der Phillips Bridge ein RaspberryPi als Koordinator eingesetzt. Dieser benötigt dafür das cod.m Zigbee Modul sowie eine entsprechende
-Software. In dem Versuch wird zigbee2mqtt eingesetzt. Anstelle einer App wird zigbee2mqtt über ein Webinterface administriert. Dieses lässt sich wie in diesem Versuch gezeigt Lokal 
+Software. In dem Versuch wird Zigbee2mqtt eingesetzt. Anstelle einer App wird Zigbee2mqtt über ein Webinterface administriert. Dieses lässt sich wie in diesem Versuch gezeigt Lokal 
 aufrufen oder aber auch nach außen verfügbar machen. 
 
 Der RaspberryPi dient in diesem Versuch als Koordinator und Versuchs-PC zugleich. 
@@ -57,16 +57,16 @@ b) Starten sie den Versuch, in dem sie ein Konsolenfenster öffnen und folgenden
     > ansible-playbook ~/ZigbeeHSRM/playbooks/reset-lab.yaml -K -e "channel=<Gruppennummer>"
 \end{lstlisting}
 
-Setzen sie den gewünchten Kanal für <Gruppennummer> ein. Der Start des Labs kann einige Minuten dauern. Dieser Befehl muss nur einmal zu Beginn
+Setzen sie den gewünschten Kanal für <Gruppennummer> ein. Der Start des Labs kann einige Minuten dauern. Dieser Befehl muss nur einmal zu Beginn
 des Praktikums ausgeführt werden. Bei einem Neustart des RaspberryPis startet der Versuch automatisch. Sie werden nach einem Passwort gefragt. 
 Das Passwort sollte gleich dem Benutzernamen sein. Im zweifel Fragen sie Ihren Betreuer.
 
-c) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die Container ausgeführt werden:
+c) Starten sie ein Konsolenfenster und überprüfen mit folgendem Befehl, ob die Container ausgeführt werden:
 \begin{lstlisting}
     > docker ps
 \end{lstlisting}
 
-Es sollten 3 Container im Status \grqq Running\grqq{} sein. Sollte dies nicht der Fall sein, beispielsweiße ein periodisches Neustarten des Containers 
+Es sollten 3 Container im Status \grqq Running\grqq{} sein. Sollte dies nicht der Fall sein, beispielsweise ein periodisches Neustarten des Containers 
 \grqq zigbee2mqtt\grqq{}, lesen sie die weiteren Schritte in den FAQs nach.
 
 d) Starten sie den Webbrowser und Navigieren zu der Seite:
@@ -74,16 +74,16 @@ d) Starten sie den Webbrowser und Navigieren zu der Seite:
     https://z2m.local
 \end{lstlisting}
 
-e) Starten sie Wireshark per \grqq sudo wireshark\grqq{} in einem Terminalfenster. Bei den verfügbaren Schnittstellen sollte sich eine 
-\grqq TI CC2231\grqq{} Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den mitzuschneidenden
+e) Starten sie Wireshark per \grqq sudo wireshark\grqq{} in einem Terminal. Bei den verfügbaren Schnittstellen sollte sich eine 
+\grqq TI CC2231\grqq{} Schnittstelle finden. Über das vorangestellte Zahnrad-Symbol können sie den mitzuschneidenden
  Kanal einstellen. Stellen sie den eben gewählten Zigbee Kanal ein. (Gruppennummer)
 
 d) Setzen sie alle ZigBee Komponenten des Versuchs zurück. Dafür drücken sie auf der Rückseite der Fernbedienung die Reset Taste.
-Die Phillips Hue Lampen können auschließlich per Touchlink zurückgesetzt werden. Drücken und halten sie dazu die äußeren Tasten der Fernbedienung während sie die Fernbedienung
+Die Phillips Hue Lampen können ausschließlich per Touchlink zurückgesetzt werden. Drücken und halten sie dazu die äußeren Tasten der Fernbedienung während sie die Fernbedienung
 direkt an die Lampe halten. Warten sie bis die Lampe mehrmals aufblinkt. Dies kann mehrere Versuche mit verschiedenen Fernbedienungspositionen benötigen. Schalten sie im Anschluss
 die beiden Lampen wieder per Handschalter vollständig aus.
 
-Alternativ bietet zigbee2mqtt ebenfalls eine Touchlink Funktionalität. Bringen sie dafür die Lampe direkt an den Koordinator und Scannen in dem zigbee2mqtt Webinterface nach 
+Alternativ bietet Zigbee2mqtt ebenfalls eine Touchlink Funktionalität. Bringen sie dafür die Lampe direkt an den Koordinator und Scannen in dem Zigbee2mqtt Webinterface nach 
 Touchlink Geräten. Im Anschluss kann die Lampe hier zurückgesetzt werden. Auch hier wird das durch mehrmaliges blinken der Lampe signalisiert.
 
 \begin{figure}[H]
@@ -99,7 +99,7 @@ Touchlink Geräten. Im Anschluss kann die Lampe hier zurückgesetzt werden. Auch
 
 \subsection{Aufgabe 2 - Joining einer Phillips Hue Lampe}
 a) Schalten sie eine der beiden Lampen ein.\\\\
-b) Starten sie nun ein Wireshark Mitschnitt und erlauben anschließend in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, 
+b) Starten sie nun ein Wireshark Mitschnitt und erlauben anschließend in Zigbee2mqtt das Anlernen von Geräten. Sobald Zigbee2mqtt ein erfolgreiches Interview gemeldet hat, 
 beenden sie den Capture Vorgang. Die Lampe signalisiert dies durch ein kurzes blinken ein erfolgreiches Interview.\\\\
 
 \begin{figure}[H]
@@ -121,7 +121,7 @@ c) Navigieren sie nun zur Übersichtsseite der Lampe. Diese sollte ähnlich wie 
     \caption{Zigbee Device Übersicht}
 \end{figure}
 
-d) Vergeben sie in der Übersichsseite der Lampe einen nutzerfreundlichen Namen. Dies geschieht über den blauen Button im unteren Teil der Übersicht.\\
+d) Vergeben sie in der Übersichtsseite der Lampe einen nutzerfreundlichen Namen. Dies geschieht über den blauen Button im unteren Teil der Übersicht.\\
 e) Dimmen und schalten sie die Lampe über die Weboberfläche. Die ist unter dem Reiter \grqq Dashboard\grqq{} möglich. Starten sie einen weiteren Capture Vorgang und
 schneiden einen Schaltvorgang mit.
 
@@ -167,7 +167,7 @@ a) Navigieren sie in der Weboberfläche zu der Übersicht Ihrer Lampe. Dort find
 b) Starten sie ein Wireshark Mitschnitt. Binden sie den Endpunkt der Fernbedienung mit dem Endpunkt Ihrer Fernbedienung. Binden sie die Cluster \grqq OnOff\grqq{}
 und \grqq LevelCtrl\grqq{}. Betätigen sie direkt nach dem Anlegen der Bindung eine Taste auf der Fernbedienung. Zum Batteriesparen \grqq schläft\grqq{} diese 
 periodisch und kann in dieser Zeit keine Bindungsanfragen annehmen. Der Hersteller geht davon aus, das die Fernbedienung gewöhnlich per Touchlink gebunden wird. 
-Warten sie bis zigbee2mqtt ein erfolgreiches Binding meldet. \\
+Warten sie bis Zigbee2mqtt ein erfolgreiches Binding meldet. \\
 
 
 
@@ -215,7 +215,7 @@ e) Starten sie einen Wireshark Mitschnitt. Schalten sie die Gruppe mit der Fernb
 \begin{Fragen}
     1. Untersuchen sie den \textbf{Beacon-Request}\\
     - Erläutern sie den Frametype und den Command Identifier.\\ 
-    - Erläutern die Ziel- und Quelladdresse und was sie daraus erschließen können.\\
+    - Erläutern die Ziel- und Quelladresse und was sie daraus erschließen können.\\
     Hinweis: Wireshark Filter: \verb|frame.protocols == "wpan"|\\
 
     2. Wie teilt der Koordinator den umliegenden Geräten mit, dass er dem Netzwerk den Beitritt weiterer Geräte erlaubt ?\\
@@ -256,7 +256,7 @@ e) Starten sie einen Wireshark Mitschnitt. Schalten sie die Gruppe mit der Fernb
     
     13. Erläutern Sie, den Zweck des versendeten \textbf{Active-Endpoint-Requests} und des \textbf{SimpleDescriptor-Requests}.\\
     -Beschreiben Sie die Information, die in den entsprechenden Response-Nachrichten enthalten ist.\\ 
-    -Wie stellt zigbee2mqtt die Information dar?\\
+    -Wie stellt Zigbee2mqtt die Information dar?\\
     -Welche Endpoints werden für den Austausch der untersuchten Request- und ResponseNachrichten verwendet? Interpretieren Sie dies!\\
     Hinweis: Wireshark Filter: \verb|frame.protocols == "wpan:zbee_nwk:zbee_aps:zbee_zdp"|\\
      

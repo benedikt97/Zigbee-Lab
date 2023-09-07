@@ -13,7 +13,7 @@ Folgende Schritte müssen ausgeführt werden, um ein RaspberryPi vorzubereiten.
     \item Ansible Playbook Ausführen
 \end{itemize}
 
-Das Repository kann mit Git und folgendem befehl geklont werden:
+Das Repository kann mit Git und folgendem Befehl geklont werden:
 \begin{lstlisting}
     git clone https://github.com/nlab4hsrm/ZigbeeHSRM.git
 \end{lstlisting}
@@ -44,7 +44,7 @@ Im letzten Schritt muss noch der Dienst \grqq hciuart\grqq{} deaktiviert werden,
 Danach muss der RaspberryPi neu gestartet werden! 
 
 
-Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLab.yaml.
+Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewiesen. Dies geschieht durch die DeployLab.yaml.
 \begin{lstlisting}
     ansible-playbook ~/ZigbeeHSRM/playbooks/DeployLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
@@ -60,7 +60,7 @@ Anschließend wird
 
 \section{Zurücksetzen des Versuchs}
 
-Vorraussetzung für dieses Playbook ist, dass einmal DeployLab ausgeführt worden ist. ResetLab installiert nicht Docker und andere notwendige Pakete.
+Voraussetzung für dieses Playbook ist, dass einmal DeployLab ausgeführt worden ist. ResetLab installiert nicht Docker und andere notwendige Pakete.
 Zum zurücksetzen wird das Playbook \grqq ResetLab\grqq{} ausgeführt.
 
 \begin{lstlisting}
@@ -71,7 +71,7 @@ Es wird dann arm64 anstelle von armhf benötigt. Dies ist allerdings nicht getes
 
 \section{Update der eingesetzten Software}
 
-Die RaspberryOS Pakete können mit dem Paktetmanager apt aktuell gehalten werden. Docker zieht initial die Container aus Dockerhub.
+Die RaspberryOS Pakete können mit dem Paketmanager apt aktuell gehalten werden. Docker zieht initial die Container aus Dockerhub.
 Mit folgendem Befehl überprüft Docker das Repository auf aktuelle Container.
 
 \begin{lstlisting}
@@ -89,15 +89,15 @@ beiden Ansible Playbooks.
 
 \section{Troubleshooting}
 
-Es empfiehlt sich bei Problemen, die Logs der Container zu betrachten. Diese erhällt man mit folgenden Befehl:
+Es empfiehlt sich bei Problemen, die Logs der Container zu betrachten. Diese erhält man mit folgenden Befehl:
 
 \begin{lstlisting}
     docker attach <container-name>
 \end{lstlisting}
 
-In der Regel ist es am sinnvollsten, mit dem Log von zigbee2mqtt zu starten. Dieser ist erfahrungsgemäßg bei einer Fehlersuche sehr hilfreich.
+In der Regel ist es am sinnvollsten, mit dem Log von Zigbee2mqtt zu starten. Dieser ist erfahrungsgemäß bei einer Fehlersuche sehr hilfreich.
 
-Ein gängier Fehler ist, dass der Container zigbee2mqtt regelmäßig neustartet. Diese Erkenntnis erhällt man per:
+Ein gängiger Fehler ist, dass der Container Zigbee2mqtt regelmäßig neustartet. Diese Erkenntnis erhält man per:
 \begin{lstlisting}
     docker ps
 \end{lstlisting}
