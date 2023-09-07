@@ -31,7 +31,7 @@ ist vorallem bei kleinen batteriebetriebenen Geräten oft der einschränkende Fa
 
 \section{Texas Instruments CC Chips}
 
-Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für Devices als ZigBee SoC 
+Texas Instruments bietet ein Spektrum von Microcontrollern, die sich mit entsprechender Firmware für Devices als ZigBee Controller
 nutzen lassen.Alternativ kann mit so einem Microcontroller auch ein Koordinator betrieben werden. Kleinere Varianten können in Endgeräten wie Lampen und Thermostate, 
 größere als Koordinator selbst verwendet werden.
 
@@ -166,7 +166,7 @@ gelangt man zum selben Ergebniss wie mit dem vorher gezeigtem CLI Befehl. Durch 
   \caption{Zigbee2Mqtt Kontext}
 \end{figure}
 
-zigbee2mqtt ist ein offenes Softwareprojekt und kann am besten mit dem Begriff \grqq Software-Zigbee-Gateway\grqq{} beschrieben werden. Es übernimmt die Funktionalität, die normalerweise entsprechende
+Zigbee2mqtt ist ein quelloffenes softwarebasiertes Zigbee Gateway. Es übernimmt die Funktionalität, die normalerweise entsprechende
 Bridges der Hersteller übernehmen. Während traditionelle Bridges, wie zum Beispiel die Phillips Hue Bridge eine REST API zur Verfügung stellen um mit entsprechenden
 Apps zu kommunizieren, macht zigbee2mqtt die Geräte per MQTT nach außen verfügbar. Auf abstrakter Ebene heißt das, dass es ein Gateway zwischen einem Zigbee Netzwerk und
 einem traditionellen IPv4 Netzwerk ist. Zur Steuerung und Visualisierung lassen sich per MQTT Anwendungen wie \grqq Homeassistant\grqq{} oder \grqq OpenHUB\grqq{} oder auch entsprechende
@@ -176,10 +176,10 @@ Quellcode und Dokumentation: \url{https://github.com/Koenkk/zigbee2mqtt} \\
 Homepage: \url{https://www.zigbee2mqtt.io/}
 
 Zigbee2mqtt verwaltet das Zigbee Netzwerk und ermöglicht es Drittanwendungen, die Geräte in diesem ZigBee Netz zu Steuern. Wird ein neues Device ins das Netzwerk eingefügt, 
-kündigt zigbee2mqtt das Gerät per MQTT an, und teilt der Anwendunge nach erfolgreichem Interview die verfügbaren Cluster des neuen Teilnehmers mit.
+kündigt zigbee2mqtt das Gerät per MQTT an, und teilt der Anwendung nach erfolgreichem Interview die verfügbaren Cluster des neuen Teilnehmers mit.
 
 Zigbee2Mqtt verwaltet drei Datenbanken, welche die Funktionsweiße deutlich machen. Viele Funktionen, wie zum Beispiel die Verwaltung von Routingtabellen und
-Verschlüsselung der Kommunikation sind direkt in der Hardware implementiert. Diese Funktionen lassen sich wie in der im Punkt TI CC Firmware gezeigen API Steuern und Abfragen.
+Verschlüsselung der Kommunikation sind direkt in der Hardware implementiert. Diese Funktionen lassen sich wie in der im Punkt TI CC Firmware gezeigen API steuern und abfragen.
 Zigbee2mqtt verwaltet in einer eigenen Datenbank die Geräte im Netzwerk sowie deren Eigenschaften.
 Folgende Datensätze finden sich in der Anwendung:
 
@@ -351,9 +351,9 @@ Zur Veranschaulichung der Funktionsweiße, ein Ausschnitt aus der API Dokumentat
 \end{figure}
 
 In diesem Beispiel wird beschrieben, wie man einen SimpleDescriptor-Request an ein Zigbee-Device versendet. Dieser Aufruf ist entsprechend parametrierbar,
-und wird zur Abfrage der verfügbaren Endpunkte eines Gerätes nach dessen Beitritt in das Netzwerk abgefragt.
+und wird zur Abfrage der verfügbaren Endpunkte eines Gerätes nach dessen Beitritt in das Netzwerk genutzt.
 
-Die Firmware, die auf dem Koordinator zum Einsatz kommt basiert auf einem Beispiel Projekt für einen ZigBee Koordinator von Texas Instruments. Dieses ist
+Die Firmware, die auf dem Koordinator zum Einsatz kommt basiert auf einem Beispielprojekt für einen ZigBee Koordinator von Texas Instruments. Dieses ist
 im SDK Kit des TI CC2652 Chips enthalten, und kann mit dem Texas Instruments Code Compose Studio bearbeitet werden. Die Firmware kann selbst kompiliert werden.
 Dazu kann ein Git Patch von den Maintainern von zigbee2mqtt angewendet werden. Zusätzlich können nun eigene Änderungen in den Code einfließen. Der Patch ist unter
 folgender URL zu finden.

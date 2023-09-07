@@ -26,7 +26,7 @@ In diesem Praktikumsversuch wird ein kleinen ZigBee Netzwerk errichtet. Verschie
 \end{figure}
 Das ZigBee Protokoll, welches in diesem Versuch untersucht wird, kommt klassischerweise in hier gezeigtem Szenario zum Einsatz.
 Eine Bridge, hier von Phillips, verbindet sich per ZigBee mit Smarthome Komponenten wie Lampen. Diese Bridge fungiert als ZigBee Koordinator. 
-Eine Smartphone App greift per REST-API auf die Bridge zu. Mit dieser App können nun die Lampen gesteuert werden.
+Eine Smartphone App greift per REST-API auf die Bridge zu. Mit der App können nun die Lampen gesteuert werden.
 
 \begin{figure}[H]
     \centering
@@ -34,14 +34,11 @@ Eine Smartphone App greift per REST-API auf die Bridge zu. Mit dieser App könne
     \caption{Versuchsaufbau}
 \end{figure}
 
-In diesem Versuch wird als Koordinator anstelle der Phillips Bridge ein RaspberryPi eingesetzt. Dieser benötigt dafür das cod.m Zigbee Modul sowie eine entsprechende
+In diesem Versuch wird anstelle der Phillips Bridge ein RaspberryPi als Koordinator eingesetzt. Dieser benötigt dafür das cod.m Zigbee Modul sowie eine entsprechende
 Software. In dem Versuch wird zigbee2mqtt eingesetzt. Anstelle einer App wird zigbee2mqtt über ein Webinterface administriert. Dieses lässt sich wie in diesem Versuch gezeigt Lokal 
-aufrufen oder aber auch nach außen verfügbar machen. In der Regel wird zigbee2mqtt an einer weitere Anwendung wie Homeassistant gekoppelt, um Lampen und andere Geräte 
-ansprechend steuern zu können. Die Kommunikation zwischen diesen beiden Applikation würde per MQTT stattfinden.
+aufrufen oder aber auch nach außen verfügbar machen. 
 
 Der RaspberryPi dient in diesem Versuch als Koordinator und Versuchs-PC zugleich. 
-
-
 
 \section{Aufgabenstellungen}
 
@@ -57,11 +54,12 @@ Stromversorgung startet der RaspberryPi automatisch.
 b) Starten sie den Versuch, in dem sie ein Konsolenfenster öffnen und folgenden Befehl absetzen.
 
 \begin{lstlisting}
-    > ansible-playbook playbooks/reset-lab.yaml -e "channel=<Gruppennummer>"
+    > ansible-playbook ~/ZigbeeHSRM/playbooks/reset-lab.yaml -K -e "channel=<Gruppennummer>"
 \end{lstlisting}
 
 Setzen sie den gewünchten Kanal für <Gruppennummer> ein. Der Start des Labs kann einige Minuten dauern. Dieser Befehl muss nur einmal zu Beginn
-des Praktikums ausgeführt werden. Bei einem Neustart des RaspberryPis startet der Versuch automatisch.
+des Praktikums ausgeführt werden. Bei einem Neustart des RaspberryPis startet der Versuch automatisch. Sie werden nach einem Passwort gefragt. 
+Das Passwort sollte gleich dem Benutzernamen sein. Im zweifel Fragen sie Ihren Betreuer.
 
 c) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die Container ausgeführt werden:
 \begin{lstlisting}
@@ -71,19 +69,19 @@ c) Starten sie ein Konsolenfester und überprüfen mit folgendem Befehl, ob die 
 Es sollten 3 Container im Status \grqq Running\grqq{} sein. Sollte dies nicht der Fall sein, beispielsweiße ein periodisches Neustarten des Containers 
 \grqq zigbee2mqtt\grqq{}, lesen sie die weiteren Schritte in den FAQs nach.
 
-d) Starten sie den Webbrowser Firefox und Navigieren zu der Seite:
+d) Starten sie den Webbrowser und Navigieren zu der Seite:
 \begin{lstlisting}
     https://z2m.local
 \end{lstlisting}
 
-e) Starten sie Wireshark über das Symbol auf dem Desktop oder alternativ per \grqq sudo wireshark\grqq{}. Bei den verfügbaren Schnittstellen sollte sich eine 
-\grqq TI CC2231\grqq{} Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den abzuhörenden
+e) Starten sie Wireshark per \grqq sudo wireshark\grqq{} in einem Terminalfenster. Bei den verfügbaren Schnittstellen sollte sich eine 
+\grqq TI CC2231\grqq{} Schnittstelle finden. Über das vorangestelle Zahnrad-Symbol können sie den mitzuschneidenden
  Kanal einstellen. Stellen sie den eben gewählten Zigbee Kanal ein. (Gruppennummer)
 
 d) Setzen sie alle ZigBee Komponenten des Versuchs zurück. Dafür drücken sie auf der Rückseite der Fernbedienung die Reset Taste.
-Die Phillips Hue Lampen können auschließlich per Touchlink zurückgesetzt werden. Drücken sie dazu die äußeren Taste der Fernbedienung und halten diese direkt an 
-die Lampe. Warten sie bis die Lampe mehrmals aufblinkt. Dies kann mehrere Versuche mit verschiedenen Fernbedienungspositionen benötigen. Schalten sie im Anschluss
-die beiden Lampen wieder aus.
+Die Phillips Hue Lampen können auschließlich per Touchlink zurückgesetzt werden. Drücken und halten sie dazu die äußeren Tasten der Fernbedienung während sie die Fernbedienung
+direkt an die Lampe halten. Warten sie bis die Lampe mehrmals aufblinkt. Dies kann mehrere Versuche mit verschiedenen Fernbedienungspositionen benötigen. Schalten sie im Anschluss
+die beiden Lampen wieder per Handschalter vollständig aus.
 
 Alternativ bietet zigbee2mqtt ebenfalls eine Touchlink Funktionalität. Bringen sie dafür die Lampe direkt an den Koordinator und Scannen in dem zigbee2mqtt Webinterface nach 
 Touchlink Geräten. Im Anschluss kann die Lampe hier zurückgesetzt werden. Auch hier wird das durch mehrmaliges blinken der Lampe signalisiert.
@@ -102,7 +100,7 @@ Touchlink Geräten. Im Anschluss kann die Lampe hier zurückgesetzt werden. Auch
 \subsection{Aufgabe 2 - Joining einer Phillips Hue Lampe}
 a) Schalten sie eine der beiden Lampen ein.\\\\
 b) Starten sie nun ein Wireshark Mitschnitt und erlauben anschließend in zigbee2mqtt das Anlernen von Geräten. Sobald zigbee2mqtt ein erfolgreiches Interview gemeldet hat, 
-beenden sie den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken ein erfolgreiches Interview.\\\\
+beenden sie den Capture Vorgang. Die Lampe signalisiert dies durch ein kurzes blinken ein erfolgreiches Interview.\\\\
 
 \begin{figure}[H]
     \centering
@@ -111,7 +109,7 @@ beenden sie den Capture Vorgang. Die Lampe signalisiert durch ein kurzes blinken
 \end{figure}
 
 \begin{Aufgabe}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.1\grqq{}}. \\
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe>-ZigbeeLab-Aufgabe2.1\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
@@ -125,16 +123,16 @@ c) Navigieren sie nun zur Übersichtsseite der Lampe. Diese sollte ähnlich wie 
 
 d) Vergeben sie in der Übersichsseite der Lampe einen nutzerfreundlichen Namen. Dies geschieht über den blauen Button im unteren Teil der Übersicht.\\
 e) Dimmen und schalten sie die Lampe über die Weboberfläche. Die ist unter dem Reiter \grqq Dashboard\grqq{} möglich. Starten sie einen weiteren Capture Vorgang und
-schneiden in diesem einen Schaltvorgang mit.
+schneiden einen Schaltvorgang mit.
 
 \begin{Aufgabe}
-    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 2.2\grqq{}}. \\
+    Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe>-ZigbeeLab-Aufgabe2.2\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
 \subsection{Aufgabe 3 - Joining eines Gerätes über ein anderes Gerät}
 Für diese Aufgabe sollte eine Lampe mit dem Koordinator verbunden sein. Die zweite Lampe wird nun über die Lampe dem Netzwerk hinzugefügt. Aus diesem Grund wird es nur der Lampe
-erlaubt ein neues Gerät aufzunehmen. 
+erlaubt ein neues Gerät in das Netzwerk aufzunehmen. 
 
 a) Schalten sie die zweite Lampe ein und starten einen Wireshark Mitschnitt.\\
 b) Erlauben sie den Beitritt neuer Geräte explizit für die bereits verbundene Phillips Lampe.
@@ -147,7 +145,7 @@ Ein erfolgreiches anlernen wird auch hier in der Weboberfläche und durch ein bl
 \end{figure}
 
 \begin{Aufgabe}
-    Speichern sie den Wireshark Mitschnitt ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 3\grqq{}}. \\
+    Speichern sie den Wireshark Mitschnitt ab als \textbf{\grqq <Gruppe>-ZigbeeLab-Aufgabe3\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
 \end{Aufgabe}
 
@@ -158,8 +156,8 @@ Ihre Übersichtsseite sollte wie folgt aussehen.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{media/Z2M-Anlernen-Lampe.png}
-    \caption{Zigbee Anlernen aktivieren - nur Lampe}
+    \includegraphics[width=1\textwidth]{media/z2m-ov.png}
+    \caption{Zigbee2mqtt Übersichtsseite Lab}
 \end{figure}
 
 
@@ -171,11 +169,7 @@ und \grqq LevelCtrl\grqq{}. Betätigen sie direkt nach dem Anlegen der Bindung e
 periodisch und kann in dieser Zeit keine Bindungsanfragen annehmen. Der Hersteller geht davon aus, das die Fernbedienung gewöhnlich per Touchlink gebunden wird. 
 Warten sie bis zigbee2mqtt ein erfolgreiches Binding meldet. \\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{media/Z2M-Group-Binding.png}
-    \caption{Zigbee Group Binding}
-\end{figure}
+
 
 Achten sie darauf alle die gezeigten Cluster anzuwählen. Jedes Cluster wird einzeln gebunden.
 
@@ -201,7 +195,14 @@ c) Starten sie einen Wireshark Mitschnitt. Editieren sie nun die Gruppe. Fügen 
 \end{Aufgabe}
 
 d) Navigieren sie nun wieder zur Binding-Übersicht der Fernbedienung. Binden sie die Fernbedienung nun mit der soeben
-angelegten Gruppe. Achten sie auch hier darauf eine Taste der Fernbedienung zu betätigen.
+angelegten Gruppe. Achten sie auch hier darauf eine Taste der Fernbedienung zu betätigen.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{media/Z2M-Group-Binding.png}
+    \caption{Zigbee2mqtt Group Binding}
+\end{figure}
+
 e) Starten sie einen Wireshark Mitschnitt. Schalten sie die Gruppe mit der Fernbedienung ein und aus.
 
 \begin{Aufgabe}

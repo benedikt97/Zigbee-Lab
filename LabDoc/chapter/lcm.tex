@@ -31,7 +31,7 @@ Bevor der Versuch ausgerollt werden kann, ist es zusätzlich notwendig manuell d
 Hier muss unter dem Menüpunkt \grqq 3 Interface Options\grqq{} die Konfiguration für \grqq I6 Serial Port\grqq{} gestartet werden. Im ersten Schritt wir der Zugriff auf die Shell über den seriellen
 Port deaktiviert. In zweitem Schritt wird die Serielle Schnittstelle dann aktiviert. 
 
-Anschließend wird Bluetooth deaktiviert. Dies passiert durch hinzufügen folgender Zeile in die Datei \grqq /boot/config.txt\grqq{}
+Anschließend wird Bluetooth deaktiviert. Dies passiert durch hinzufügen folgender Zeile in der Datei \grqq /boot/config.txt\grqq{}
 \begin{lstlisting}
     dtoverlay=disable-bt
 \end{lstlisting}
@@ -44,7 +44,7 @@ Im letzten Schritt muss noch der Dienst \grqq hciuart\grqq{} deaktiviert werden,
 Danach muss der RaspberryPi neu gestartet werden! 
 
 
-Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLabl.yaml.
+Zum Ausrollen werden die Rollen \grqq Docker\grqq{} und \grqq ZigbeeLab\grqq{} zugewießen. Dies geschieht durch die DeployLab.yaml.
 \begin{lstlisting}
     ansible-playbook ~/ZigbeeHSRM/playbooks/DeployLab.yaml -K -e "channel=<channelnumber>"
 \end{lstlisting}
@@ -60,6 +60,7 @@ Anschließend wird
 
 \section{Zurücksetzen des Versuchs}
 
+Vorraussetzung für dieses Playbook ist, dass einmal DeployLab ausgeführt worden ist. ResetLab installiert nicht Docker und andere notwendige Pakete.
 Zum zurücksetzen wird das Playbook \grqq ResetLab\grqq{} ausgeführt.
 
 \begin{lstlisting}
@@ -74,20 +75,21 @@ Die RaspberryOS Pakete können mit dem Paktetmanager apt aktuell gehalten werden
 Mit folgendem Befehl überprüft Docker das Repository auf aktuelle Container.
 
 \begin{lstlisting}
-    docker compose pull /srv/docker-compose.yaml
+    docker compose -f /srv/docker-compose.yaml pull 
 \end{lstlisting}
 
 Anschließend können die Container mit folgendem Befehl neu gestartet werden.
 
 \begin{lstlisting}
-    docker compose up -d /srv/docker-compose.yaml
+    docker compose up -f /srv/docker-compose.yaml -d 
 \end{lstlisting}
 
-Sämtliche Software wird onehin bei jedem Zurücksetzen des Versuchen aktualisiert.
+Alle weiteren Komponenten stammen aus der Ubuntu Paketverwaltung und können regulär mit apt aktualisiert werden. Die geschieht automatisch bei ausführen einer der 
+beiden Ansible Playbooks.
 
 \section{Troubleshooting}
 
-Es empfiehlt sich bei Problemen sich den Log der Container anzuschauen.
+Es empfiehlt sich bei Problemen, die Logs der Container zu betrachten. Diese erhällt man mit folgenden Befehl:
 
 \begin{lstlisting}
     docker attach <container-name>
@@ -95,7 +97,7 @@ Es empfiehlt sich bei Problemen sich den Log der Container anzuschauen.
 
 In der Regel ist es am sinnvollsten, mit dem Log von zigbee2mqtt zu starten. Dieser ist erfahrungsgemäßg bei einer Fehlersuche sehr hilfreich.
 
-Ein gängier Fehler ist, das der Container zigbee2mqtt regelmäßig neustartet. Diese Information erhällt man mit einem
+Ein gängier Fehler ist, dass der Container zigbee2mqtt regelmäßig neustartet. Diese Erkenntnis erhällt man per:
 \begin{lstlisting}
     docker ps
 \end{lstlisting}
