@@ -1,7 +1,4 @@
 - name: Deploy ZigBee Lab
-  include: InstallPackages.yaml
-
-- name: Deploy ZigBee Lab
   become: True
   include: DeployFiles.yaml
 
