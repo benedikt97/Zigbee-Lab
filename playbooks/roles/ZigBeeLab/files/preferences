@@ -223,12 +223,16 @@ gui.column.hidden:
 gui.column.format: 
 	"No.", "%m",
 	"Time", "%t",
-	"Source", "%s",
-	"Destination", "%d",
+	"ZB NWL Src.", "%s",
+	"ZB NWL Dest.", "%d",
+	"IEEE Src.", "%Cus:wpan.src16:0:R",
+	"IEEE Dst.", "%Cus:wpan.dst16:0:R",
 	"Protocol", "%p",
 	"Length", "%L",
-	"Info", "%i",
-	"Neue Spalte", "%hs"
+	"Delivery Mode", "%Cus:zbee_aps.delivery:0:R",
+	"Destination Endpoint", "%Cus:zbee_aps.dst:0:R",
+	"Source Endpoint", "%Cus:zbee_aps.src:0:R",
+	"Info", "%i"
 
 ####### User Interface: Font ########
 
@@ -240,7 +244,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Layout type (1-6)
 # A decimal number
-#gui.layout_type: 1
+gui.layout_type: 2
 
 # Layout content of the pane 1
 # One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
@@ -255,7 +259,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 # Layout content of the pane 3
 # One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
 # (case-insensitive).
-#gui.layout_content_3: PBYTES
+gui.layout_content_3: PDIAGRAM
 
 # Enable Packet List Separator
 # TRUE or FALSE (case-insensitive)
@@ -289,7 +293,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: eth0(1),br-f1895eea7296(1),vethd3834ce(1),vethc291994(1),veth2132b83(1),any(113),lo(1),wlan0(1),docker0(1),bluetooth-monitor(254),nflog(239),nfqueue(228),dbus-system(231),dbus-session(231),cc2531(195),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
+capture.devices_linktypes: eth0(1),br-0489913c1e3f(1),veth330d687(1),veth0dc3193(1),vethf0afdd8(1),any(113),lo(1),wlan0(1),docker0(1),bluetooth-monitor(254),nflog(239),nfqueue(228),dbus-system(231),dbus-session(231),cc2531(195),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -305,15 +309,15 @@ capture.devices_linktypes: eth0(1),br-f1895eea7296(1),vethd3834ce(1),vethc291994
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: eth0(2),br-f1895eea7296(2),vethd3834ce(2),vethc291994(2),veth2132b83(2),any(2),lo(2),wlan0(2),docker0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),dbus-system(2),dbus-session(2),cc2531(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
+capture.devices_buffersize: eth0(2),br-0489913c1e3f(2),veth330d687(2),veth0dc3193(2),vethf0afdd8(2),any(2),lo(2),wlan0(2),docker0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),dbus-system(2),dbus-session(2),cc2531(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: eth0:0(262144),br-f1895eea7296:0(262144),vethd3834ce:0(262144),vethc291994:0(262144),veth2132b83:0(262144),any:0(262144),lo:0(262144),wlan0:0(262144),docker0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),dbus-system:0(262144),dbus-session:0(262144),cc2531:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
+capture.devices_snaplen: eth0:0(262144),br-0489913c1e3f:0(262144),veth330d687:0(262144),veth0dc3193:0(262144),vethf0afdd8:0(262144),any:0(262144),lo:0(262144),wlan0:0(262144),docker0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),dbus-system:0(262144),dbus-session:0(262144),cc2531:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: eth0(1),br-f1895eea7296(1),vethd3834ce(1),vethc291994(1),veth2132b83(1),any(1),lo(1),wlan0(1),docker0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),dbus-system(1),dbus-session(1),cc2531(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
+capture.devices_pmode: eth0(1),br-0489913c1e3f(1),veth330d687(1),veth0dc3193(1),vethf0afdd8(1),any(1),lo(1),wlan0(1),docker0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),dbus-system(1),dbus-session(1),cc2531(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -396,106 +400,6 @@ capture.devices_pmode: eth0(1),br-f1895eea7296(1),vethd3834ce(1),vethc291994(1),
 # A string
 #extcap.udpdump.debugfile: 
 
-# Max bytes in a packet
-# A string
-#extcap.randpkt.maxbytes: 5000
-
-# Number of packets
-# A string
-#extcap.randpkt.count: 1000
-
-# Packet delay (ms)
-# A string
-#extcap.randpkt.delay: 0
-
-# Random type
-# A string
-#extcap.randpkt.randomtype: false
-
-# All random packets
-# A string
-#extcap.randpkt.allrandom: false
-
-# Type of packet
-# A string
-#extcap.randpkt.type: 
-
-# Run in debug mode
-# A string
-#extcap.randpkt.debug: false
-
-# Use a file for debug
-# A string
-#extcap.randpkt.debugfile: 
-
-# Remote SSH server address
-# A string
-#extcap.ciscodump.remotehost: 
-
-# Remote SSH server port
-# A string
-#extcap.ciscodump.remoteport: 22
-
-# Remote SSH server username
-# A string
-#extcap.ciscodump.remoteusername: root
-
-# Path to SSH private key
-# A string
-#extcap.ciscodump.sshkey: 
-
-# ProxyCommand
-# A string
-#extcap.ciscodump.proxycommand: 
-
-# Remote interface
-# A string
-#extcap.ciscodump.remoteinterface: 
-
-# Remote capture filter
-# A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::2c4a:fcb0:9066:3f47 any eq 0, deny tcp any eq 0 host fe80::2c4a:fcb0:9066:3f47, deny tcp host fe80::d826:3242:5857:4be4 any eq 0, deny tcp any eq 0 host fe80::d826:3242:5857:4be4, deny tcp host fe80::d8f6:e36e:2da2:b461 any eq 0, deny tcp any eq 0 host fe80::d8f6:e36e:2da2:b461, deny tcp host fe80::42:17ff:fe96:387 any eq 0, deny tcp any eq 0 host fe80::42:17ff:fe96:387, deny tcp host fe80::c38:d96e:9661:8b9f any eq 0, deny tcp any eq 0 host fe80::c38:d96e:9661:8b9f, deny tcp host 169.254.211.240 any eq 0, deny tcp any eq 0 host 169.254.211.240, deny tcp host 169.254.186.96 any eq 0, deny tcp any eq 0 host 169.254.186.96, deny tcp host 169.254.156.231 any eq 0, deny tcp any eq 0 host 169.254.156.231, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.10.30 any eq 0, deny tcp any eq 0 host 192.168.10.30, permit ip any any
-
-# Packets to capture
-# A string
-#extcap.ciscodump.remotecount: 
-
-# Run in debug mode
-# A string
-#extcap.ciscodump.debug: false
-
-# Use a file for debug
-# A string
-#extcap.ciscodump.debugfile: 
-
-# IEEE 802.15.4 2.4GHz radio channel to capture (11 to 26)
-# A string
-extcap.cc2531.channel: 15
-
-# Interface index
-# A string
-#extcap.dpauxmon.interface_id: 0
-
-# Run in debug mode
-# A string
-#extcap.dpauxmon.debug: false
-
-# Use a file for debug
-# A string
-#extcap.dpauxmon.debugfile: 
-
-# Starting position
-# A string
-#extcap.sdjournal.startfrom: 
-
-# Run in debug mode
-# A string
-#extcap.sdjournal.debug: false
-
-# Use a file for debug
-# A string
-#extcap.sdjournal.debugfile: 
-
 # Remote SSH server address
 # A string
 #extcap.sshdump.remotehost: 
@@ -534,7 +438,7 @@ extcap.cc2531.channel: 15
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::2c4a:fcb0:9066:3f47 or host fe80::d826:3242:5857:4be4 or host fe80::d8f6:e36e:2da2:b461 or host fe80::42:17ff:fe96:387 or host fe80::c38:d96e:9661:8b9f or host 169.254.211.240 or host 169.254.186.96 or host 169.254.156.231 or host 172.18.0.1 or host 172.17.0.1 or host 192.168.10.30) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::6c94:6d8a:1ca6:6568 or host fe80::105c:7dff:fe43:2aa1 or host fe80::a0d:2124:65d1:154c or host fe80::42:afff:fe00:8137 or host fe80::ec4e:69c6:2f5c:6672 or host fd00::863b:487d:724:1865 or host 169.254.81.159 or host 169.254.67.172 or host 169.254.248.200 or host 172.18.0.1 or host 172.17.0.1 or host 192.168.10.30) and port 22)
 
 # Packets to capture
 # A string
@@ -547,6 +451,106 @@ extcap.cc2531.channel: 15
 # Use a file for debug
 # A string
 #extcap.sshdump.debugfile: 
+
+# Remote SSH server address
+# A string
+#extcap.ciscodump.remotehost: 
+
+# Remote SSH server port
+# A string
+#extcap.ciscodump.remoteport: 22
+
+# Remote SSH server username
+# A string
+#extcap.ciscodump.remoteusername: root
+
+# Path to SSH private key
+# A string
+#extcap.ciscodump.sshkey: 
+
+# ProxyCommand
+# A string
+#extcap.ciscodump.proxycommand: 
+
+# Remote interface
+# A string
+#extcap.ciscodump.remoteinterface: 
+
+# Remote capture filter
+# A string
+#extcap.ciscodump.remotefilter: deny tcp host fe80::6c94:6d8a:1ca6:6568 any eq 0, deny tcp any eq 0 host fe80::6c94:6d8a:1ca6:6568, deny tcp host fe80::105c:7dff:fe43:2aa1 any eq 0, deny tcp any eq 0 host fe80::105c:7dff:fe43:2aa1, deny tcp host fe80::a0d:2124:65d1:154c any eq 0, deny tcp any eq 0 host fe80::a0d:2124:65d1:154c, deny tcp host fe80::42:afff:fe00:8137 any eq 0, deny tcp any eq 0 host fe80::42:afff:fe00:8137, deny tcp host fe80::ec4e:69c6:2f5c:6672 any eq 0, deny tcp any eq 0 host fe80::ec4e:69c6:2f5c:6672, deny tcp host fd00::863b:487d:724:1865 any eq 0, deny tcp any eq 0 host fd00::863b:487d:724:1865, deny tcp host 169.254.81.159 any eq 0, deny tcp any eq 0 host 169.254.81.159, deny tcp host 169.254.67.172 any eq 0, deny tcp any eq 0 host 169.254.67.172, deny tcp host 169.254.248.200 any eq 0, deny tcp any eq 0 host 169.254.248.200, deny tcp host 172.18.0.1 any eq 0, deny tcp any eq 0 host 172.18.0.1, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.10.30 any eq 0, deny tcp any eq 0 host 192.168.10.30, permit ip any any
+
+# Packets to capture
+# A string
+#extcap.ciscodump.remotecount: 
+
+# Run in debug mode
+# A string
+#extcap.ciscodump.debug: false
+
+# Use a file for debug
+# A string
+#extcap.ciscodump.debugfile: 
+
+# IEEE 802.15.4 2.4GHz radio channel to capture (11 to 26)
+# A string
+extcap.cc2531.channel: 20
+
+# Interface index
+# A string
+#extcap.dpauxmon.interface_id: 0
+
+# Run in debug mode
+# A string
+#extcap.dpauxmon.debug: false
+
+# Use a file for debug
+# A string
+#extcap.dpauxmon.debugfile: 
+
+# Starting position
+# A string
+#extcap.sdjournal.startfrom: 
+
+# Run in debug mode
+# A string
+#extcap.sdjournal.debug: false
+
+# Use a file for debug
+# A string
+#extcap.sdjournal.debugfile: 
+
+# Max bytes in a packet
+# A string
+#extcap.randpkt.maxbytes: 5000
+
+# Number of packets
+# A string
+#extcap.randpkt.count: 1000
+
+# Packet delay (ms)
+# A string
+#extcap.randpkt.delay: 0
+
+# Random type
+# A string
+#extcap.randpkt.randomtype: false
+
+# All random packets
+# A string
+#extcap.randpkt.allrandom: false
+
+# Type of packet
+# A string
+#extcap.randpkt.type: 
+
+# Run in debug mode
+# A string
+#extcap.randpkt.debug: false
+
+# Use a file for debug
+# A string
+#extcap.randpkt.debugfile: 
 
 ####### Name Resolution ########
 
@@ -1779,10 +1783,6 @@ extcap.cc2531.channel: 15
 # Whether the DSI dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #dsi.desegment: TRUE
-
-# Semicolon-separated list of private RSA keys used for DTLS decryption. Used by versions of Wireshark prior to 1.6
-# A string
-#dtls.keys_list: 
 
 # redirect dtls debug to file name; leave empty to disable debug, use "-" to redirect output to stderr
 # 
@@ -4972,10 +4972,6 @@ wpan.fcs_format: TI CC24xx metadata
 # Whether the TIPC-over-TCP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #tipc.desegment: TRUE
-
-# Semicolon-separated list of private RSA keys used for TLS decryption. Used by versions of Wireshark prior to 1.6
-# A string
-#tls.keys_list: 
 
 # Redirect TLS debug to the file specified. Leave empty to disable debugging or use "-" to redirect output to stderr.
 # A path to a file

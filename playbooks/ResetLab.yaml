@@ -1,7 +1,7 @@
-- name: Update Packages
-  hosts: localhost
-  roles:
-    - AptUpdate
+#- name: Update Packages
+#  hosts: localhost
+#  roles:
+#    - AptUpdate
 
 - name: Reset Lab
   hosts: localhost
@@ -9,7 +9,17 @@
   
     - name: Stop Containers
       become: true
-      ansible.builtin.command: 'docker kill nginx mosquitto zigbee2mqtt'
+      ansible.builtin.command: 'docker kill nginx'
+      ignore_errors: true
+      
+    - name: Stop Containers
+      become: true
+      ansible.builtin.command: 'docker kill mosquitto'
+      ignore_errors: true
+      
+    - name: Stop Containers
+      become: true
+      ansible.builtin.command: 'docker kill zigbee2mqtt'
       ignore_errors: true
 
 - name: Redeploy the Lab

@@ -9,7 +9,7 @@ Folgende Hardware sollte sich in Ihrer Versuchskiste befinden. Bitte überprüfe
     \item CC2531 Sniffer Stick
     \item cod.m ZigBee CC2652P2 Raspberry Pi Module
     \item 2 x Phillips Hue White E27
-    \item 1 x Phillips Hue dimmer switch
+    \item 1 x Phillips Hue Dimmer Switch
     \item HDMI Kabel
     \item Ethernet Kabel
 \end{itemize}
@@ -78,9 +78,9 @@ e) Starten sie Wireshark per \grqq sudo wireshark\grqq{} in einem Terminal. Bei 
 \grqq TI CC2231\grqq{} Schnittstelle finden. Über das vorangestellte Zahnrad-Symbol können sie den mitzuschneidenden
  Kanal einstellen. Stellen sie den eben gewählten Zigbee Kanal ein. (Gruppennummer)
 
-d) Setzen sie alle ZigBee Komponenten des Versuchs zurück. Dafür drücken sie auf der Rückseite der Fernbedienung die Reset Taste.
+d) Setzen sie alle ZigBee Komponenten des Versuchs zurück. Dafür drücken sie auf der Rückseite der Fernbedienung die Reset Taste einige Sekunden, bis die LED rot leuchtet.
 Die Phillips Hue Lampen können ausschließlich per Touchlink zurückgesetzt werden. Drücken und halten sie dazu die äußeren Tasten der Fernbedienung während sie die Fernbedienung
-direkt an die Lampe halten. Warten sie bis die Lampe mehrmals aufblinkt. Dies kann mehrere Versuche mit verschiedenen Fernbedienungspositionen benötigen. Schalten sie im Anschluss
+direkt an die Lampe halten. Warten sie bis die Lampe mehrmals aufblinkt und im Anschluss etwas gedimmt ist. Dies kann mehrere Versuche mit verschiedenen Fernbedienungspositionen benötigen. Schalten sie im Anschluss
 die beiden Lampen wieder per Handschalter vollständig aus.
 
 Alternativ bietet Zigbee2mqtt ebenfalls eine Touchlink Funktionalität. Bringen sie dafür die Lampe direkt an den Koordinator und Scannen in dem Zigbee2mqtt Webinterface nach 
@@ -150,7 +150,10 @@ Ein erfolgreiches anlernen wird auch hier in der Weboberfläche und durch ein bl
 \end{Aufgabe}
 
 c) Sehen sie sich die Netzwerkübersicht unter dem Reiter \grqq Karte\grqq{} an. Aktivieren sie nur den Haken \grqq isParent\grqq{} \\
-d) Fügen sie die Fernbedienung Ihrem Netzwerk hinzu. Gehen sie dabei wie bisher vor. Setzen sie die Batterie in die Lampe ein und erlauben die Aufnahme neuer Geräte.
+d) Fügen sie die Fernbedienung Ihrem Netzwerk hinzu. Gehen sie dabei wie bisher vor. Setzen sie die Batterie in die Fernbedienung ein und erlauben die Aufnahme neuer Geräte.
+Die Fernbedienung lässt sich im Zweifel durch langes drücken aller 4 Tasten in den Pairingmodus schalten. Wenn auch das nicht funktioniert, setzt man 
+die Fernbedienung am besten erneut vollständig zurück wie in Aufgabe 1 beschrieben.
+
 
 Ihre Übersichtsseite sollte wie folgt aussehen.
 
@@ -164,20 +167,28 @@ Ihre Übersichtsseite sollte wie folgt aussehen.
 \subsection{Aufgabe 4 - Binding der Fernbedienung}
 
 a) Navigieren sie in der Weboberfläche zu der Übersicht Ihrer Lampe. Dort finden sie einen Reiter \grqq binden\grqq{}. \\
-b) Starten sie ein Wireshark Mitschnitt. Binden sie den Endpunkt der Fernbedienung mit dem Endpunkt Ihrer Fernbedienung. Binden sie die Cluster \grqq OnOff\grqq{}
-und \grqq LevelCtrl\grqq{}. Betätigen sie direkt nach dem Anlegen der Bindung eine Taste auf der Fernbedienung. Zum Batteriesparen \grqq schläft\grqq{} diese 
-periodisch und kann in dieser Zeit keine Bindungsanfragen annehmen. Der Hersteller geht davon aus, das die Fernbedienung gewöhnlich per Touchlink gebunden wird. 
-Warten sie bis Zigbee2mqtt ein erfolgreiches Binding meldet. \\
+b) Trennen sie das Binding zwischen Endpunkt 1 der Fernbedienung und dem Koordinator. Betätigen sie direkt nach dem Trennen eine Taste auf der Fernbedienung. Zum Batteriesparen \grqq schläft\grqq{} diese 
+periodisch und kann in dieser Zeit keine Bindungsanfragen annehmen. 
+Warten sie bis Zigbee2mqtt eine erfolgreiche Trennung  des Binding meldet. \\
+c) Starten sie ein Wireshark Mitschnitt. Binden sie den Endpunkt 1 der Fernbedienung mit dem Endpunkt 11 Ihrer Lampe. Binden sie die Cluster \grqq OnOff\grqq{}
+und \grqq LevelCtrl\grqq{}. 
 
 
 
-Achten sie darauf alle die gezeigten Cluster anzuwählen. Jedes Cluster wird einzeln gebunden.
+
 
 c) Schalten sie nun die Lampe mit der Fernbedienung ein und aus. 
 
 \begin{Hinweis}
     Speichern sie den Wireshark Capture ab als \textbf{\grqq <Gruppe> - ZigbeeLab - Aufgabe 4\grqq{}}. \\
     Beantworten sie die Fragen in Ihrem Versuchsbericht.
+\end{Hinweis}
+
+\begin{Hinweis}
+    Das Binding ist auf den Geräten mangelhaft implementiert, da Phillips selbst diese Funktion nicht nutzt. Es kann notwendig sein, die Fernbedienung ein weiteres mal vollständig zurückzusetzen und neu anzulernen.
+    Dafür muss der Rest Knopf der Fernbedienung so lange gedrückt werden, bis die LED rot leuchtet. Vor allem wenn bei der Phillips Hue Fernbedienung mehr als ein Binding auf den Endpunkt 1 gelegt wird, scheint diese 
+    Probleme zu bekommen. Sollte es dennoch Probleme geben, kann der Wireshark Trace Aufschluss geben. Oft werden die Binding Tabellen nicht mehr aktualisiert und die Fernbedienung schickt die Kommandos an nicht mehr 
+    existierende Gruppen aus dem vorherigen Versuchsdurchgang.
 \end{Hinweis}
 
 d) Entfernen sie im Anschluss dieses Binding. Drücken sie auch hier eine Taste der Fernbedienung damit diese geweckt wird.

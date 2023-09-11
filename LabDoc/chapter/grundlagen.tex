@@ -81,6 +81,9 @@ Der RaspberryPi besitzt die PC typischen Schnittstellen wie Ethernet, HDMI, und 
 
 Als Zigbee Koordinator wird ein auf dem TI CC2652 basierendem RaspberryPi Hat vom Hersteller cod.m eingesetzt. Dieser wurde vom Hersteller
 für den Einsatz mit \grqq homegear\grqq{} oder \grqq zigbee2Mqtt\grqq{} entwickelt. Ein Datenblatt und Bedienungsanleitung sind im Anhang.
+Der Adapter wird mit einer modifizierten Texas Instruments Firmware betrieben, welche im Auslieferungszustand bereits installiert ist.
+ Er wird direkt auf die GPIO Leiste des RaspberryPis aufgesteckt, und kommuniziert mit diesem per UART. Der Chip von Texas Instruments hat bereits
+ einen Verstärker für die Antenne von +20dbm integriert. Die Verstärkung kann in der Firmware oder auch dynamisch über die API angepasst werden.
 
 \begin{figure}[H]
   \centering

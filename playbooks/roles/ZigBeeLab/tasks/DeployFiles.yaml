@@ -86,9 +86,9 @@
     group: root
 
 - name: Create /root/.config/wireshark/prefences
-  ansible.builtin.file:
-    path: /root/.config/wireshark/preferences
-    state: directory
+  ansible.builtin.copy:
+    dest: /root/.config/wireshark/preferences
+    src: preferences
     owner: root
     group: root
 

@@ -177,3 +177,66 @@ Für den Versuch wird weiterhin ein Webbrowser sowie Wireshark benötigt. Die be
     update_cache: true
 \end{lstlisting}
 
+Die Konfigurationen der Anwendungen werden per Ansible überschrieben. Ebenso wird die Binärdatei die zur Anbindung des Sniffersticks als externes Interface an Wireshark benötigt wird 
+per Ansible implementiert. In Wireshark ist zu Beginn das Layout auf ZigBee angepasst. Zusätzlich sind die notwendigen Schlüssel zum Entschlüsseln der Kommunikation eingetragen. Unter 
+dem Protokoll IEEE 802.15.4 ist ebenfalls das FCS Formart auf TI CC24XX gestellt. Ansonsten werden die Pakete als Fehlerhaft markiert und nicht korrekt dargestellt.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/ws-configured.png}
+  \caption{Wireshark mit angepassten Layout}
+\end{figure}
+
+In dem Layout sind werden direkt die Adressen aus dem IEEE Layer und dem ZigBee NWL Layer dargestellt. Damit ist immer das Ziel sowie der aktuelle Hop direkt erkennbar.
+
+\section{Devices}
+
+Als Zigbee Devices kommen folgende Geräte zum Einsatz:
+
+\begin{itemize}
+  \item Phillips Hue Dimmer Switch V1
+  \item 2 x Phillips Hue White A60 E27
+  \item cod.m RaspberryPi Hat
+\end{itemize}
+
+\subsection{Fernbedienung}
+Als Alternative zur Phillips Hue Fernbedienung wurde ein OSRAM Lightify Switch Mini getestet. Die Phillips Hue Fernbedienung hat den Nachteil,
+das ein Hardreset nur über einen Knopf auf der Rückseite, welcher per Büroklammer oder ähnlichem betätigt werden muss, möglich ist. Nur nach diesem 
+Hardreset erlaubt die Fernbedienung eine neue PAN-ID und sucht auf anderen Kanälen nach verfügbaren Netzwerken. Die Erfahrung zeigt allerdings,
+dass dieser Reset Taster nicht sonderlich standhaft ist und gerade im Praktikumsbetrieb schnell verschleißt. Ebenso ist ein Softreset möglich,
+indem alle Tasten der Fernbedienung gleichzeitig gedrückt werden. Allerdings bleibt hier die Konfiguration persistent, und es wird nur einem 
+vorher bekannten Netzwerk neu beigetreten. 
+
+Weiteres Manko sind proprietäre Funktionen von Phillips Hue. So werden Kommandos verschickt, die nicht im Standard enthalten sind und lediglich von der Phillips Hue Bridge verstanden 
+werden können \cite{koe}. Weiterhin setzen Phillips und viele weitere Herstelle das ZigBee Binding nicht in Ihren Ecosystemen ein. Die Logik, welche Lampe durch 
+die Fernbedienungstasten gesteuert werden, ist in die Hue Bridge implementiert. Das Binding ist damit oft nur mangelhaft implementiert. Der Dimmer Switch 
+zeigt oft das Verhalten seine Bindings nicht mehr zu aktualisieren, obwohl neue Binding Requests bestätigt werden. In Wireshark erkennt man, das alle Kommandos
+an eine nicht vorhandene Gruppe geschickt werden zum Beispiel. Dieses Fehlerbild ist nur mit einem Hardreset lösbar. 
+
+Die Osram Fernbedienung ist haptisch deutlich ansprechender als die Phillips Fernbedienung. Zusätzlich lässt sich diese per Tastenkombinationen auf der 
+Vorderseite Softreseten, Hardreseten sowie in den Pairingmodus schalten. In diesem Modus tritt sie zuverlässig neuen Netzwerken bei und verhielt sich 
+deutlich unkomplizierter als die Phillips Hue Fernbedienung. 
+
+Leider hat die Implementation des Bindings erhebliche Mängel und ist damit nicht nutzbar. Auch hier werden alle Bindungsanfragen von Zigbee2Mqtt zuverlässig 
+bestätigt. Die Fernbedienung bietet 3 Endpunkte, die allesamt einzeln Problemfrei gebunden werden können. Auch hier führt allerdings ein doppeltes Binding auf einem 
+Endpunkt zu inkonsistentem Verhalten. Es lässt sich also pro Endpunkt nur ein Device Binden.
+
+Leider verhält sich die Fernbedienung nur beim drücken des \grqq Off\grqq Buttons korrekt. Bei dem \grqq On\grqq Button verschickt die Fernbedienung die Kommando Frames immer 
+per Broadcast. Dies führt bei großen Netzwerken dazu, dass alle Geräte sich einschalten. Die beiden Buttons gehören zum selben Cluster und Bindings gelten pro Cluster. Daher ist 
+dieses Verhalten nicht nachvollziehbar. Auch hier wird Osram die Funktion in seinem Ecosystem entweder überhaupt nicht einsetzen und es ist irrelevant das die Funktion nicht korrekt 
+umgesetzt ist, oder sie haben eine eigene Logik die keinem Standard entspricht und das Binding entsprechend modifiziert.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/osram-device.png}
+  \caption{Osram Bug - Binding mit Device}
+\end{figure}
+Hier ist zu sehen wie die Off-Nachricht per Unicast korrekterweise an die Lampe verschickt wird. Die On-Nachricht wird allerdings an die Broadcast Adresse geschickt.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{media/osram-group.png}
+  \caption{Osram Bug - Binding mit Group}
+\end{figure}
+Das identische Verhalten ist bei einem Binding mit einer Gruppe zu beobachten.
+
